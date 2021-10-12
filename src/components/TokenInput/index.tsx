@@ -114,7 +114,7 @@ const TokenInput: FC<Props> = ({ ...props }) => {
         v = final.toString()
       }
     } else {
-      v = balance.amount.toFormat(8)
+      v = balance.amount.toFixed(8)
     }
 
     const bv = toBigNumber(v)
