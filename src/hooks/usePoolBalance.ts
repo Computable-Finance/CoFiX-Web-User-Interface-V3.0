@@ -24,7 +24,7 @@ const usePoolBalance = (src: string, dest: string) => {
 
       pool?.getPoolInfo().then((res) => {
         if (res?.amounts) {
-          setBalance(res.amounts[1])
+          setBalance(pair.src.symbol === "ETH" ? res.amounts[1] : res.amounts[0])
           setLoading(false)
         }
       })
