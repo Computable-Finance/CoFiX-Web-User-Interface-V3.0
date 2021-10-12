@@ -200,8 +200,8 @@ msgid "DAO balance"
 msgstr "DAO balance"
 
 #: src/pages/Repurchase/index.tsx
-msgid "DAO balance（ETH-Anchor）"
-msgstr "DAO balance（ETH-Anchor）"
+msgid "DAO balance（ETH）"
+msgstr "DAO balance（ETH）"
 
 #: src/pages/shared/WalletConnect/Status/Modal/index.tsx
 msgid "Disconnect"

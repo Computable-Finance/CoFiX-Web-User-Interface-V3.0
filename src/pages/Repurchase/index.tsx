@@ -69,7 +69,7 @@ const Repurchase: FC = () => {
         <ul>
           <li>
             <RepurchaseCard
-              title={t`DAO balance（ETH-Anchor）`}
+              title={t`DAO balance（ETH）`}
               value={daoInfo ? api?.Tokens.ETH.format(daoInfo.ethAmount) : '--'}
               icon={<GrayTokenETH />}
               loading={!daoInfo}
