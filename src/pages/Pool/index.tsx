@@ -38,11 +38,10 @@ const Pool: FC = () => {
                 mining rewards.
                 The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from
                 the old version of the fund pool as soon as possible.
-                Jump to the old version
               </Trans>
 
               <a href="https://v2.cofix.tech" className="link" target="_blank" rel="noreferrer">
-                <Trans>Jump to v2.1</Trans>
+                <Trans>Jump to the old version</Trans>
               </a>
             </p>
           </section>
