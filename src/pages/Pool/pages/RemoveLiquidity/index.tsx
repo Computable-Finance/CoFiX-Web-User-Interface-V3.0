@@ -53,7 +53,7 @@ const RemoveLiquidity: FC = () => {
 
   useEffect(()=> {
     if (poolInfo?.xtokenTotalSupply.value) {
-      setPercent(toBigNumber(amount).toNumber() / Number(poolInfo?.xtokenTotalSupply.formatAmount))
+      setPercent(toBigNumber(amount).div(poolInfo?.xtokenTotalSupply.amount).toNumber())
     }
   }, [amount])
 
