@@ -325,7 +325,7 @@ class CoFiXPair extends ERC20Token {
           },
           oracleOut: amountIn.multipliedBy(tokenAmount),
           amountOut: amountOut,
-          oracleFee: toBigNumber(0.01),
+          oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
         }
       } else if (src === this.pair[1].symbol && dest === 'ETH') {
         let amountOut = amountIn.div(tokenAmount)
@@ -345,7 +345,7 @@ class CoFiXPair extends ERC20Token {
           },
           oracleOut: amountIn.div(tokenAmount),
           amountOut: amountOut,
-          oracleFee: toBigNumber(0.01),
+          oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
         }
       } else {
         throw new Error(`can not swap ${src} to ${dest}`)
