@@ -60,7 +60,9 @@ export const useRiskModal = container.useContainer
 
 const RiskModal: FC = () => {
   const {action, approve, show, setShow} = useRiskModal()
-  const [isRead, setIsRead] = useState(false)
+  const [isReadSwap, setIsReadSwap] = useState(false)
+  const [isReadPool, setIsReadPool] = useState(false)
+  const [isReadRepurchase, setIsReadRepurchase] = useState(false)
   const modal = useRef<any>()
 
   useEffect(() => {
@@ -134,7 +136,7 @@ const RiskModal: FC = () => {
             </section>
 
             <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsRead(e.target.checked)}/>
+              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadSwap(e.target.checked)}/>
               <label htmlFor="opt-in" className={"tips-info"}>
                 <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
                   caused by the risks.</Trans>
@@ -228,7 +230,7 @@ const RiskModal: FC = () => {
             </section>
 
             <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsRead(e.target.checked)}/>
+              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadPool(e.target.checked)}/>
               <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
                 caused by the risks.</Trans>
             </div>
@@ -294,7 +296,7 @@ const RiskModal: FC = () => {
               </p>
             </section>
             <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsRead(e.target.checked)}/>
+              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadRepurchase(e.target.checked)}/>
               <label htmlFor="opt-in" className={"tips-info"}>
                 <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
                   caused by the risks.</Trans>
@@ -316,7 +318,7 @@ const RiskModal: FC = () => {
           {content}
         </div>
 
-        <Button block primary disabled={!isRead} onClick={() => approve(action)}>
+        <Button block primary disabled={!(action === 0 && isReadSwap || action === 1 && isReadPool || action === 2 && isReadRepurchase)} onClick={() => approve(action)}>
           <Trans>Sure</Trans>
         </Button>
 
