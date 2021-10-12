@@ -1,7 +1,19 @@
-import { TokenCOFI, TokenNEST } from 'src/components/Icon'
+import { TokenCOFI, TokenNEST, TokenUSDT } from 'src/components/Icon'
 
 import { CoFiXPairProps } from '../api/CoFiXPair'
 import { Mainnet, Rinkeby } from './chains'
+
+export const ETHUSDT: CoFiXPairProps = {
+  symbol: 'ETH-USDT',
+  Icon: TokenUSDT,
+  pair: ['ETH', 'USDT'],
+  addresses: {
+    [Mainnet.chainId]: '0xFa8055B3e0C36605bB31e23bC565C31eb3Dca386',
+    [Rinkeby.chainId]: '0xf749fA2B6E75F9EfBa8427eA86036f38A7173F9C',
+  },
+  cofiAmountPerBlock: 3,
+  cofiRewardPercentage: 0.9,
+}
 
 export const ETHNEST: CoFiXPairProps = {
   symbol: 'ETH-NEST',
@@ -27,4 +39,4 @@ export const ETHCOFI: CoFiXPairProps = {
   cofiRewardPercentage: 0.9,
 }
 
-export const CoFiXPairWhitelist = [ETHNEST, ETHCOFI]
+export const CoFiXPairWhitelist = [ETHUSDT, ETHNEST, ETHCOFI]
