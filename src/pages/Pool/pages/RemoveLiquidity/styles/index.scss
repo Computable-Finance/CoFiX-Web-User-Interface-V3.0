@@ -1,0 +1,55 @@
+@import 'src/styles/shared.scss';
+
+.cofi-page-pool-add-liquidity {
+  &-tip {
+    font-size: $font-size-sm;
+    color: $dim-color;
+    text-align: center;
+  }
+}
+
+.cofi-token-input {
+  &-name{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  &-tooltip-icon {
+    line-height: 0;
+    margin-left: $space-sm;
+    cursor: pointer;
+
+    @include tablet {
+      margin-left: $space;
+    }
+  }
+
+  &-tooltip {
+    padding: $space $space-md;
+    @include tablet {
+      padding: $space-md $space;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: #000000;
+      margin-bottom: $space-sm;
+    }
+
+    section + section {
+      margin-top: $space;
+    }
+
+    p {
+      font-size: $font-size-md;
+      line-height: $line-height;
+      color: $dim-color;
+      margin: 0;
+    }
+  }
+
+}
+
+

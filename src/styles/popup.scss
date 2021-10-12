@@ -1,0 +1,39 @@
+.popup-content {
+  margin: auto;
+  border-radius: 12px;
+  max-height: calc(100% - 24px);
+  overflow: scroll;
+  background-color: white;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+  }
+
+  .cofi-card {
+    box-shadow: none;
+    border: 0px;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+.popup-arrow {
+  color: white;
+}
+[role='tooltip'].popup-content {
+  min-width: 220px;
+  max-width: 330px;
+  box-shadow: 0px 0px 50px #e5e5e5;
+  border-radius: 12px;
+  background: white;
+  margin-top: 4px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}

@@ -1,0 +1,521 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "1. In the CoFiX protocol, market making can enter unilateral assets. The system will calculate the market making share based on the net value of the current fund pool. When the price fluctuates, it will cause the net value to change, and there may be impermanent losses. LP must be manually Hedging can reduce or avoid impermanence losses;"
+msgstr "1. In the CoFiX protocol, market making can enter unilateral assets. The system will calculate the market making share based on the net value of the current fund pool. When the price fluctuates, it will cause the net value to change, and there may be impermanent losses. LP must be manually Hedging can reduce or avoid impermanence losses;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "1. The COFI price comes from the NEST oracle machine. Due to the characteristics of the blockchain itself, the actual settlement price may be different from the price displayed on this page, because the sale back code is executed using the effective price of the oracle at the time of the sale back;"
+msgstr "1. The COFI price comes from the NEST oracle machine. Due to the characteristics of the blockchain itself, the actual settlement price may be different from the price displayed on this page, because the sale back code is executed using the effective price of the oracle at the time of the sale back;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "1. The price of the CoFiX 3.0 protocol comes from the NEST oracle, which will deviate from the centralized exchange;"
+msgstr "1. The price of the CoFiX 3.0 protocol comes from the NEST oracle, which will deviate from the centralized exchange;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "2. After CoFiX V3.0, 0.1% of each transaction enters the DAO contract for resale. When the CoFIX transaction volume is too low, there will not be enough ETH in the DAO balance for resale;"
+msgstr "2. After CoFiX V3.0, 0.1% of each transaction enters the DAO contract for resale. When the CoFIX transaction volume is too low, there will not be enough ETH in the DAO balance for resale;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "2. The difference in the number of the two tokens in the CoFiX fund pool may be very large, and the market maker may not be able to withdraw the designated token when withdrawing liquidity;"
+msgstr "2. The difference in the number of the two tokens in the CoFiX fund pool may be very large, and the market maker may not be able to withdraw the designated token when withdrawing liquidity;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "2. There is a spread between the actual exchange price of the transaction and the price of the NEST oracle, and the spread will increase the transaction cost. Therefore, the number of transactions obtained in CoFiX 3.0 may be less than in the exchange;"
+msgstr "2. There is a spread between the actual exchange price of the transaction and the price of the NEST oracle, and the spread will increase the transaction cost. Therefore, the number of transactions obtained in CoFiX 3.0 may be less than in the exchange;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "3. CoFiX Dao sell-back quota is released according to the block, each block releases 50 COFI, and the sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait a few blocks before continuing to participate;"
+msgstr "3. CoFiX Dao sell-back quota is released according to the block, each block releases 50 COFI, and the sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait a few blocks before continuing to participate;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "3. The price of the oracle used in the calculation of the LP share may deviate from the exchange price to a certain extent, causing the expected share and the actual share to be inconsistent. The risk is more obvious when the NEST oracle quotes density is small, and the LP can choose after the NEST price takes effect (For example, within 20 blocks) to purchase or redeem to reduce the risk;"
+msgstr "3. The price of the oracle used in the calculation of the LP share may deviate from the exchange price to a certain extent, causing the expected share and the actual share to be inconsistent. The risk is more obvious when the NEST oracle quotes density is small, and the LP can choose after the NEST price takes effect (For example, within 20 blocks) to purchase or redeem to reduce the risk;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "3. The transaction requires a 0.3% handling fee, and there is a certain transaction cost. In addition, the transaction also needs to pay a certain miners fee, which is paid to the Ethereum miners;"
+msgstr "3. The transaction requires a 0.3% handling fee, and there is a certain transaction cost. In addition, the transaction also needs to pay a certain miners fee, which is paid to the Ethereum miners;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "4. In CoFiX V3.0, LP providers do not have COFI rewards, and LPs can only obtain fee income. The fee income does not necessarily cover impermanent losses, so market making may not be able to obtain profits and may cause losses;"
+msgstr "4. In CoFiX V3.0, LP providers do not have COFI rewards, and LPs can only obtain fee income. The fee income does not necessarily cover impermanent losses, so market making may not be able to obtain profits and may cause losses;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "4. In extreme cases, such as long-term pending transactions, CoFiX 3.0 will fail the transaction, and the miner fee will be collected by the Ethereum system and will not be refunded."
+msgstr "4. In extreme cases, such as long-term pending transactions, CoFiX 3.0 will fail the transaction, and the miner fee will be collected by the Ethereum system and will not be refunded."
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "4. In order to ensure the safety of the system, when the COFI price fluctuates sharply, the resale may fail, and the failure of the resale will result in the loss of the miners fee and the oracle call fee;"
+msgstr "4. In order to ensure the safety of the system, when the COFI price fluctuates sharply, the resale may fail, and the failure of the resale will result in the loss of the miners fee and the oracle call fee;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "5. Although the CoFiX protocol carries out some security controls, there may be undiscovered loopholes in external oracles and smart contracts, which may cause the transaction price to deviate from the market price extremely, resulting in losses."
+msgstr "5. Although the CoFiX protocol carries out some security controls, there may be undiscovered loopholes in external oracles and smart contracts, which may cause the transaction price to deviate from the market price extremely, resulting in losses."
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "5. As the market price fluctuates, participating in the resale may not always be beneficial; smart contracts have been tested, but the contract code has inherent risks, please use it at your own risk"
+msgstr "5. As the market price fluctuates, participating in the resale may not always be beneficial; smart contracts have been tested, but the contract code has inherent risks, please use it at your own risk"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "5. The price of the CoFiX protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may have the risk of risk-free arbitrage (although the system model has been multi-layered protection), once the system has arbitrage risk , Will bring risks to all LPs;"
+msgstr "5. The price of the CoFiX protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may have the risk of risk-free arbitrage (although the system model has been multi-layered protection), once the system has arbitrage risk , Will bring risks to all LPs;"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "6. Once the smart contract hides the undiscovered bug, it will cause unexpected risks. Because the blockchain system itself has the characteristics of non-tampering, the bug may not be repairable, and all participating users/smart contracts need to understand the risk;"
+msgstr "6. Once the smart contract hides the undiscovered bug, it will cause unexpected risks. Because the blockchain system itself has the characteristics of non-tampering, the bug may not be repairable, and all participating users/smart contracts need to understand the risk;"
+
+#: src/pages/Repurchase/index.tsx
+msgid "About Repurchase"
+msgstr "About Repurchase"
+
+#: src/pages/Repurchase/index.tsx
+msgid "Accumulated repurchase in DAO (COFI)"
+msgstr "Accumulated repurchase in DAO (COFI)"
+
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Add Liquidity"
+msgstr "Add Liquidity"
+
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/Index/index.tsx
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Amount"
+msgstr "Amount"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Amount | Percentage"
+msgstr "Amount | Percentage"
+
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/pages/shared/TransactionButtonGroup/index.tsx
+msgid "Approve"
+msgstr "Approve"
+
+#: src/pages/Repurchase/AnchorSelector/index.tsx
+msgid "Balance In DAO"
+msgstr "Balance In DAO"
+
+#: src/pages/Repurchase/AnchorSelector/index.tsx
+msgid "Balance in DAO:"
+msgstr "Balance in DAO:"
+
+#: src/components/TokenInput/index.tsx
+msgid "Balance:"
+msgstr "Balance:"
+
+#: src/libs/web3/hooks/useTransaction.ts
+msgid "Claim COFI"
+msgstr "Claim COFI"
+
+#: src/pages/shared/WalletConnect/Button/Modal/index.tsx
+msgid "Click the button below to connect to CoFiX DApp"
+msgstr "Click the button below to connect to CoFiX DApp"
+
+#: src/pages/shared/TransactionModal/index.tsx
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/pages/Repurchase/index.tsx
+msgid "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and 0.1% of the transaction handling fee is entered into the DAO contract. After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO contract is traded into ETH during the upgrade and placed in the DAO contract"
+msgstr "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and 0.1% of the transaction handling fee is entered into the DAO contract. After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO contract is traded into ETH during the upgrade and placed in the DAO contract"
+
+#: src/pages/Pool/index.tsx
+msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible. Jump to the old version"
+msgstr "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible. Jump to the old version"
+
+#: src/pages/Repurchase/index.tsx
+msgid "CoFiX DAO contract address:"
+msgstr "CoFiX DAO contract address:"
+
+#: src/pages/Swap/index.tsx
+msgid "CoFiX Dapp is the most efficient Token Swap on Ethereum."
+msgstr "CoFiX Dapp is the most efficient Token Swap on Ethereum."
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH dividends from market fees."
+msgstr "CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH dividends from market fees."
+
+#: src/pages/shared/Menu/index.tsx
+msgid "Community"
+msgstr "Community"
+
+#: src/pages/Swap/index.tsx
+msgid "Confirm Swap"
+msgstr "Confirm Swap"
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "Confirm the transaction in your Wallet"
+msgstr "Confirm the transaction in your Wallet"
+
+#: src/pages/shared/WalletConnect/Button/index.tsx
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
+
+#: src/pages/shared/WalletConnect/Button/Modal/index.tsx
+msgid "Connect to CoFiX"
+msgstr "Connect to CoFiX"
+
+#: src/pages/shared/WalletConnect/Status/Modal/index.tsx
+msgid "Connected"
+msgstr "Connected"
+
+#: src/pages/Repurchase/index.tsx
+msgid "Current Circulation (COFI)"
+msgstr "Current Circulation (COFI)"
+
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Current Net Worth"
+msgstr "Current Net Worth"
+
+#: src/pages/Repurchase/index.tsx
+#: src/pages/Repurchase/index.tsx
+msgid "Current Repurchase Price"
+msgstr "Current Repurchase Price"
+
+#: src/pages/Repurchase/index.tsx
+msgid "Current available amount of repurchase"
+msgstr "Current available amount of repurchase"
+
+#: src/pages/Repurchase/index.tsx
+msgid "DAO balance"
+msgstr "DAO balance"
+
+#: src/pages/Repurchase/index.tsx
+msgid "DAO balance（ETH-Anchor）"
+msgstr "DAO balance（ETH-Anchor）"
+
+#: src/pages/shared/WalletConnect/Status/Modal/index.tsx
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/pages/shared/Menu/index.tsx
+msgid "Document"
+msgstr "Document"
+
+#: src/libs/web3/constants/anchor-pool.ts
+msgid "ETH Anchor"
+msgstr "ETH Anchor"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Empty Liquidity"
+msgstr "Empty Liquidity"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully understand the resale rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully understand the resale rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+
+#: src/pages/Repurchase/TokenRadioGroup/index.tsx
+#: src/pages/Repurchase/index.tsx
+msgid "Estimated Receive:"
+msgstr "Estimated Receive:"
+
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Exchange"
+msgstr "Exchange"
+
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+msgid "Expected share"
+msgstr "Expected share"
+
+#: src/pages/Swap/index.tsx
+msgid "FEE(ESTIMATED)"
+msgstr "FEE(ESTIMATED)"
+
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "FROM"
+msgstr "FROM"
+
+#: src/pages/shared/Menu/index.tsx
+msgid "Github"
+msgstr "Github"
+
+#: src/pages/Swap/index.tsx
+msgid "How is this calculated?"
+msgstr "How is this calculated?"
+
+#: src/pages/shared/RiskModal/index.tsx
+#: src/pages/shared/RiskModal/index.tsx
+#: src/pages/shared/RiskModal/index.tsx
+msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+msgstr "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+
+#: src/pages/Swap/index.tsx
+msgid "If you receive less than this amount, the transaction will be rejected"
+msgstr "If you receive less than this amount, the transaction will be rejected"
+
+#: src/pages/Swap/index.tsx
+msgid "Includes Risk Compensation,Trading Fee and Price Impact"
+msgstr "Includes Risk Compensation,Trading Fee and Price Impact"
+
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+#: src/pages/Pool/pages/AddLiquidity/index.tsx
+msgid "Input"
+msgstr "Input"
+
+#: src/pages/Repurchase/index.tsx
+msgid "Input Repurchase Amount"
+msgstr "Input Repurchase Amount"
+
+#: src/pages/Pool/index.tsx
+msgid "Jump to v2.1"
+msgstr "Jump to v2.1"
+
+#: src/libs/web3/connectors/injected.tsx
+msgid "MetaMask"
+msgstr "MetaMask"
+
+#: src/pages/Swap/index.tsx
+msgid "Minimum Received"
+msgstr "Minimum Received"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "My Pool"
+msgstr "My Pool"
+
+#: src/pages/Swap/index.tsx
+msgid "NEST Oracle Price"
+msgstr "NEST Oracle Price"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Net worth"
+msgstr "Net worth"
+
+#: src/pages/Pool/pages/Index/index.tsx
+#: src/pages/Pool/pages/Index/index.tsx
+#: src/pages/Pool/pages/Index/index.tsx
+#: src/pages/shared/Header/index.tsx
+msgid "Pool"
+msgstr "Pool"
+
+#: src/components/TokenReceive/index.tsx
+#: src/components/TokenReceive/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Pool Balance:"
+msgstr "Pool Balance:"
+
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Pool total share"
+msgstr "Pool total share"
+
+#: src/pages/Swap/index.tsx
+msgid "Price Spread"
+msgstr "Price Spread"
+
+#: src/pages/Pool/index.tsx
+#: src/pages/shared/RiskModal/index.tsx
+msgid "Read More"
+msgstr "Read More"
+
+#: src/pages/Swap/index.tsx
+msgid "Read More about CoFiX Mining"
+msgstr "Read More about CoFiX Mining"
+
+#: src/pages/shared/WalletConnect/Status/Modal/index.tsx
+msgid "Recent Transactions"
+msgstr "Recent Transactions"
+
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/pages/Pool/pages/Index/index.tsx
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Remove Liquidity"
+msgstr "Remove Liquidity"
+
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/pages/Repurchase/index.tsx
+#: src/pages/Repurchase/index.tsx
+#: src/pages/shared/Header/index.tsx
+msgid "Repurchase"
+msgstr "Repurchase"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "Risk Warning"
+msgstr "Risk Warning"
+
+#: src/components/TokenInput/Modal/index.tsx
+msgid "Search name or address"
+msgstr "Search name or address"
+
+#: src/pages/Repurchase/AnchorSelector/index.tsx
+#: src/pages/Repurchase/AnchorSelector/index.tsx
+msgid "Select Anchor"
+msgstr "Select Anchor"
+
+#: src/pages/shared/PoolSelector/index.tsx
+msgid "Select Pool"
+msgstr "Select Pool"
+
+#: src/components/TokenInput/Modal/index.tsx
+msgid "Select Token"
+msgstr "Select Token"
+
+#: src/pages/Repurchase/TokenRadioGroup/index.tsx
+msgid "Select token to repurchase"
+msgstr "Select token to repurchase"
+
+#: src/libs/web3/hooks/useTransaction.ts
+msgid "Stake XToken"
+msgstr "Stake XToken"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "Sure"
+msgstr "Sure"
+
+#: src/libs/web3/hooks/useTransaction.ts
+#: src/pages/shared/Header/index.tsx
+msgid "Swap"
+msgstr "Swap"
+
+#: src/pages/Swap/index.tsx
+msgid "Swap Rate"
+msgstr "Swap Rate"
+
+#: src/pages/Swap/index.tsx
+msgid "Swap Route"
+msgstr "Swap Route"
+
+#: src/pages/shared/Menu/index.tsx
+msgid "Switch to v2.1"
+msgstr "Switch to v2.1"
+
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "TO(ESTIMATED)"
+msgstr "TO(ESTIMATED)"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "TVL"
+msgstr "TVL"
+
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "The Trade Price is calculated based on the Decentralized NEST Oracle Price, the Computable Risk Compensation Coefficient, the Price Impact, and a Trading Fee. Trading Fee goes to all the COFI holders."
+msgstr "The Trade Price is calculated based on the Decentralized NEST Oracle Price, the Computable Risk Compensation Coefficient, the Price Impact, and a Trading Fee. Trading Fee goes to all the COFI holders."
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "The current fund pool is no longer mined"
+msgstr "The current fund pool is no longer mined"
+
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "The fund pool is priced in ETH, and the share * net value is the amount of ETH that can be received. The withdrawal of non-ETH currency needs to be converted according to the current exchange rate."
+msgstr "The fund pool is priced in ETH, and the share * net value is the amount of ETH that can be received. The withdrawal of non-ETH currency needs to be converted according to the current exchange rate."
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "To enter the CoFiX 3.0 agreement, users/smart contracts participating in the transaction need to fully understand the transaction rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "To enter the CoFiX 3.0 agreement, users/smart contracts participating in the transaction need to fully understand the transaction rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+
+#: src/pages/shared/RiskModal/index.tsx
+msgid "To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary to fully understand the market-making rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary to fully understand the market-making rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Trade Price Calculation"
+msgstr "Trade Price Calculation"
+
+#: src/pages/Swap/index.tsx
+msgid "Traders always get market prices at the smallest spread."
+msgstr "Traders always get market prices at the smallest spread."
+
+#: src/pages/Swap/index.tsx
+msgid "Trading Price"
+msgstr "Trading Price"
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "Transaction Rejected"
+msgstr "Transaction Rejected"
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "Transaction Submitted"
+msgstr "Transaction Submitted"
+
+#: src/libs/web3/constants/anchor-pool.ts
+msgid "USD Anchor"
+msgstr "USD Anchor"
+
+#: src/pages/Swap/index.tsx
+msgid "Uniswap Price"
+msgstr "Uniswap Price"
+
+#: src/libs/web3/hooks/useTransaction.ts
+msgid "Unsupported Content"
+msgstr "Unsupported Content"
+
+#: src/libs/web3/hooks/useTransaction.ts
+msgid "Unsupported Type"
+msgstr "Unsupported Type"
+
+#: src/pages/shared/WalletConnect/Status/Modal/index.tsx
+msgid "View"
+msgstr "View"
+
+#: src/pages/shared/TransactionNotification/index.tsx
+msgid "View in Browser"
+msgstr "View in Browser"
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "View in Etherscan"
+msgstr "View in Etherscan"
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "Waiting For Confirmation"
+msgstr "Waiting For Confirmation"
+
+#: src/pages/shared/WalletConnect/Status/Modal/index.tsx
+msgid "Wallet"
+msgstr "Wallet"
+
+#: src/libs/web3/connectors/wallet-connect.tsx
+msgid "Wallet Connect"
+msgstr "Wallet Connect"
+
+#: src/pages/Swap/index.tsx
+msgid "What is CoFiX Swap?"
+msgstr "What is CoFiX Swap?"
+
+#: src/pages/shared/Menu/index.tsx
+msgid "WhitePaper"
+msgstr "WhitePaper"
+
+#: src/libs/web3/hooks/useTransaction.ts
+msgid "Withdraw XToken"
+msgstr "Withdraw XToken"
+
+#: src/pages/Pool/index.tsx
+msgid "You add assets (ETH, USDT, etc.) to the fund pool, and you only get commission income from making the market, and you no longer get mining rewards. Market making has certain risks that will cause impermanent losses. Please carefully understand the market making rules and the risks before providing liquidity."
+msgstr "You add assets (ETH, USDT, etc.) to the fund pool, and you only get commission income from making the market, and you no longer get mining rewards. Market making has certain risks that will cause impermanent losses. Please carefully understand the market making rules and the risks before providing liquidity."
+
+#: src/pages/shared/TransactionModal/index.tsx
+msgid "You failed confirming the transaction"
+msgstr "You failed confirming the transaction"
+
+#: src/libs/web3/connectors/im-token.tsx
+msgid "imToken"
+msgstr "imToken"
+
+#: src/pages/Pool/index.tsx
+msgid "risk warning"
+msgstr "risk warning"
