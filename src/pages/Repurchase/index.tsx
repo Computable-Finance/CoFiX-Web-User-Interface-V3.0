@@ -36,10 +36,10 @@ const Repurchase: FC = () => {
   const daoInfo = useDAOInfo()
 
   const [amount, setAmount] = useState('')
-  // const { balance: ethBalance } = useTokenBalance('ETH', account || '')
   const { balance: cofiBalance } = useTokenBalance('COFI', account || '')
   const anchorPool = api?.CoFixAnchorPools["ETH"]
   const [insufficient, setInsufficient] = useState(false)
+  const [insufficient2, setInsufficient2] = useState(false)
   const daoBalance = useDAOBalance()
   const etherScanHost = useEtherScanHost()
 
@@ -115,9 +115,10 @@ const Repurchase: FC = () => {
             }
             symbol="ETH"
             balance={daoBalance?.ETH}
+            checkInsufficientBalance
+            onInsufficientBalance={(i) => setInsufficient2(i)}
             balanceTitle={t`DAO balance`}
             selectable={false}
-            editable={false}
           />
 
           <Field
@@ -157,7 +158,7 @@ const Repurchase: FC = () => {
               transactionType: TransactionType.Repurchase,
               token: ['COFI', 'COFI'],
             }}
-            disabled={insufficient || insufficientAnchor || !amount || toBigNumber(amount).lte(0)}
+            disabled={insufficient || insufficient2 || insufficientAnchor || !amount || toBigNumber(amount).lte(0)}
             onClick={handleRepurchase.handler}
           >
             <Trans>Repurchase</Trans>
