@@ -31,7 +31,8 @@ export type PoolInfo = {
     amount: BigNumber
     formatAmount: string
   },
-  token1nav: BigNumber
+  k: BigNumber
+  tokenAmount: BigNumber
 }
 
 export type StakeInfo = {
@@ -114,7 +115,6 @@ class CoFiXPair extends ERC20Token {
     const tokens = [this.api.Tokens[this.pair[0].symbol], this.api.Tokens[this.pair[1].symbol]]
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
-    const token1nav = tokenAmount.multipliedBy(toBigNumber(1).plus(k).div(toBigNumber(1)))
 
     const [balances, ethAmounts, usdtAmounts, cofiUSDTAmount, pairBalance, pairTotalSupply, vaultBalance] =
       await Promise.all([
@@ -193,7 +193,7 @@ class CoFiXPair extends ERC20Token {
         amount: pairTotalSupply.div(new BigNumber(10).pow(18)),
         formatAmount: pairTotalSupply.div(new BigNumber(10).pow(18)).toString(),
       },
-      token1nav,
+      k, tokenAmount,
     }
 
     return this.poolInfo

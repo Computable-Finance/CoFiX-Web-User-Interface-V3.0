@@ -37,10 +37,9 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
         if (!poolInfo) {
           return
         }
+        const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
 
-        const liquidity1 = toBigNumber(content.token0.amount).div(poolInfo.nav)
-        const liquidity2 = toBigNumber(content.token1.amount).div(poolInfo.token1nav)
-        const liquidity = liquidity1.plus(liquidity2)
+        const liquidity = toBigNumber(content.token0.amount).plus(toBigNumber(content.token1.amount).multipliedBy(toBigNumber(1).div(tokenAmount)))
 
         if (!liquidity.isNaN()) {
           content.liquidity = liquidity.toFixed(6)
