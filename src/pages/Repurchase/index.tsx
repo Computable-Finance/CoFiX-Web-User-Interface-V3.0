@@ -53,13 +53,13 @@ const Repurchase: FC = () => {
       return false
     }
 
-    const target = anchorPool.anchorToken === 'ETH' ? handleRepurchase.ethAmount : handleRepurchase.usdtAmount
+    const target = handleRepurchase.ethAmount
     if (!target) {
       return false
     }
 
     return target.amount.gte(daoBalance["ETH"].amount)
-  }, [cofiBalance, amount, anchorPool, daoBalance, handleRepurchase.ethAmount, handleRepurchase.usdtAmount])
+  }, [cofiBalance, amount, anchorPool, daoBalance, handleRepurchase.ethAmount])
 
   const classPrefix = 'cofi-page-repurchase'
 
@@ -108,17 +108,18 @@ const Repurchase: FC = () => {
 
           <TokenInput
             title={t`Estimated Receive:`}
-            value={
-              (anchorPool?.anchorToken === 'ETH'
-                ? handleRepurchase.ethAmount?.formatAmount
-                : handleRepurchase.usdtAmount?.formatAmount) || '--'
-            }
+            value={handleRepurchase.ethAmount?.formatAmount}
             symbol="ETH"
             balance={daoBalance?.ETH}
             checkInsufficientBalance
             onInsufficientBalance={(i) => setInsufficient2(i)}
             balanceTitle={t`DAO balance`}
             selectable={false}
+            onChange={(e)=> {
+              if (daoInfo?.cofiETHAmount) {
+                setAmount(daoInfo?.cofiETHAmount.multipliedBy(toBigNumber(e)).toFormat(8))
+              }
+            }}
           />
 
           <Field
@@ -126,27 +127,15 @@ const Repurchase: FC = () => {
             value={daoInfo ? daoInfo.quota.toFixed(0) : `--`}
             loading={!daoInfo}
           />
-          {anchorPool?.anchorToken === 'ETH' ? (
-            <Field
-              name={t`Current Repurchase Price` + ` (COFI/ETH)`}
-              value={
-                daoInfo
-                  ? `${daoInfo.cofiETHAmount ? api?.Tokens.ETH.format(daoInfo.cofiETHAmount) : '--'} ETH`
-                  : '-- ETH'
-              }
-              loading={!daoInfo}
-            />
-          ) : (
-            <Field
-              name={t`Current Repurchase Price` + ` (COFI/USDT)`}
-              value={
-                daoInfo
-                  ? `${daoInfo.cofiUSDTAmount ? api?.Tokens.USDT.format(daoInfo.cofiUSDTAmount) : '--'} USDT`
-                  : '-- ETH'
-              }
-              loading={!daoInfo}
-            />
-          )}
+          <Field
+            name={t`Current Repurchase Price` + ` (COFI/ETH)`}
+            value={
+              daoInfo
+                ? `${daoInfo.cofiETHAmount ? api?.Tokens.ETH.format(daoInfo.cofiETHAmount) : '--'} ETH`
+                : '-- ETH'
+            }
+            loading={!daoInfo}
+          />
           {/* <Field
             name={t`ETH Balance in your wallet`}
             value={`${ethBalance ? ethBalance.formatAmount : '--'} ETH`}
