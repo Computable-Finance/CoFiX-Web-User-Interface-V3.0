@@ -30,6 +30,7 @@ const Swap: FC = () => {
   const [confirm, setConfirm] = useState(false)
   const { checkRisk } = useRiskModal()
   const [insufficient, setInsufficient] = useState(false)
+  const [insufficient2, setInsufficient2] = useState(false)
   const [change, setChange] = useState('')
   const balance = usePoolBalance(pair.src.symbol, pair.dest.symbol)
 
@@ -143,6 +144,8 @@ const Swap: FC = () => {
             value={dest.amount}
             balanceTitle={t`Pool Balance:`}
             balance={balance.balance}
+            checkInsufficientBalance
+            onInsufficientBalance={(b) => setInsufficient2(b)}
             noExtra={
               (dest.symbol === 'ETH' && src.symbol === 'USDT') || (dest.symbol === 'USDT' && src.symbol === 'ETH')
             }
@@ -236,7 +239,7 @@ const Swap: FC = () => {
             transactionType: TransactionType.Swap,
             token: [src.symbol, dest.symbol],
           }}
-          disabled={!src.amount || toBigNumber(src.amount).lte(0) || !swap.ratio || insufficient}
+          disabled={!src.amount || toBigNumber(src.amount).lte(0) || !swap.ratio || insufficient || insufficient2}
           onClick={async () => {
             try {
               await checkRisk(RiskAction.Swap)
