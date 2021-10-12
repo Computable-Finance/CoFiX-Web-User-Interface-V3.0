@@ -39,7 +39,8 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           return
         }
         const liquidity = toBigNumber(content.liquidity)
-        const ethAmountOut = liquidity.multipliedBy(poolInfo.nav)
+        const ethAmountOut = liquidity.multipliedBy(poolInfo.amounts[0]).div(poolInfo.xtokenTotalSupply.amount)
+        const tokenAmountOut = liquidity.multipliedBy(poolInfo.amounts[1]).div(poolInfo.xtokenTotalSupply.amount)
 
         if (!liquidity.isNaN()) {
           // TODO: calaculate real receive
@@ -50,7 +51,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
             },
             {
               symbol: pair.pair[1].symbol,
-              amount: pair.pair[1].format(ethAmountOut),
+              amount: pair.pair[1].format(tokenAmountOut),
             },
           ]
         } else {
