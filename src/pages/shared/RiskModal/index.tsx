@@ -314,7 +314,7 @@ const RiskModal: FC = () => {
   return (
     <Popup modal open={show} onClose={() => setShow(false)} ref={modal}>
       <Card title={t`Risk Warning`} className={`${classPrefix}-card`}>
-        <div>
+        <div className={`${classPrefix}-card-content`}>
           {content}
         </div>
 

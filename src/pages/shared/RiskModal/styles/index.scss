@@ -2,8 +2,13 @@
 
 .cofi-risk-modal {
   &-card {
-    section + section {
-      margin-top: $space;
+    &-content {
+      section + section {
+        margin-top: $space;
+      }
+
+      height: 500px;
+      overflow: auto;
     }
 
     p {
