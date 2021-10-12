@@ -45,7 +45,9 @@ const PoolSelector: FC<Props> = ({ ...props }) => {
     const arr: Array<CoFiXPair> = []
     Object.values(api.CoFiXPairs).map((map) =>
       Object.values(map).map((p) => {
-        arr.push(p)
+        if (p.symbol !== "ETH-USDT"){
+          arr.push(p)
+        }
       })
     )
 
