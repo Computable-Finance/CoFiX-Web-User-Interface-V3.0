@@ -130,8 +130,8 @@ msgid "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handl
 msgstr "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and 0.1% of the transaction handling fee is entered into the DAO contract. After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO contract is traded into ETH during the upgrade and placed in the DAO contract"
 
 #: src/pages/Pool/index.tsx
-msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
-msgstr "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
+msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
+msgstr "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
 
 #: src/pages/Repurchase/index.tsx
 msgid "CoFiX DAO contract address:"

@@ -36,7 +36,7 @@ const Pool: FC = () => {
               <Trans>
                 CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive
                 mining rewards.
-                The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from
+                The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from
                 the old version of the fund pool as soon as possible.
               </Trans>
 

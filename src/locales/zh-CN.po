@@ -130,8 +130,8 @@ msgid "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handl
 msgstr "CoFiX 3.0 已重新升级资金池，升级后手续费全部使用 ETH 计费，交易手续费的 0.1% 进入 DAO 合约，升级后 DAO 合约只展示 ETH 余额，DAO 合约中的 USD 锚定币在升级时交易成 ETH，放到 DAO 合约中"
 
 #: src/pages/Pool/index.tsx
-msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.0 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
-msgstr "CoFiX 3.0 全新升级资金池合约，升级后做市商将不再获得挖矿奖励，CoFiX 2.0 的资金池需要手动迁移到 CoFiX 3.0 版本，请尽快从旧版资金池取出资金。"
+msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
+msgstr "CoFiX 3.0 全新升级资金池合约，升级后做市商将不再获得挖矿奖励，CoFiX 2.1 的资金池需要手动迁移到 CoFiX 3.0 版本，请尽快从旧版资金池取出资金。"
 
 #: src/pages/Repurchase/index.tsx
 msgid "CoFiX DAO contract address:"
