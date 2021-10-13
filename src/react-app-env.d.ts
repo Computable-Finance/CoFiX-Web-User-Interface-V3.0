@@ -16,7 +16,6 @@ type ethereum = {
   isConnected: () => boolean
   request: <T extends unknown>(args: RequestArguments) => Promise<T>
 
-  isMetaMask?: true
   on?: (...args: any[]) => void
   removeListener?: (...args: any[]) => void
   autoRefreshOnNetworkChange?: boolean
