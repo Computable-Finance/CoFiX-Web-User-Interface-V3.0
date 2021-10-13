@@ -108,14 +108,6 @@ msgstr "Amount | Percentage"
 msgid "Approve"
 msgstr "Approve"
 
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Balance In DAO"
-msgstr "Balance In DAO"
-
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Balance in DAO:"
-msgstr "Balance in DAO:"
-
 #: src/components/TokenInput/index.tsx
 msgid "Balance:"
 msgstr "Balance:"
@@ -272,6 +264,10 @@ msgstr "Includes Risk Compensation,Trading Fee and Price Impact"
 msgid "Input"
 msgstr "Input"
 
+#: src/components/TokenInput/index.tsx
+msgid "Input Quantity"
+msgstr "Input Quantity"
+
 #: src/pages/Repurchase/index.tsx
 msgid "Input Repurchase Amount"
 msgstr "Input Repurchase Amount"
@@ -357,11 +353,6 @@ msgstr "Risk Warning"
 msgid "Search name or address"
 msgstr "Search name or address"
 
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Select Anchor"
-msgstr "Select Anchor"
-
 #: src/pages/shared/PoolSelector/index.tsx
 msgid "Select Pool"
 msgstr "Select Pool"
@@ -446,10 +437,6 @@ msgstr "Transaction Rejected"
 msgid "Transaction Submitted"
 msgstr "Transaction Submitted"
 
-#: src/libs/web3/constants/anchor-pool.ts
-msgid "USD Anchor"
-msgstr "USD Anchor"
-
 #: src/pages/Swap/index.tsx
 msgid "Uniswap Price"
 msgstr "Uniswap Price"
@@ -497,6 +484,10 @@ msgstr "WhitePaper"
 #: src/libs/web3/hooks/useTransaction.ts
 msgid "Withdraw XToken"
 msgstr "Withdraw XToken"
+
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Withdraw the following assets"
+msgstr "Withdraw the following assets"
 
 #: src/pages/Pool/index.tsx
 msgid "You add assets (ETH, USDT, etc.) to the fund pool, and you only get commission income from making the market, and you no longer get mining rewards. Market making has certain risks that will cause impermanent losses. Please carefully understand the market making rules and the risks before providing liquidity."

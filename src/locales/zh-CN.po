@@ -108,14 +108,6 @@ msgstr "数量 ｜ 比例"
 msgid "Approve"
 msgstr "授权"
 
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Balance In DAO"
-msgstr "DAO 合约余额"
-
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Balance in DAO:"
-msgstr "DAO 合约余额："
-
 #: src/components/TokenInput/index.tsx
 msgid "Balance:"
 msgstr "余额："
@@ -272,6 +264,10 @@ msgstr "包含做市风险补偿，交易费和价格冲击成本"
 msgid "Input"
 msgstr "输入"
 
+#: src/components/TokenInput/index.tsx
+msgid "Input Quantity"
+msgstr "取出份额"
+
 #: src/pages/Repurchase/index.tsx
 msgid "Input Repurchase Amount"
 msgstr "输入参与回售数量"
@@ -357,11 +353,6 @@ msgstr "风险提示"
 msgid "Search name or address"
 msgstr "查询名称或地址"
 
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-#: src/pages/Repurchase/AnchorSelector/index.tsx
-msgid "Select Anchor"
-msgstr "选择锚定币"
-
 #: src/pages/shared/PoolSelector/index.tsx
 msgid "Select Pool"
 msgstr "选择资金池"
@@ -446,10 +437,6 @@ msgstr "交易已拒绝"
 msgid "Transaction Submitted"
 msgstr "交易已提交"
 
-#: src/libs/web3/constants/anchor-pool.ts
-msgid "USD Anchor"
-msgstr "USD 锚定币"
-
 #: src/pages/Swap/index.tsx
 msgid "Uniswap Price"
 msgstr "Uniswap 价格"
@@ -497,6 +484,10 @@ msgstr "白皮书"
 #: src/libs/web3/hooks/useTransaction.ts
 msgid "Withdraw XToken"
 msgstr "取回 XToken"
+
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Withdraw the following assets"
+msgstr "收到资产数量"
 
 #: src/pages/Pool/index.tsx
 msgid "You add assets (ETH, USDT, etc.) to the fund pool, and you only get commission income from making the market, and you no longer get mining rewards. Market making has certain risks that will cause impermanent losses. Please carefully understand the market making rules and the risks before providing liquidity."
