@@ -1,4 +1,3 @@
-import BigNumber from 'bignumber.js'
 import { useCallback, useEffect, useState } from 'react'
 import useSlippageTolerance from 'src/hooks/useSlippageTolerance'
 import { toBigNumber, deadline } from '../util'
@@ -75,69 +74,6 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           to: api.account || '',
           oracleCallFee: api.Tokens.ETH.parse(api.chainId === 1 ? 0.001 : 0.01).toFixed(0),
           sendETHValue: api.Tokens.ETH.parse(api.chainId === 1 ? 0.001 : 0.01).toFixed(0),
-          receive: content.receive,
-        }
-
-        if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
-          setArgs(newArgs)
-        }
-      } else if (content.token0) {
-        // find Single-Sided Pool
-        const pool = api.CoFixAnchorPools[content.token0]
-        const token = api.Tokens[content.token0]
-
-        if (!pool || !token) {
-          return
-        }
-
-        const liquidity = toBigNumber(content.liquidity)
-
-        if (!liquidity.isNaN()) {
-          const poolInfo = await pool.getAnchorPoolInfo(token.symbol)
-          if (!poolInfo) {
-            return
-          }
-
-          const sortedTotalSupply = poolInfo.xtokenTotalSupplys.sort((a, b) => {
-            if (a.symbol === token.symbol) {
-              return -1
-            } else if (b.symbol === token.symbol) {
-              return 1
-            } else {
-              return a.totalSupply.amount.minus(b.totalSupply.amount).gt(0) ? -1 : 1
-            }
-          })
-
-          content.receive = []
-          let remain = liquidity
-          for (let i = 0; i < sortedTotalSupply.length && remain.gt(0); i++) {
-            const out = BigNumber.minimum(remain, sortedTotalSupply[i].totalSupply.amount)
-            remain = remain.minus(out)
-            if (out.gt(0)) {
-              content.receive.push({
-                symbol: sortedTotalSupply[i].symbol,
-                amount: api.Tokens[sortedTotalSupply[i].symbol].format(out),
-              })
-            }
-          }
-        } else {
-          content.receive = [
-            {
-              symbol: token.symbol,
-              amount: '--',
-            },
-          ]
-        }
-
-        const newArgs = {
-          pool: pool.address || '',
-          token: token.address || '',
-
-          liquidity: liquidity.shiftedBy(18).toFixed(0),
-          amountETHMin: '0',
-          to: api.account || '',
-          oracleCallFee: api.Tokens.ETH.parse(0).toFixed(0),
-          sendETHValue: api.Tokens.ETH.parse(0).toFixed(0),
           receive: content.receive,
         }
 
