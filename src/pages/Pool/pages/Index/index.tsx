@@ -1,17 +1,18 @@
 import './styles'
 
-import { t, Trans } from '@lingui/macro'
-import { FC, useState } from 'react'
+import {t, Trans} from '@lingui/macro'
+import {FC, useState} from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Link, useHistory } from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import { DollarOutline, Empty, PercentageSignOutline } from 'src/components/Icon'
+import {DollarOutline, Empty, PercentageSignOutline} from 'src/components/Icon'
 import usePoolInfo from 'src/hooks/usePoolInfo'
 import useToken from 'src/hooks/useToken'
-import { PoolInfo } from 'src/libs/web3/api/CoFiXPair'
+import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import PoolSelector from 'src/pages/shared/PoolSelector'
+import {RiskAction, useRiskModal} from "../../../shared/RiskModal";
 
 const Item: FC<{
   Icon: typeof DollarOutline
@@ -33,6 +34,7 @@ const Item: FC<{
 
 const Pool: FC = () => {
   const { api } = useWeb3()
+  const {checkRisk} = useRiskModal()
   const [pair, setPair] = useState(['ETH', 'NEST'])
   const { info: poolInfo } = usePoolInfo<PoolInfo>(pair[0], pair[1])
 
@@ -110,7 +112,15 @@ const Pool: FC = () => {
               gradient
               primary
               disabled={token0.symbol === 'ETH' && token1.symbol === 'USDT'}
-              onClick={() => history.push(`/pool/add-liquidity/${token0.symbol}/${token1.symbol}`)}
+              onClick={async () => {
+                try {
+                  await checkRisk(RiskAction.Pool)
+                  history.push(`/pool/add-liquidity/${token0.symbol}/${token1.symbol}`)
+                }catch(_) {
+                  // comment for eslint
+                }
+
+              }}
             >
               <Trans>Add Liquidity</Trans>
             </Button>

@@ -1,42 +1,33 @@
 import './styles'
 
-import { t, Trans } from '@lingui/macro'
-import { FC, useEffect, useMemo, useState } from 'react'
+import {t, Trans} from '@lingui/macro'
+import {FC, useMemo, useState} from 'react'
 import Card from 'src/components/Card'
 import CollapseCard from 'src/components/CollapaseCard'
 import Field from 'src/components/Field'
-import { GrayTokenCOFI, GrayTokenETH } from 'src/components/Icon'
+import {GrayTokenCOFI, GrayTokenETH} from 'src/components/Icon'
 import TokenInput from 'src/components/TokenInput'
 import useDAOBalance from 'src/hooks/useDAOBalance'
 import useDAOInfo from 'src/hooks/useDAOInfo'
 import useTokenBalance from 'src/hooks/useTokenBalance'
 import useRepurchase from 'src/libs/web3/hooks/useRepurchase'
-import { TransactionType } from 'src/libs/web3/hooks/useTransaction'
+import {TransactionType} from 'src/libs/web3/hooks/useTransaction'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { toBigNumber } from 'src/libs/web3/util'
+import {toBigNumber} from 'src/libs/web3/util'
 import TransactionButtonGroup from 'src/pages/shared/TransactionButtonGroup'
 
-import { RiskAction, useRiskModal } from '../shared/RiskModal'
+import {RiskAction, useRiskModal} from '../shared/RiskModal'
 import RepurchaseCard from './Card'
 import useEtherScanHost from 'src/hooks/useEtherScanHost'
 
 const Repurchase: FC = () => {
   const { checkRisk } = useRiskModal()
-  useEffect(() => {
-    ;(async () => {
-      try {
-        await checkRisk(RiskAction.Repurchase)
-      } catch (_) {
-        // comment for eslint
-      }
-    })()
-  }, [])
 
   const { account, api } = useWeb3()
   const daoInfo = useDAOInfo()
 
   const [amount, setAmount] = useState('')
-  const { balance: cofiBalance } = useTokenBalance('COFI', account || '')
+  const {balance: cofiBalance} = useTokenBalance('COFI', account || '')
   const anchorPool = api?.CoFixAnchorPools["ETH"]
   const [insufficient, setInsufficient] = useState(false)
   const [insufficient2, setInsufficient2] = useState(false)
@@ -71,7 +62,7 @@ const Repurchase: FC = () => {
             <RepurchaseCard
               title={t`DAO balance（ETH）`}
               value={daoInfo ? api?.Tokens.ETH.format(daoInfo.ethAmount) : '--'}
-              icon={<GrayTokenETH />}
+              icon={<GrayTokenETH/>}
               loading={!daoInfo}
             />
           </li>
@@ -79,7 +70,7 @@ const Repurchase: FC = () => {
             <RepurchaseCard
               title={t`Accumulated repurchase in DAO (COFI)`}
               value={daoInfo ? toBigNumber(daoInfo.cofiAmount).toFormat(0) : '--'}
-              icon={<GrayTokenCOFI />}
+              icon={<GrayTokenCOFI/>}
               loading={!daoInfo}
             />
           </li>
@@ -87,7 +78,7 @@ const Repurchase: FC = () => {
             <RepurchaseCard
               title={t`Current Circulation (COFI)`}
               value={daoInfo ? toBigNumber(daoInfo.cofiCirculationAmount).toFormat(0) : '--'}
-              icon={<GrayTokenCOFI />}
+              icon={<GrayTokenCOFI/>}
               loading={!daoInfo}
             />
           </li>
@@ -115,7 +106,7 @@ const Repurchase: FC = () => {
             onInsufficientBalance={(i) => setInsufficient2(i)}
             balanceTitle={t`DAO balance`}
             selectable={false}
-            onChange={(e)=> {
+            onChange={(e) => {
               if (daoInfo?.cofiETHAmount) {
                 setAmount(daoInfo?.cofiETHAmount.multipliedBy(toBigNumber(e)).toFormat(8))
               }
@@ -148,7 +139,17 @@ const Repurchase: FC = () => {
               token: ['COFI', 'COFI'],
             }}
             disabled={insufficient || insufficient2 || insufficientAnchor || !amount || toBigNumber(amount).lte(0)}
-            onClick={handleRepurchase.handler}
+            onClick={
+              async () => {
+                try {
+                  await checkRisk(RiskAction.Repurchase)
+                  console.log("here")
+                  handleRepurchase.handler()
+                } catch (_) {
+                  // comment for eslint
+                }
+              }
+            }
           >
             <Trans>Repurchase</Trans>
           </TransactionButtonGroup>
@@ -160,8 +161,10 @@ const Repurchase: FC = () => {
           <section>
             <p>
               <Trans>
-                CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and 0.1% of the transaction handling fee is entered into the DAO contract.
-                After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO contract is traded into ETH during the upgrade and placed in the DAO contract
+                CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and
+                0.1% of the transaction handling fee is entered into the DAO contract.
+                After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO
+                contract is traded into ETH during the upgrade and placed in the DAO contract
               </Trans>
             </p>
           </section>

@@ -1,30 +1,18 @@
 import './styles'
 
-import {FC, useEffect} from 'react'
+import {FC} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import CollapseCard from 'src/components/CollapaseCard'
 import {Trans, t} from '@lingui/macro'
 import Card from 'src/components/Card'
 
 import loadable from '@loadable/component'
-import {RiskAction, useRiskModal} from '../shared/RiskModal'
 
 const Index = loadable(() => import('./pages/Index'))
 const AddLiquidity = loadable(() => import('./pages/AddLiquidity'))
 const RemoveLiquidity = loadable(() => import('./pages/RemoveLiquidity'))
 
 const Pool: FC = () => {
-  const {checkRisk} = useRiskModal()
-  useEffect(() => {
-    ;(async () => {
-      try {
-        await checkRisk(RiskAction.Pool)
-      } catch (_) {
-        // comment for eslint
-      }
-    })()
-  }, [])
-
   const classPrefix = 'cofi-page-pool'
 
   return (
