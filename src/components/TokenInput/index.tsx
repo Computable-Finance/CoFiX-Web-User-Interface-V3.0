@@ -198,7 +198,7 @@ const TokenInput: FC<Props> = ({ ...props }) => {
       <div className={`${classPrefix}-container`}>
         <div className={`${classPrefix}-token`}>
           {token ? token.isXToken ? <TokenXToken /> : <token.Icon /> : <Skeleton width={44} height={44} circle />}
-          <span>{token ? token.isXToken ? t`Input Quantity` : token.symbol : <Skeleton width={80} />}</span>
+          <span>{token ? token.isXToken ? t`Withdraw Share` : token.symbol : <Skeleton width={80} />}</span>
 
           {props.selectable && (
             <Popup

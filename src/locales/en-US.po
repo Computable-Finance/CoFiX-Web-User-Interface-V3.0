@@ -264,10 +264,6 @@ msgstr "Includes Risk Compensation,Trading Fee and Price Impact"
 msgid "Input"
 msgstr "Input"
 
-#: src/components/TokenInput/index.tsx
-msgid "Input Quantity"
-msgstr "Input Quantity"
-
 #: src/pages/Repurchase/index.tsx
 msgid "Input Repurchase Amount"
 msgstr "Input Repurchase Amount"
@@ -325,6 +321,10 @@ msgstr "Read More"
 #: src/pages/Swap/index.tsx
 msgid "Read More about CoFiX Mining"
 msgstr "Read More about CoFiX Mining"
+
+#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
+msgid "Received Assets"
+msgstr "Received Assets"
 
 #: src/pages/shared/WalletConnect/Status/Modal/index.tsx
 msgid "Recent Transactions"
@@ -481,13 +481,13 @@ msgstr "What is CoFiX Swap?"
 msgid "WhitePaper"
 msgstr "WhitePaper"
 
+#: src/components/TokenInput/index.tsx
+msgid "Withdraw Share"
+msgstr "Withdraw Share"
+
 #: src/libs/web3/hooks/useTransaction.ts
 msgid "Withdraw XToken"
 msgstr "Withdraw XToken"
-
-#: src/pages/Pool/pages/RemoveLiquidity/index.tsx
-msgid "Withdraw the following assets"
-msgstr "Withdraw the following assets"
 
 #: src/pages/Pool/index.tsx
 msgid "You add assets (ETH, USDT, etc.) to the fund pool, and you only get commission income from making the market, and you no longer get mining rewards. Market making has certain risks that will cause impermanent losses. Please carefully understand the market making rules and the risks before providing liquidity."

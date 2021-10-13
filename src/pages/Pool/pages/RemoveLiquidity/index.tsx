@@ -76,7 +76,7 @@ const RemoveLiquidity: FC = () => {
       />
 
       <TokenReceive
-        title={t`Withdraw the following assets`}
+        title={t`Received Assets`}
         tokens={[symbol[0], symbol[1]]}
         percent={percent}
         tooltip={
