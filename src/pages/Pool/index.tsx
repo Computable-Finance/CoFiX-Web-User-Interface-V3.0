@@ -40,7 +40,7 @@ const Pool: FC = () => {
                 the old version of the fund pool as soon as possible.
               </Trans>
 
-              <a href="https://v2.cofix.tech" className="link" target="_blank" rel="noreferrer">
+              <a href="https://v21.cofix.tech" className="link" target="_blank" rel="noreferrer">
                 <Trans>Jump to the old version</Trans>
               </a>
             </p>
