@@ -80,6 +80,7 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
+                <input style={{ display: "none" }}/>
                 <Trans>
                   To enter the CoFiX 3.0 agreement, users/smart contracts participating in the transaction need to fully
                   understand the transaction rules and understand the following risks. Users who do not understand the
@@ -150,6 +151,7 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
+                <input style={{ display: "none" }}/>
                 <Trans>
                   CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH
                   dividends from market fees.
@@ -242,6 +244,7 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
+                <input style={{ display: "none" }}/>
                 <Trans>
                   Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully
                   understand the resale rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:
@@ -312,7 +315,7 @@ const RiskModal: FC = () => {
 
   const classPrefix = 'cofi-risk-modal'
   return (
-    <Popup modal open={show} onClose={() => setShow(false)} ref={modal}>
+    <Popup modal open={show} onClose={() => setShow(false)} ref={modal} closeOnDocumentClick={false}>
       <Card title={t`Risk Warning`} className={`${classPrefix}-card`}>
         <div className={`${classPrefix}-card-content`}>
           {content}
