@@ -87,19 +87,7 @@ const AddLiquidity: FC = () => {
 
       <Field name={t`Expected share`} value={`${handleAddLiquidity.liquidity || '--'}`}/>
 
-      { toBigNumber(amount[0]).lte(0)  ? (
-        <Button
-          block
-          gradient
-          primary
-          onClick={handleAddLiquidity.handler}
-          disabled={
-            insufficient1 || toBigNumber(amount[1]).lte(0)
-          }
-        >
-          <Trans>Add Liquidity</Trans>
-        </Button>
-      ) : (
+      {toBigNumber(amount[1]).gt(0) ? (
         <TransactionButtonGroup
           approve={{
             transactionType: TransactionType.AddLiquidity,
@@ -112,7 +100,19 @@ const AddLiquidity: FC = () => {
         >
           <Trans>Add Liquidity</Trans>
         </TransactionButtonGroup>
-      ) }
+      ) : (
+        <Button
+          block
+          gradient
+          primary
+          onClick={handleAddLiquidity.handler}
+          disabled={
+            insufficient1 || toBigNumber(amount[1]).lte(0)
+          }
+        >
+          <Trans>Add Liquidity</Trans>
+        </Button>
+      )}
 
     </Card>
   )
