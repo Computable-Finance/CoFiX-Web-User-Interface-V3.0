@@ -143,7 +143,6 @@ const Repurchase: FC = () => {
               async () => {
                 try {
                   await checkRisk(RiskAction.Repurchase)
-                  console.log("here")
                   handleRepurchase.handler()
                 } catch (_) {
                   // comment for eslint
