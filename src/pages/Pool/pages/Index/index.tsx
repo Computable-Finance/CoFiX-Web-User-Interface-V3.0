@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import {Link, useHistory} from 'react-router-dom'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import {DollarOutline, Empty, PercentageSignOutline} from 'src/components/Icon'
+import {Asset, DollarOutline, Empty, Percent, PercentageSignOutline} from 'src/components/Icon'
 import usePoolInfo from 'src/hooks/usePoolInfo'
 import useToken from 'src/hooks/useToken'
 import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
@@ -141,35 +141,24 @@ const Pool: FC = () => {
             ) : (
               <Card>
                 <div className={`${classPrefix}-section`}>
-                  <div className={`${classPrefix}-header`}>
-                    <div className={`${classPrefix}-title`}>
-                      <span>{`${token0.symbol}-${token1.symbol} ${t`Pool`}`}</span>
-                      {/* <Tag>{`${t`Mining`} x2`}</Tag> */}
-                    </div>
-
-                    <div className={`${classPrefix}-extra`}>
-                      <Trans>Amount | Percentage</Trans>
-                    </div>
-                  </div>
-
                   <ul className={`${classPrefix}-ul`}>
                     <li>
-                      <token0.Icon />
+                      <Asset/>
                       <div>
-                        <span>{token0.symbol}</span>
+                        <span><Trans>我的份额</Trans></span>
                         {poolInfo ? (
-                          <span>{poolInfo ? `${poolInfo.myPoolAmounts[0]} | ${poolInfo.myPoolRatio}` : '--'}</span>
+                          <span>{poolInfo ? `${ poolInfo.xtokenBalance.amount.toFormat(8) }` : '--'}</span>
                         ) : (
                           <Skeleton width={200} />
                         )}
                       </div>
                     </li>
                     <li>
-                      <token1.Icon />
+                      <Percent/>
                       <div>
-                        <span>{token1.symbol}</span>
+                        <span><Trans>占比</Trans></span>
                         {poolInfo ? (
-                          <span>{poolInfo ? `${poolInfo.myPoolAmounts[1]} | ${poolInfo.myPoolRatio}` : '--'}</span>
+                          <span>{poolInfo ? `${poolInfo.myPoolRatio}` : '--'}</span>
                         ) : (
                           <Skeleton width={200} />
                         )}
