@@ -137,10 +137,6 @@ msgstr "CoFiX DAO contract address:"
 msgid "CoFiX Dapp is the most efficient Token Swap on Ethereum."
 msgstr "CoFiX Dapp is the most efficient Token Swap on Ethereum."
 
-#: src/pages/shared/RiskModal/index.tsx
-msgid "CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH dividends from market fees."
-msgstr "CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH dividends from market fees."
-
 #: src/pages/shared/Menu/index.tsx
 msgid "Community"
 msgstr "Community"

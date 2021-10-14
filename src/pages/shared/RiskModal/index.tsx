@@ -153,15 +153,6 @@ const RiskModal: FC = () => {
               <p>
                 <input style={{ display: "none" }}/>
                 <Trans>
-                  CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH
-                  dividends from market fees.
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
                   To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary
                   to fully understand the market-making rules and understand the following risks.
                   Users who do not understand the rules or cannot bear the risks are not recommended to participate:

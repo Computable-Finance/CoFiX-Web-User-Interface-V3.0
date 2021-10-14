@@ -137,10 +137,6 @@ msgstr "CoFiX DAO 合约地址："
 msgid "CoFiX Dapp is the most efficient Token Swap on Ethereum."
 msgstr "CoFiX DApp 是以太坊上最高效的闪兑应用。"
 
-#: src/pages/shared/RiskModal/index.tsx
-msgid "CoFiX rewards Liquidity Providers with XToken, which allow you to mine COFI tokens and earn ETH dividends from market fees."
-msgstr "CoFiX 用 XTokens 回报资金流动性提供者，允许您挖掘 COFI 代币并从市场费中赚取 ETH 收益。"
-
 #: src/pages/shared/Menu/index.tsx
 msgid "Community"
 msgstr "社区"
