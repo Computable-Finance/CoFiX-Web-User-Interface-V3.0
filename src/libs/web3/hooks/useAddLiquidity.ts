@@ -71,7 +71,6 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
 
         if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
           setArgs(newArgs)
-          console.log(newArgs)
         }
       } else {
         setArgs(undefined)
