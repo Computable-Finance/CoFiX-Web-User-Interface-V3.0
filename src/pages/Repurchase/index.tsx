@@ -27,6 +27,8 @@ const Repurchase: FC = () => {
   const daoInfo = useDAOInfo()
 
   const [amount, setAmount] = useState('')
+  const [ethAmount, setEthAmount] = useState('')
+  const [action, setAction] = useState("token")
   const {balance: cofiBalance} = useTokenBalance('COFI', account || '')
   const anchorPool = api?.CoFixAnchorPools["ETH"]
   const [insufficient, setInsufficient] = useState(false)
@@ -92,14 +94,17 @@ const Repurchase: FC = () => {
             symbol="COFI"
             selectable={false}
             value={amount}
-            onChange={(v) => setAmount(v)}
+            onChange={(v) => {
+              setAmount(v)
+              setAction("token")
+            }}
             checkInsufficientBalance
             onInsufficientBalance={(i) => setInsufficient(i)}
           />
 
           <TokenInput
             title={t`Estimated Receive:`}
-            value={handleRepurchase.ethAmount?.formatAmount}
+            value={action === "token" ? handleRepurchase.ethAmount?.formatAmount : ethAmount}
             symbol="ETH"
             balance={daoBalance?.ETH}
             checkInsufficientBalance
@@ -107,8 +112,10 @@ const Repurchase: FC = () => {
             balanceTitle={t`DAO balance`}
             selectable={false}
             onChange={(e) => {
+              setEthAmount(e)
+              setAction("eth")
               if (daoInfo?.cofiETHAmount) {
-                setAmount(daoInfo?.cofiETHAmount.multipliedBy(toBigNumber(e)).toFormat(8))
+                setAmount(toBigNumber(e).div(daoInfo?.cofiETHAmount).toFixed(8))
               }
             }}
           />
@@ -127,11 +134,6 @@ const Repurchase: FC = () => {
             }
             loading={!daoInfo}
           />
-          {/* <Field
-            name={t`ETH Balance in your wallet`}
-            value={`${ethBalance ? ethBalance.formatAmount : '--'} ETH`}
-            loading={!ethBalance || ethBalance.value.lt(0)}
-          /> */}
 
           <TransactionButtonGroup
             approve={{
