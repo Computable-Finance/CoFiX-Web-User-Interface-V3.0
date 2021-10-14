@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import {Link, useHistory} from 'react-router-dom'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import {Asset, DollarOutline, Empty, Percent, PercentageSignOutline} from 'src/components/Icon'
+import {Asset, BarGraphOutline, DollarOutline, Empty, Percent, PercentageSignOutline} from 'src/components/Icon'
 import usePoolInfo from 'src/hooks/usePoolInfo'
 import useToken from 'src/hooks/useToken'
 import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
@@ -103,6 +103,14 @@ const Pool: FC = () => {
                       loading={!poolInfo}
                     />
                   </li>
+                  <li>
+                    <Item
+                      Icon={BarGraphOutline}
+                      title={`${t`Total Share`}`}
+                      content={poolInfo ? poolInfo.xtokenTotalSupply.amount.toFormat(8) : '--'}
+                      loading={!poolInfo}
+                    />
+                  </li>
                 </ul>
               </div>
             </Card>
@@ -145,7 +153,9 @@ const Pool: FC = () => {
                     <li>
                       <Asset/>
                       <div>
-                        <span><Trans>我的份额</Trans></span>
+                        <span>
+                          <Trans>My Share</Trans>
+                        </span>
                         {poolInfo ? (
                           <span>{poolInfo ? `${ poolInfo.xtokenBalance.amount.toFormat(8) }` : '--'}</span>
                         ) : (
@@ -156,7 +166,9 @@ const Pool: FC = () => {
                     <li>
                       <Percent/>
                       <div>
-                        <span><Trans>占比</Trans></span>
+                        <span>
+                          <Trans>Ratio</Trans>
+                        </span>
                         {poolInfo ? (
                           <span>{poolInfo ? `${poolInfo.myPoolRatio}` : '--'}</span>
                         ) : (
@@ -170,7 +182,7 @@ const Pool: FC = () => {
             )}
 
             {!poolInfo || poolInfo?.emptyLiquidity || (
-              <Button block gradient>
+              <Button block outline>
                 <Link to={`/pool/remove-liquidity/${token0.symbol}/${token1.symbol}`}>
                   <Trans>Remove Liquidity</Trans>
                 </Link>

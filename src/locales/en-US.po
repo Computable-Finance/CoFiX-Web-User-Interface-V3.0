@@ -99,10 +99,6 @@ msgstr "Add Liquidity"
 msgid "Amount"
 msgstr "Amount"
 
-#: src/pages/Pool/pages/Index/index.tsx
-msgid "Amount | Percentage"
-msgstr "Amount | Percentage"
-
 #: src/libs/web3/hooks/useTransaction.ts
 #: src/pages/shared/TransactionButtonGroup/index.tsx
 msgid "Approve"
@@ -284,6 +280,10 @@ msgstr "Minimum Received"
 msgid "My Pool"
 msgstr "My Pool"
 
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "My Share"
+msgstr "My Share"
+
 #: src/pages/Swap/index.tsx
 msgid "NEST Oracle Price"
 msgstr "NEST Oracle Price"
@@ -292,7 +292,6 @@ msgstr "NEST Oracle Price"
 msgid "Net worth"
 msgstr "Net worth"
 
-#: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/shared/Header/index.tsx
@@ -312,6 +311,10 @@ msgstr "Pool total share"
 #: src/pages/Swap/index.tsx
 msgid "Price Spread"
 msgstr "Price Spread"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Ratio"
+msgstr "Ratio"
 
 #: src/pages/Pool/index.tsx
 #: src/pages/shared/RiskModal/index.tsx
@@ -415,6 +418,10 @@ msgstr "To enter the CoFiX 3.0 agreement, users/smart contracts participating in
 #: src/pages/shared/RiskModal/index.tsx
 msgid "To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary to fully understand the market-making rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 msgstr "To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary to fully understand the market-making rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Total Share"
+msgstr "Total Share"
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx

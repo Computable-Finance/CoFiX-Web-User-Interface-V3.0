@@ -99,10 +99,6 @@ msgstr "添加流动性"
 msgid "Amount"
 msgstr "数量"
 
-#: src/pages/Pool/pages/Index/index.tsx
-msgid "Amount | Percentage"
-msgstr "数量 ｜ 比例"
-
 #: src/libs/web3/hooks/useTransaction.ts
 #: src/pages/shared/TransactionButtonGroup/index.tsx
 msgid "Approve"
@@ -284,6 +280,10 @@ msgstr "收到的最低数额"
 msgid "My Pool"
 msgstr "我的资金池"
 
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "My Share"
+msgstr "我的份额"
+
 #: src/pages/Swap/index.tsx
 msgid "NEST Oracle Price"
 msgstr "NEST 预言机价格"
@@ -292,7 +292,6 @@ msgstr "NEST 预言机价格"
 msgid "Net worth"
 msgstr "当前净值"
 
-#: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/shared/Header/index.tsx
@@ -312,6 +311,10 @@ msgstr "资金池总份额"
 #: src/pages/Swap/index.tsx
 msgid "Price Spread"
 msgstr "点差"
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Ratio"
+msgstr "占比"
 
 #: src/pages/Pool/index.tsx
 #: src/pages/shared/RiskModal/index.tsx
@@ -415,6 +418,10 @@ msgstr "进入CoFiX 3.0 协议，参与交易的用户/智能合约，需要充�
 #: src/pages/shared/RiskModal/index.tsx
 msgid "To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary to fully understand the market-making rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
 msgstr "为 CoFiX 3.0 协议提供流动性(成为LP的用户/智能合约)，需要充分了解做市规则并明白以下风险，没有理解规则或不能承受风险的用户不建议参与："
+
+#: src/pages/Pool/pages/Index/index.tsx
+msgid "Total Share"
+msgstr "总份额"
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx
