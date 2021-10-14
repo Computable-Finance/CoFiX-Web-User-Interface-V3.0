@@ -143,11 +143,12 @@ const Swap: FC = () => {
             symbol={dest.symbol}
             value={dest.amount}
             balanceTitle={t`Pool Balance:`}
-            balance={balance.balance}
+            balance={balance.balance }
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient2(b)}
             noExtra={
               (dest.symbol === 'ETH' && src.symbol === 'USDT') || (dest.symbol === 'USDT' && src.symbol === 'ETH')
+              || (dest.symbol === src.symbol)
             }
             onChange={(amount: string, symbol: string) => handleChange('dest', amount, symbol)}
             loading={swap.loading && change != 'dest'}
@@ -239,7 +240,7 @@ const Swap: FC = () => {
             transactionType: TransactionType.Swap,
             token: [src.symbol, dest.symbol],
           }}
-          disabled={!src.amount || toBigNumber(src.amount).lte(0) || !swap.ratio || insufficient || insufficient2}
+          disabled={!src.amount || toBigNumber(src.amount).lte(0) || !swap.ratio || insufficient || insufficient2 || src.symbol === dest.symbol}
           onClick={async () => {
             try {
               await checkRisk(RiskAction.Swap)
