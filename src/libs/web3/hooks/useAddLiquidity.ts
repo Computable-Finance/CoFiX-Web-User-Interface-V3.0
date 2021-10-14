@@ -53,7 +53,6 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
           content.liquidity = liquidity.toFixed(6)
           setLiquidity(content.liquidity)
         }
-
         const newArgs = {
           pool: pair.address || '',
           token: pair.pair[1].address || '',
@@ -66,7 +65,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
             .toFixed(0),
           to: api.account || '',
           oracleCallFee: api.chainId === 1 ? "0.001" : "0.01",
-          sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === 1 ? 0.001 : 0.01).plus(api.Tokens.ETH.parse(content.token0.amount))).toFixed(0),
+          sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === 1 ? 0.001 : 0.01).plus(toBigNumber(content.token0.amount))).toFixed(0),
         }
 
         if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
