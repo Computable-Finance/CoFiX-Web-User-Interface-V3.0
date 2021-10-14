@@ -19,12 +19,11 @@ const usePoolBalance = (src: string, dest: string) => {
     if (swap.swapInfo) {
       src = swap.swapInfo.path.slice(-2)[0]
       dest = swap.swapInfo.path.slice(-2)[1]
-
       const pool = api?.CoFiXPairs[src][dest]
 
       pool?.getPoolInfo().then((res) => {
         if (res?.amounts) {
-          setBalance(pair.src.symbol === "ETH" ? res.amounts[1] : res.amounts[0])
+          setBalance(src === "ETH"  ? res.amounts[1] : res.amounts[0])
           setLoading(false)
         }
       })
