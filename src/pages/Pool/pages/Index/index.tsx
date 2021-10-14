@@ -13,6 +13,7 @@ import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import PoolSelector from 'src/pages/shared/PoolSelector'
 import {RiskAction, useRiskModal} from "../../../shared/RiskModal";
+import {toBigNumber} from "../../../../libs/web3/util";
 
 const Item: FC<{
   Icon: typeof DollarOutline
@@ -144,7 +145,7 @@ const Pool: FC = () => {
 
           <div className={`${classPrefix}-info-container`}>
             <h1 className={`${classPrefix}-h1`}>{t`My Pool`}</h1>
-            {poolInfo?.emptyLiquidity ? (
+            {poolInfo?.emptyLiquidity || poolInfo?.xtokenBalance.amount.lt(toBigNumber(0.00000001)) ? (
               empty
             ) : (
               <Card>
@@ -181,7 +182,7 @@ const Pool: FC = () => {
               </Card>
             )}
 
-            {!poolInfo || poolInfo?.emptyLiquidity || (
+            {!poolInfo || poolInfo?.emptyLiquidity || poolInfo?.xtokenBalance.amount.lt(toBigNumber(0.00000001))  || (
               <Button block>
                 <Link to={`/pool/remove-liquidity/${token0.symbol}/${token1.symbol}`}>
                   <Trans>Remove Liquidity</Trans>
