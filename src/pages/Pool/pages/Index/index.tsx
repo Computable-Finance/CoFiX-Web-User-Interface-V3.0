@@ -182,7 +182,7 @@ const Pool: FC = () => {
             )}
 
             {!poolInfo || poolInfo?.emptyLiquidity || (
-              <Button block outline>
+              <Button block>
                 <Link to={`/pool/remove-liquidity/${token0.symbol}/${token1.symbol}`}>
                   <Trans>Remove Liquidity</Trans>
                 </Link>
