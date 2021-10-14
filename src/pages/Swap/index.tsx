@@ -159,7 +159,8 @@ const Swap: FC = () => {
         <Field
           name={t`Trading Price`}
           loading={swap.loading}
-          value={`1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}`}
+          value={ src.symbol !== dest.symbol ?  `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
+            `1 ${src.symbol} = -- ${dest.symbol}`}
           tooltip={
             <>
               <h1>
