@@ -43,7 +43,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
 
         const totalVault = poolInfo.amounts[0].plus(poolInfo.amounts[1].multipliedBy(toBigNumber(1).div(tokenAmount)))
 
-        if (poolInfo.xtokenTotalSupply.amount.gt(0)){
+        if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
           liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
         } else {
           liquidity = liquidity.multipliedBy(toBigNumber(1))
