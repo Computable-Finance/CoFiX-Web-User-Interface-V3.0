@@ -36,8 +36,8 @@ msgid "2. There is a spread between the actual exchange price of the transaction
 msgstr "2. 交易的实际兑换价格于NEST预言机的价格存在点差，点差会增加交易成本，因此在 CoFiX 3.0 中进行交易获得数量可能会比在交易所中少；"
 
 #: src/pages/shared/RiskModal/index.tsx
-msgid "3. CoFiX Dao sell-back quota is released according to the block, each block releases 50 COFI, and the sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait a few blocks before continuing to participate;"
-msgstr "3. CoFiX Dao 的回售额度按照区块释放，每个区块释放 50 COFI，回售额度有上限，如果已达到当前额度上限，则可能要等待几个区块后才能继续参与；"
+msgid "3. CoFiX Dao sell-back quota is released according to the block, each block releases 500 COFI, and the sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait a few blocks before continuing to participate;"
+msgstr "3. CoFiX Dao 的回售额度按照区块释放，每个区块释放 500 COFI，回售额度有上限，如果已达到当前额度上限，则可能要等待几个区块后才能继续参与；"
 
 #: src/pages/shared/RiskModal/index.tsx
 msgid "3. The price of the oracle used in the calculation of the LP share may deviate from the exchange price to a certain extent, causing the expected share and the actual share to be inconsistent. The risk is more obvious when the NEST oracle quotes density is small, and the LP can choose after the NEST price takes effect (For example, within 20 blocks) to purchase or redeem to reduce the risk;"

@@ -265,7 +265,7 @@ const RiskModal: FC = () => {
             <section>
               <p>
                 <Trans>
-                  3. CoFiX Dao sell-back quota is released according to the block, each block releases 50 COFI, and the
+                  3. CoFiX Dao sell-back quota is released according to the block, each block releases 500 COFI, and the
                   sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait
                   a few blocks before continuing to participate;
                 </Trans>
