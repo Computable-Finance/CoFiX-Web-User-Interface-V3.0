@@ -1,6 +1,6 @@
 import {
   TokenCOFI,
-  TokenNEST,
+  TokenNEST, TokenNHBTC,
   TokenPETH,
   TokenUSDC,
   TokenUSDT,
@@ -65,4 +65,13 @@ export const WETH: TokenProps = {
   },
 }
 
-export const ERC20TokenWhitelist = [USDT, NEST, COFI]
+export const NHBTC: TokenProps = {
+  symbol: 'NHBTC',
+  Icon: TokenNHBTC,
+  addresses: {
+    [Mainnet.chainId]: '0x1f832091faf289ed4f50fe7418cfbd2611225d46',
+    [Rinkeby.chainId]: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
+  },
+}
+
+export const ERC20TokenWhitelist = [USDT, NEST, COFI, NHBTC]
