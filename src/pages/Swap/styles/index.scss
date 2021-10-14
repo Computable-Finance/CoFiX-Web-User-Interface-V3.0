@@ -50,7 +50,7 @@ $switch-button-size: 72px;
 
   &-trading-price {
     &-container {
-      padding: $space-sm 0;
+      padding: $space-sm 0 0;
       ul {
         li {
           display: flex;
@@ -101,9 +101,9 @@ $switch-button-size: 72px;
 
     &-tip {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      padding: math.div($space-sm, 2) 0;
+      padding: math.div($space-sm, 2) 0 0;
 
       & > span:first-child {
         color: $dim-color;
