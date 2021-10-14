@@ -20,7 +20,7 @@ export const ETHNEST: CoFiXPairProps = {
   Icon: TokenNEST,
   pair: ['ETH', 'NEST'],
   addresses: {
-    [Mainnet.chainId]: '0x2FA6F2d5e42630e872cD0F33C69D1c2708FF79Fd',
+    [Mainnet.chainId]: '0xA1e3D346297DAa93235f2e39372d4FCDb2230475',
     [Rinkeby.chainId]: '0x503B77BB77182b5f2a19Bacc5285af0edC5126FF',
   },
   cofiAmountPerBlock: 3,
@@ -32,7 +32,19 @@ export const ETHCOFI: CoFiXPairProps = {
   Icon: TokenCOFI,
   pair: ['ETH', 'COFI'],
   addresses: {
-    [Mainnet.chainId]: '0x711EA25b70Bb580a7cb19DeBd0ab40A016c3fCbb',
+    [Mainnet.chainId]: '0x8F6b4C4E48fe9B4b24A30037f07099778bAba0a9',
+    [Rinkeby.chainId]: '0x4115F0e23AbDd94AEF944e5Aba1362b43d3d6638',
+  },
+  cofiAmountPerBlock: 3,
+  cofiRewardPercentage: 0.9,
+}
+
+export const ETHNHBTC: CoFiXPairProps = {
+  symbol: 'ETH-NHBTC',
+  Icon: TokenCOFI,
+  pair: ['ETH', 'NHBTC'],
+  addresses: {
+    [Mainnet.chainId]: '0x400a0aA54074C924166e7864A588b1CA0baacaD2',
     [Rinkeby.chainId]: '0x4115F0e23AbDd94AEF944e5Aba1362b43d3d6638',
   },
   cofiAmountPerBlock: 3,
