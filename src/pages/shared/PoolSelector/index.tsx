@@ -102,9 +102,9 @@ const PoolSelector: FC<Props> = ({ ...props }) => {
                     }}
                   >
                     <Button block primary={p.symbol === pair.symbol}>
-                      <div>
-                        <t0.Icon />
-                        <t1.Icon />
+                      <div style={{display: "flex", alignItems: "center"}}>
+                        <t0.Icon/>
+                        <t1.Icon/>
                       </div>
 
                       <div>{`${t0.symbol}-${t1.symbol}`}</div>
