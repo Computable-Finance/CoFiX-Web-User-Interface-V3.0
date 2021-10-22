@@ -5,7 +5,7 @@ import { TIME_TO_NEXT_BLOCK } from 'src/constants/parameter'
 
 import API from '.'
 import { BLOCK_DAILY } from '../constants/constant'
-import { formatETH, formatUSDT, toBigNumber } from '../util'
+import { toBigNumber } from '../util'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import Token from './Token'
 import { USDT, WETH } from '../constants/tokens'
@@ -283,8 +283,8 @@ class CoFiXPair extends ERC20Token {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(formatUSDT(oraclePrice)).multipliedBy(amountIn),
-          amountOut: toBigNumber(formatUSDT(realPrice)),
+          oracleOut: toBigNumber(this.api.Tokens.USDT.parse(oraclePrice)).multipliedBy(amountIn),
+          amountOut: toBigNumber(this.api.Tokens.USDT.parse(realPrice)),
           oracleFee: toBigNumber(0),
         }
       } else {
@@ -304,8 +304,8 @@ class CoFiXPair extends ERC20Token {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(formatETH(oraclePrice)).multipliedBy(amountIn),
-          amountOut: toBigNumber(formatETH(realPrice)),
+          oracleOut: toBigNumber(this.api.Tokens.ETH.parse(oraclePrice)).multipliedBy(amountIn),
+          amountOut: toBigNumber(this.api.Tokens.ETH.parse(realPrice)),
           oracleFee: toBigNumber(0),
         }
       }
