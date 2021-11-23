@@ -283,8 +283,8 @@ class CoFiXPair extends ERC20Token {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).div(1000000),
-          amountOut: toBigNumber(realPrice).div(1000000),
+          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).shiftedBy(-6),
+          amountOut: toBigNumber(realPrice).shiftedBy(-6),
           oracleFee: toBigNumber(0),
         }
       } else {
@@ -303,8 +303,8 @@ class CoFiXPair extends ERC20Token {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).div(1000000000000000000),
-          amountOut: toBigNumber(realPrice).div(1000000000000000000),
+          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).shiftedBy(-18),
+          amountOut: toBigNumber(realPrice).shiftedBy(-18),
           oracleFee: toBigNumber(0),
         }
       }
