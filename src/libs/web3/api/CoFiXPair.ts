@@ -283,8 +283,8 @@ class CoFiXPair extends ERC20Token {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(this.api.Tokens.USDT.parse(oraclePrice)).multipliedBy(amountIn),
-          amountOut: toBigNumber(this.api.Tokens.USDT.parse(realPrice)),
+          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).div(1000000),
+          amountOut: toBigNumber(realPrice).div(1000000),
           oracleFee: toBigNumber(0),
         }
       } else {
@@ -298,14 +298,13 @@ class CoFiXPair extends ERC20Token {
           WETH.addresses[this.api.chainId],
           this.api.Tokens.USDT.parse(1).toFixed(0)
         )
-
         return {
           fee: {
             symbol: 'ETH',
             amount: toBigNumber(0),
           },
-          oracleOut: toBigNumber(this.api.Tokens.ETH.parse(oraclePrice)).multipliedBy(amountIn),
-          amountOut: toBigNumber(this.api.Tokens.ETH.parse(realPrice)),
+          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).div(1000000000000000000),
+          amountOut: toBigNumber(realPrice).div(1000000000000000000),
           oracleFee: toBigNumber(0),
         }
       }
