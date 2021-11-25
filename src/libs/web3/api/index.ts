@@ -35,7 +35,6 @@ class API {
   account?: string
 
   Tokens: {
-    ETH: Token
     USDT: Token
 
     [symbol: string]: Token

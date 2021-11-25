@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { BigNumberish } from 'ethers'
 import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types/cofix'
-import { TIME_TO_NEXT_BLOCK } from 'src/constants/parameter'
 
 import API from '.'
 import { toBigNumber } from '../util'
@@ -14,7 +13,6 @@ export type PoolInfo = {
   formatAmounts: Array<string>
   nav: BigNumber
   miningSpeed: number
-  apr: string
 
   emptyLiquidity: boolean
   myPoolRatio: string
@@ -106,12 +104,11 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
 
-    const [balances, ethAmounts, usdtAmounts, cofiUSDTAmount, pairBalance, pairTotalSupply] =
+    const [balances, ethAmounts, usdtAmounts, pairBalance, pairTotalSupply] =
       await Promise.all([
         Promise.all([this.contract.ethBalance(), tokens[1].balanceOf(this.address)]),
         Promise.all([tokens[0].getValuePerETH(), tokens[1].getValuePerETH()]),
         Promise.all([tokens[0].getUSDTAmount(), tokens[1].getUSDTAmount()]),
-        this.api.Tokens.COFI.getUSDTAmount(),
 
         this.balanceOf(this.api.account || ''),
         this.totalSupply(),
@@ -123,7 +120,7 @@ class CoFiXPair extends ERC20Token {
       tokens[1].format(tokens[1].amount(balances[1] || 0)),
     ]
 
-    if (!ethAmounts[0] || !ethAmounts[1] || !usdtAmounts[0] || !usdtAmounts[1] || !cofiUSDTAmount) {
+    if (!ethAmounts[0] || !ethAmounts[1] || !usdtAmounts[0] || !usdtAmounts[1]) {
       return
     }
 
@@ -136,19 +133,6 @@ class CoFiXPair extends ERC20Token {
       nav = new BigNumber(navPerShare.toString()).div(new BigNumber(10).pow(18))
     }
 
-    let apr = '--'
-    if (!totalFunds.isZero()) {
-      apr =
-        toBigNumber(this.cofiAmountPerBlock)
-          .multipliedBy(cofiUSDTAmount)
-          .multipliedBy(60 * 60 * 24)
-          .div(TIME_TO_NEXT_BLOCK)
-          .div(totalFunds)
-          .multipliedBy(365)
-          .multipliedBy(100)
-          .toFixed(2) + '%'
-    }
-
     const myPoolRatio = new BigNumber(0)
     const myPoolAmounts = ['0.0', '0.0']
 
@@ -158,7 +142,6 @@ class CoFiXPair extends ERC20Token {
       formatAmounts,
       nav,
       miningSpeed: toBigNumber(this.cofiAmountPerBlock).toNumber(),
-      apr,
 
       emptyLiquidity: myPoolRatio.isZero(),
       myPoolRatio: `${myPoolRatio.multipliedBy(100).toFixed(2)} %`,
@@ -207,7 +190,7 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
     const amountIn = toBigNumber(amount)
-    if (src === 'ETH' && dest === this.pair[1].symbol) {
+    if (src === 'USDT' && dest === this.pair[1].symbol) {
       const fee = amountIn.multipliedBy(this.theta).div(10000)
       const c = toBigNumber(
         await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
@@ -220,9 +203,9 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.multipliedBy(tokenAmount),
         amountOut: amountOut,
-        oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
+        oracleFee: toBigNumber(0.001),
       }
-    } else if (src === this.pair[1].symbol && dest === 'ETH') {
+    } else if (src === this.pair[1].symbol && dest === 'USDT') {
       let amountOut = amountIn.div(tokenAmount)
 
       const c = toBigNumber(
@@ -240,7 +223,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.div(tokenAmount),
         amountOut: amountOut,
-        oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
+        oracleFee: toBigNumber(0.001),
       }
     } else {
       throw new Error(`can not swap ${src} to ${dest}`)

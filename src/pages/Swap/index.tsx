@@ -23,7 +23,7 @@ const Swap: FC = () => {
   const { api } = useWeb3()
 
   const [pair, setPair] = useState({
-    src: { symbol: 'ETH', amount: '' },
+    src: { symbol: 'NEST', amount: '' },
     dest: { symbol: 'USDT', amount: '' },
   })
   const swap = useSwap(pair)
@@ -146,10 +146,6 @@ const Swap: FC = () => {
             balance={balance.balance}
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient2(b)}
-            noExtra={
-              (dest.symbol === 'ETH' && src.symbol === 'USDT') || (dest.symbol === 'USDT' && src.symbol === 'ETH')
-              || (dest.symbol === src.symbol)
-            }
             onChange={(amount: string, symbol: string) => handleChange('dest', amount, symbol)}
             loading={swap.loading && change != 'dest'}
             onFocus={() => setChange('dest')}

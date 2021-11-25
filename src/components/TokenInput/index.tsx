@@ -223,8 +223,8 @@ const TokenInput: FC<Props> = ({ ...props }) => {
               className={`${classPrefix}-input`}
               value={value}
               onChange={handleInput}
-              placeholder={props.editable === false ? '--' : '0.0'}
-              disabled={props.editable === false}
+              placeholder={!props.editable ? '--' : '0.0'}
+              disabled={!props.editable}
               style={{
                 display: props.loading || shouldShowBalanceLoading ? 'none' : 'unset',
               }}
