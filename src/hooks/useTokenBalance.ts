@@ -11,7 +11,7 @@ const useTokenBalance = (symbol: string, address?: string) => {
     amount: BigNumber
     formatAmount: string
   }>()
-  const [loading, setLoaindg] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   async function refresh() {
     if (!address || !api) {
@@ -24,7 +24,7 @@ const useTokenBalance = (symbol: string, address?: string) => {
     }
 
     try {
-      setLoaindg(true)
+      setLoading(true)
       const v = await t.balanceOf(address)
       if (!balance || !v.eq(balance.value)) {
         setBalance({
@@ -34,7 +34,7 @@ const useTokenBalance = (symbol: string, address?: string) => {
         })
       }
     } finally {
-      setLoaindg(false)
+      setLoading(false)
     }
   }
 
