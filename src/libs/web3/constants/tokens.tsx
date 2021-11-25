@@ -14,8 +14,8 @@ export const USDT: TokenProps = {
   symbol: 'USDT',
   Icon: TokenUSDT,
   addresses: {
-    [Mainnet.chainId]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-    [Testnet.chainId]: '0x2d750210c0b5343a0b79beff8F054C9add7d2411',
+    [Mainnet.chainId]: '0xDd4A68D8236247BDC159F7C5fF92717AA634cBCc',
+    [Testnet.chainId]: '0xDd4A68D8236247BDC159F7C5fF92717AA634cBCc',
   },
 }
 
@@ -23,8 +23,8 @@ export const PETH: TokenProps = {
   symbol: 'PETH',
   Icon: TokenPETH,
   addresses: {
-    [Mainnet.chainId]: '0x53f878Fb7Ec7B86e4F9a0CB1E9a6c89C0555FbbD',
-    [Testnet.chainId]: '0x4D4B378eFbeb7eE15Aa498F3383C9949391557e0',
+    [Mainnet.chainId]: '0xc39dC1385a44fBB895991580EA55FC10e7451cB3',
+    [Testnet.chainId]: '0xc39dC1385a44fBB895991580EA55FC10e7451cB3',
   },
 }
 
@@ -41,8 +41,8 @@ export const NEST: TokenProps = {
   symbol: 'NEST',
   Icon: TokenNEST,
   addresses: {
-    [Mainnet.chainId]: '0x04abEdA201850aC0124161F037Efd70c74ddC74C',
-    [Testnet.chainId]: '0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25',
+    [Mainnet.chainId]: '0x821edD79cc386E56FeC9DA5793b87a3A52373cdE',
+    [Testnet.chainId]: '0x821edD79cc386E56FeC9DA5793b87a3A52373cdE',
   },
   formatPrecision: 2,
 }

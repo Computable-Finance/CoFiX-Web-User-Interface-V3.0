@@ -8,8 +8,8 @@ import { Mainnet, Testnet } from './chains'
 
 export const NestPriceFacade: NestPriceFacadeProps = {
   addresses: {
-    [Mainnet.chainId]: '0xB5D2890c061c321A5B6A4a4254bb1522425BAF0A',
-    [Testnet.chainId]: '0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838',
+    [Mainnet.chainId]: '0xF2f9E62f52389EF223f5Fa8b9926e95386935277',
+    [Testnet.chainId]: '0xF2f9E62f52389EF223f5Fa8b9926e95386935277',
   },
 }
 
@@ -22,15 +22,15 @@ export const UniswapQuoter: UniswapQuoterProps = {
 
 export const CoFiXDAO: CoFiXDAOProps = {
   addresses: {
-    [Mainnet.chainId]: '0x2Cf06Aa521DD979Bc1b50ce44590A09db21d6A74',
-    [Testnet.chainId]: '0x2720dF961723568062A96F9f5310d8ab408bfFfc',
+    [Mainnet.chainId]: '0x76D8680e763c611f204c974cf2F6c203d44fd124',
+    [Testnet.chainId]: '0x76D8680e763c611f204c974cf2F6c203d44fd124',
   },
 }
 
 export const CoFiXRouter: CoFiXRouterProps = {
   addresses: {
-    [Mainnet.chainId]: '0x57F0A4ef374B35eb32B61Dd8bc68C58e886CFC84',
-    [Testnet.chainId]: '0x9f7997EFb0aF6f5e370dea99b1941D73330825C9',
+    [Mainnet.chainId]: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84',
+    [Testnet.chainId]: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84',
   },
 }
 

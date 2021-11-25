@@ -62,6 +62,7 @@ const AddLiquidity: FC = () => {
         symbol={symbol}
         title={`${t`Input`}${t`Amount`}`}
         value={amount}
+        tokens={[params.token0, params.token1]}
         onChange={handleChange}
         checkInsufficientBalance
         onInsufficientBalance={(i) => setInsufficient1(i)}

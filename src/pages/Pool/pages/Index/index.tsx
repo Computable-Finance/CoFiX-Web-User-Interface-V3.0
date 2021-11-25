@@ -36,7 +36,7 @@ const Item: FC<{
 const Pool: FC = () => {
   const { api } = useWeb3()
   const {checkRisk} = useRiskModal()
-  const [pair, setPair] = useState(['ETH', 'NEST'])
+  const [pair, setPair] = useState(['NEST', 'USDT'])
   const { info: poolInfo } = usePoolInfo<PoolInfo>(pair[0], pair[1])
 
   const [token0, token1] = [useToken(pair[0]), useToken(pair[1])]
