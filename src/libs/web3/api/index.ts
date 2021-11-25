@@ -1,17 +1,12 @@
-import UniswapQuoter, { UniswapQuoterProps } from './UniswapQuoter'
-import { Web3Provider } from '@ethersproject/providers'
-import CoFiXController, { CoFiXControllerProps } from './CoFiXController'
-import CoFiXDAO, { CoFiXDAOProps } from './CoFixDAO'
-import CoFiXPair, { CoFiXPairProps } from './CoFiXPair'
-import CoFiXRouter, { CoFiXRouterProps } from './CoFiXRouter'
-import CoFiXVaultForStaking, { CoFiXVaultForStakingProps } from './CoFiXVaultForStaking'
-import ERC20Token, { ERC20TokenProps } from './ERC20Token'
-import NestPriceFacade, { NestPriceFacadeProps } from './NestPriceFacade'
+import {Web3Provider} from '@ethersproject/providers'
+import CoFiXPair, {CoFiXPairProps} from './CoFiXPair'
+import CoFiXRouter, {CoFiXRouterProps} from './CoFiXRouter'
+import ERC20Token, {ERC20TokenProps} from './ERC20Token'
+import NestPriceFacade, {NestPriceFacadeProps} from './NestPriceFacade'
 import ETHToken from './ETHToken'
 import Token from './Token'
-import CoFiXAnchorPool, { CoFiXAnchorPoolProps } from './CoFiXAnchorPool'
-import { toBigNumber } from '../util'
-import { BigNumberish } from 'ethers'
+import {toBigNumber} from '../util'
+import {BigNumberish} from 'ethers'
 import BigNumber from 'bignumber.js'
 
 export type SwapInfo = {
@@ -29,14 +24,9 @@ type APIProps = {
 
   ERC20Tokens: Array<ERC20TokenProps>
   CoFiXPairs: Array<CoFiXPairProps>
-  CoFixAnchorPools: Array<CoFiXAnchorPoolProps>
 
   NestPriceFacade: NestPriceFacadeProps
-  CoFiXController: CoFiXControllerProps
   CoFiXRouter: CoFiXRouterProps
-  CoFiXVaultForStaking: CoFiXVaultForStakingProps
-  CoFiXDAO: CoFiXDAOProps
-  UniswapQuoter: UniswapQuoterProps
 }
 
 class API {
@@ -57,20 +47,12 @@ class API {
     }
   }
 
-  CoFixAnchorPools: {
-    [symbol: string]: CoFiXAnchorPool
-  }
-
   Contracts: {
     NestPriceFacade: NestPriceFacade
-    CoFiXController: CoFiXController
     CoFiXRouter: CoFiXRouter
-    CoFiXVaultForStaking: CoFiXVaultForStaking
-    CoFiXDAO: CoFiXDAO
-    UniswapQuoter: UniswapQuoter
   }
 
-  swapMap: Record<string, Record<string, CoFiXPair | CoFiXAnchorPool>>
+  swapMap: Record<string, Record<string, CoFiXPair>>
 
   constructor(props: APIProps) {
     this.provider = props.provider
@@ -105,28 +87,12 @@ class API {
       }, Object.create(null)),
     }
 
-    this.CoFixAnchorPools = {
-      ...props.CoFixAnchorPools.reduce((pools, props) => {
-        const pool = new CoFiXAnchorPool(this, props)
-
-        props.tokens.forEach((t) => {
-          pools[t] = pool
-        })
-
-        return pools
-      }, Object.create(null)),
-    }
-
     this.Contracts = {
       NestPriceFacade: new NestPriceFacade(this, props.NestPriceFacade),
-      CoFiXController: new CoFiXController(this, props.CoFiXController),
       CoFiXRouter: new CoFiXRouter(this, props.CoFiXRouter),
-      CoFiXVaultForStaking: new CoFiXVaultForStaking(this, props.CoFiXVaultForStaking),
-      CoFiXDAO: new CoFiXDAO(this, props.CoFiXDAO),
-      UniswapQuoter: new UniswapQuoter(this, props.UniswapQuoter),
     }
 
-    const map: Record<string, Record<string, CoFiXPair | CoFiXAnchorPool>> = {}
+    const map: Record<string, Record<string, CoFiXPair>> = {}
 
     Object.keys(this.CoFiXPairs).forEach((symbol1) => {
       if (!map[symbol1]) {
@@ -146,24 +112,6 @@ class API {
       })
     })
 
-    Object.keys(this.CoFixAnchorPools).forEach((symbol1) => {
-      if (!map[symbol1]) {
-        map[symbol1] = {}
-      }
-
-      this.CoFixAnchorPools[symbol1].tokens.forEach((symbol2) => {
-        if (symbol1 === symbol2) {
-          return
-        }
-        if (!map[symbol2]) {
-          map[symbol2] = {}
-        }
-
-        map[symbol1][symbol2] = this.CoFixAnchorPools[symbol1]
-        map[symbol2][symbol1] = this.CoFixAnchorPools[symbol1]
-      })
-    })
-
     this.swapMap = map
   }
 
@@ -173,7 +121,6 @@ class API {
       Object.values(this.CoFiXPairs).map(async (p) => await Promise.all(Object.values(p).map((p) => p.init())))
     )
     await Promise.all(Object.values(this.Contracts).map((t) => t.init()))
-    await Promise.all(Object.values(this.CoFixAnchorPools).map((t) => t.init()))
   }
 
   async getSwapInfo(src: string, dest: string, amount: BigNumberish | BigNumber) {
@@ -284,8 +231,7 @@ class API {
   }
 
   getTokenByAddress(address: string) {
-    const token = Object.values(this.Tokens).find((t) => t.address === address)
-    return token
+    return Object.values(this.Tokens).find((t) => t.address === address)
   }
 }
 

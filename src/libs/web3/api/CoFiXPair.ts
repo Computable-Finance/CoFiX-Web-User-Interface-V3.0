@@ -4,11 +4,9 @@ import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types/c
 import { TIME_TO_NEXT_BLOCK } from 'src/constants/parameter'
 
 import API from '.'
-import { BLOCK_DAILY } from '../constants/constant'
 import { toBigNumber } from '../util'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import Token from './Token'
-import { USDT, WETH } from '../constants/tokens'
 
 export type PoolInfo = {
   totalFunds: BigNumber
@@ -65,7 +63,6 @@ class CoFiXPair extends ERC20Token {
   cofiRewardPercentage: number
 
   poolInfo?: PoolInfo
-  stakeInfo?: StakeInfo
 
   theta = toBigNumber(20)
   impactCostVOL = toBigNumber(1)
@@ -94,17 +91,10 @@ class CoFiXPair extends ERC20Token {
       return
     }
 
-    const [config, channelInfo] = await Promise.all([
-      this.contract.getConfig(),
-      this.api.Contracts.CoFiXVaultForStaking.contract?.getChannelInfo(this.address || ''),
-    ])
+    const config = await this.contract.getConfig();
     this.theta = toBigNumber(config.theta)
     this.impactCostVOL = toBigNumber(config.impactCostVOL)
     this.nt = toBigNumber(config.nt)
-
-    if (channelInfo?.cofiPerBlock) {
-      this.cofiAmountPerBlock = this.api.Tokens.COFI.amount(channelInfo?.cofiPerBlock).toNumber()
-    }
   }
 
   async getPoolInfo(): Promise<PoolInfo | undefined> {
@@ -116,7 +106,7 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
 
-    const [balances, ethAmounts, usdtAmounts, cofiUSDTAmount, pairBalance, pairTotalSupply, vaultBalance] =
+    const [balances, ethAmounts, usdtAmounts, cofiUSDTAmount, pairBalance, pairTotalSupply] =
       await Promise.all([
         Promise.all([this.contract.ethBalance(), tokens[1].balanceOf(this.address)]),
         Promise.all([tokens[0].getValuePerETH(), tokens[1].getValuePerETH()]),
@@ -125,8 +115,6 @@ class CoFiXPair extends ERC20Token {
 
         this.balanceOf(this.api.account || ''),
         this.totalSupply(),
-
-        this.api.Contracts.CoFiXVaultForStaking.balanceOf(this.address, this.api.account || ''),
       ])
 
     const amounts = [tokens[0].amount(balances[0] || 0), tokens[1].amount(balances[1] || 0)]
@@ -161,16 +149,8 @@ class CoFiXPair extends ERC20Token {
           .toFixed(2) + '%'
     }
 
-    let myPoolRatio = new BigNumber(0)
-    let myPoolAmounts = ['0.0', '0.0']
-    if (!pairTotalSupply.isZero()) {
-      myPoolRatio = pairBalance.plus(vaultBalance).div(pairTotalSupply)
-
-      myPoolAmounts = [
-        tokens[0].format(amounts[0].multipliedBy(myPoolRatio)),
-        tokens[1].format(amounts[1].multipliedBy(myPoolRatio)),
-      ]
-    }
+    const myPoolRatio = new BigNumber(0)
+    const myPoolAmounts = ['0.0', '0.0']
 
     this.poolInfo = {
       totalFunds,
@@ -212,45 +192,6 @@ class CoFiXPair extends ERC20Token {
     return token1.amount(token1.parse(value.initToken1Amount)).div(token0.amount(token1.parse(value.initToken0Amount)))
   }
 
-  async getStakeInfo() {
-    const info: Partial<StakeInfo> = {}
-    if (!this.address || !this.api.account) {
-      return
-    }
-
-    const [xTokenInPool, stakedXToken] = await Promise.all([
-      this.balanceOf(this.api.Contracts.CoFiXVaultForStaking.address || ''),
-      this.api.Contracts.CoFiXVaultForStaking.balanceOf(this.address, this.api.account),
-    ])
-    info.dailyMined = toBigNumber(this.cofiAmountPerBlock).multipliedBy(BLOCK_DAILY)
-    info.stakedRatio = '--'
-    if (!xTokenInPool.isZero()) {
-      info.stakedRatio = `${stakedXToken.div(xTokenInPool).multipliedBy(100).toFixed(2)} %`
-    }
-
-    info.xTokenInPool = {
-      value: xTokenInPool,
-      amount: xTokenInPool.shiftedBy(-18),
-      formatAmount: toBigNumber(xTokenInPool.shiftedBy(-18).toFixed(4)).toFormat(4),
-    }
-    info.stakedXToken = {
-      value: stakedXToken,
-      amount: stakedXToken.shiftedBy(-18),
-      formatAmount: toBigNumber(stakedXToken.shiftedBy(-18).toFixed(4)).toFormat(4),
-    }
-
-    return info as StakeInfo
-  }
-
-  async earenedCOFI() {
-    const earenedCOFI = await this.api.Contracts.CoFiXVaultForStaking.earned(this.address || '', this.api.account || '')
-    return {
-      value: earenedCOFI,
-      amount: this.api.Tokens.COFI.amount(earenedCOFI),
-      formatAmount: this.api.Tokens.COFI.format(this.api.Tokens.COFI.amount(earenedCOFI)),
-    }
-  }
-
   async swap(src: string, dest: string, amount: BigNumber | BigNumberish) {
     if (!this.impactCostVOL) {
       throw new Error(`cofix pair ${this.symbol} not init`)
@@ -264,91 +205,45 @@ class CoFiXPair extends ERC20Token {
       throw new Error(`coifx pair ${this.symbol} not found`)
     }
 
-    if ((src === 'ETH' && dest === 'USDT') || (src === 'USDT' && dest === 'ETH')) {
-      const amountIn = toBigNumber(amount)
-      if (src === 'ETH') {
-        const realPrice = await this.api.Contracts.UniswapQuoter.quoteExactInputSingle(
-          WETH.addresses[this.api.chainId],
-          USDT.addresses[this.api.chainId],
-          this.api.Tokens.ETH.parse(amountIn).toFixed(0)
-        )
-        const oraclePrice = await this.api.Contracts.UniswapQuoter.quoteExactInputSingle(
-          WETH.addresses[this.api.chainId],
-          USDT.addresses[this.api.chainId],
-          this.api.Tokens.ETH.parse(1).toFixed(0)
-        )
+    const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
+    const amountIn = toBigNumber(amount)
+    if (src === 'ETH' && dest === this.pair[1].symbol) {
+      const fee = amountIn.multipliedBy(this.theta).div(10000)
+      const c = toBigNumber(
+        await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
+      ).shiftedBy(-18)
+      const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(toBigNumber(1).plus(k).plus(c))
+      return {
+        fee: {
+          symbol: 'ETH',
+          amount: fee,
+        },
+        oracleOut: amountIn.multipliedBy(tokenAmount),
+        amountOut: amountOut,
+        oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
+      }
+    } else if (src === this.pair[1].symbol && dest === 'ETH') {
+      let amountOut = amountIn.div(tokenAmount)
 
-        return {
-          fee: {
-            symbol: 'ETH',
-            amount: toBigNumber(0),
-          },
-          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).shiftedBy(-6),
-          amountOut: toBigNumber(realPrice).shiftedBy(-6),
-          oracleFee: toBigNumber(0),
-        }
-      } else {
-        const realPrice = await this.api.Contracts.UniswapQuoter.quoteExactInputSingle(
-          USDT.addresses[this.api.chainId],
-          WETH.addresses[this.api.chainId],
-          this.api.Tokens.USDT.parse(amountIn).toFixed(0)
-        )
-        const oraclePrice = await this.api.Contracts.UniswapQuoter.quoteExactInputSingle(
-          USDT.addresses[this.api.chainId],
-          WETH.addresses[this.api.chainId],
-          this.api.Tokens.USDT.parse(1).toFixed(0)
-        )
-        return {
-          fee: {
-            symbol: 'ETH',
-            amount: toBigNumber(0),
-          },
-          oracleOut: toBigNumber(oraclePrice).multipliedBy(amountIn).shiftedBy(-18),
-          amountOut: toBigNumber(realPrice).shiftedBy(-18),
-          oracleFee: toBigNumber(0),
-        }
+      const c = toBigNumber(
+        await this.contract.impactCostForBuyInETH(this.api.Tokens.ETH.parse(amountOut).toFixed(0))
+      ).shiftedBy(-18)
+
+      amountOut = amountOut.div(toBigNumber(1).plus(k).plus(c))
+      const fee = amountOut.multipliedBy(this.theta).div(10000)
+      amountOut = amountOut.minus(fee)
+
+      return {
+        fee: {
+          symbol: 'ETH',
+          amount: fee,
+        },
+        oracleOut: amountIn.div(tokenAmount),
+        amountOut: amountOut,
+        oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
       }
     } else {
-      const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
-      const amountIn = toBigNumber(amount)
-      if (src === 'ETH' && dest === this.pair[1].symbol) {
-        const fee = amountIn.multipliedBy(this.theta).div(10000)
-        const c = toBigNumber(
-          await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
-        ).shiftedBy(-18)
-        const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(toBigNumber(1).plus(k).plus(c))
-        return {
-          fee: {
-            symbol: 'ETH',
-            amount: fee,
-          },
-          oracleOut: amountIn.multipliedBy(tokenAmount),
-          amountOut: amountOut,
-          oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
-        }
-      } else if (src === this.pair[1].symbol && dest === 'ETH') {
-        let amountOut = amountIn.div(tokenAmount)
-
-        const c = toBigNumber(
-          await this.contract.impactCostForBuyInETH(this.api.Tokens.ETH.parse(amountOut).toFixed(0))
-        ).shiftedBy(-18)
-
-        amountOut = amountOut.div(toBigNumber(1).plus(k).plus(c))
-        const fee = amountOut.multipliedBy(this.theta).div(10000)
-        amountOut = amountOut.minus(fee)
-
-        return {
-          fee: {
-            symbol: 'ETH',
-            amount: fee,
-          },
-          oracleOut: amountIn.div(tokenAmount),
-          amountOut: amountOut,
-          oracleFee: toBigNumber(this.api.chainId === 1 ? 0.001 : 0.01),
-        }
-      } else {
-        throw new Error(`can not swap ${src} to ${dest}`)
-      }
+      throw new Error(`can not swap ${src} to ${dest}`)
     }
   }
 }

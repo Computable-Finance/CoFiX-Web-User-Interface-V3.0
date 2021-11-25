@@ -22,30 +22,13 @@ const useApprove = (content?: TransactionApproveContent) => {
           return
         }
         return {
-          token: content.token[1]
-            ? api.CoFiXPairs[content.token[0]][content.token[1]]
-            : api.CoFixAnchorPools[content.token[0]].xtokens[content.token[0]],
+          token: api.CoFiXPairs[content.token[0]][content.token[1]],
           spender: api.Contracts.CoFiXRouter.address,
-        }
-      case TransactionType.StakeXToken:
-        if (!content.token[0]) {
-          return
-        }
-        return {
-          token: content.token[1]
-            ? api.CoFiXPairs[content.token[0]][content.token[1]]
-            : api.CoFixAnchorPools[content.token[0]].xtokens[content.token[0]],
-          spender: api.Contracts.CoFiXVaultForStaking.address,
         }
       case TransactionType.Swap:
         return {
           token: api.Tokens[content.token[0]],
           spender: api.Contracts.CoFiXRouter.address,
-        }
-      case TransactionType.Repurchase:
-        return {
-          token: api.Tokens[content.token[0]],
-          spender: api.Contracts.CoFiXDAO.address,
         }
     }
   }, [api, content?.token?.[0], content?.token?.[1], content?.transactionType])
