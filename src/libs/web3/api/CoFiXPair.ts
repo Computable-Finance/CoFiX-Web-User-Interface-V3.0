@@ -64,7 +64,6 @@ class CoFiXPair extends ERC20Token {
 
   theta = toBigNumber(20)
   impactCostVOL = toBigNumber(1)
-  nt = toBigNumber(3000)
 
   constructor(api: API, props: CoFiXPairProps) {
     super(api, {
@@ -92,7 +91,6 @@ class CoFiXPair extends ERC20Token {
     const config = await this.contract.getConfig();
     this.theta = toBigNumber(config.theta)
     this.impactCostVOL = toBigNumber(config.impactCostVOL)
-    this.nt = toBigNumber(config.nt)
   }
 
   async getPoolInfo(): Promise<PoolInfo | undefined> {
@@ -106,7 +104,7 @@ class CoFiXPair extends ERC20Token {
 
     const [balances, ethAmounts, usdtAmounts, pairBalance, pairTotalSupply] =
       await Promise.all([
-        Promise.all([this.contract.ethBalance(), tokens[1].balanceOf(this.address)]),
+        Promise.all([tokens[0].balanceOf(this.address), tokens[1].balanceOf(this.address)]),
         Promise.all([tokens[0].getValuePerETH(), tokens[1].getValuePerETH()]),
         Promise.all([tokens[0].getUSDTAmount(), tokens[1].getUSDTAmount()]),
 
@@ -162,19 +160,6 @@ class CoFiXPair extends ERC20Token {
     return this.poolInfo
   }
 
-  async getPoolRatio() {
-    if (!this.contract) {
-      return
-    }
-
-    const value = await this.contract.getInitialAssetRatio()
-
-    const token0 = this.api.Tokens[this.pair[0].symbol]
-    const token1 = this.api.Tokens[this.pair[1].symbol]
-
-    return token1.amount(token1.parse(value.initToken1Amount)).div(token0.amount(token1.parse(value.initToken0Amount)))
-  }
-
   async swap(src: string, dest: string, amount: BigNumber | BigNumberish) {
     if (!this.impactCostVOL) {
       throw new Error(`cofix pair ${this.symbol} not init`)
@@ -203,7 +188,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.multipliedBy(tokenAmount),
         amountOut: amountOut,
-        oracleFee: toBigNumber(0.001),
+        oracleFee: toBigNumber(0.005),
       }
     } else if (src === this.pair[1].symbol && dest === 'USDT') {
       let amountOut = amountIn.div(tokenAmount)
@@ -223,7 +208,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.div(tokenAmount),
         amountOut: amountOut,
-        oracleFee: toBigNumber(0.001),
+        oracleFee: toBigNumber(0.005),
       }
     } else {
       throw new Error(`can not swap ${src} to ${dest}`)

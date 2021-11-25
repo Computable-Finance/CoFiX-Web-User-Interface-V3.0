@@ -2,364 +2,1294 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer, utils } from 'ethers'
-import { Provider } from '@ethersproject/providers'
-import type { INestPriceFacade, INestPriceFacadeInterface } from '../INestPriceFacade'
+import { Contract, Signer, utils } from "ethers";
+import { Provider } from "@ethersproject/providers";
+import type {
+  INestPriceFacade,
+  INestPriceFacadeInterface,
+} from "../INestPriceFacade";
 
 const _abi = [
   {
+    anonymous: false,
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        indexed: false,
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "token0",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "unit",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "token1",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "reward",
+        type: "address",
       },
     ],
-    name: 'triggeredPrice',
+    name: "Open",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "miner",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "scale",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "Post",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "_governance",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "address",
+        name: "tokenAddress",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address",
       },
     ],
-    name: 'triggeredPriceInfo',
+    name: "balanceOf",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'avgPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'sigmaSQ',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'height',
-        type: 'uint256',
+        internalType: "address",
+        name: "newGovernance",
+        type: "address",
       },
     ],
-    name: 'findPrice',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
+    name: "changeGovernance",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
-      },
-    ],
-    name: 'latestPrice',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
+        internalType: "uint256[]",
+        name: "indices",
+        type: "uint256[]",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    name: "close",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'count',
-        type: 'uint256',
+        internalType: "uint96",
+        name: "vault",
+        type: "uint96",
       },
     ],
-    name: 'lastPriceList',
-    outputs: [
-      {
-        internalType: 'uint256[]',
-        name: '',
-        type: 'uint256[]',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
+    name: "decrease",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
       },
     ],
-    name: 'latestPriceAndTriggeredPriceInfo',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'latestPriceBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'latestPriceValue',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredPriceBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredPriceValue',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredAvgPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredSigmaSQ',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
+    name: "donate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'count',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
       },
     ],
-    name: 'lastPriceListAndTriggeredPriceInfo',
+    name: "estimate",
     outputs: [
       {
-        internalType: 'uint256[]',
-        name: 'prices',
-        type: 'uint256[]',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredPriceBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredPriceValue',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredAvgPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'triggeredSigmaSQ',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "height",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
       },
     ],
-    name: 'triggeredPrice2',
+    name: "findPrice",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenPrice',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "height",
+        type: "uint256",
       },
     ],
-    name: 'triggeredPriceInfo2',
+    name: "findPrice",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'avgPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'sigmaSQ',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenAvgPrice',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenSigmaSQ',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAccountCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'tokenAddress',
-        type: 'address',
+        internalType: "address",
+        name: "addr",
+        type: "address",
       },
     ],
-    name: 'latestPrice2',
+    name: "getAccountIndex",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'blockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenBlockNumber',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'ntokenPrice',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
-]
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "getChannelInfo",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "channelId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "sheetCount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "feeInfo",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "token0",
+            type: "address",
+          },
+          {
+            internalType: "uint96",
+            name: "unit",
+            type: "uint96",
+          },
+          {
+            internalType: "address",
+            name: "token1",
+            type: "address",
+          },
+          {
+            internalType: "uint96",
+            name: "rewardPerBlock",
+            type: "uint96",
+          },
+          {
+            internalType: "address",
+            name: "reward",
+            type: "address",
+          },
+          {
+            internalType: "uint96",
+            name: "vault",
+            type: "uint96",
+          },
+          {
+            internalType: "address",
+            name: "governance",
+            type: "address",
+          },
+          {
+            internalType: "uint32",
+            name: "genesisBlock",
+            type: "uint32",
+          },
+          {
+            internalType: "uint16",
+            name: "postFeeUnit",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "singleFee",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "reductionRate",
+            type: "uint16",
+          },
+        ],
+        internalType: "struct INestOpenMining.PriceChannelView",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getConfig",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "maxBiteNestedLevel",
+            type: "uint8",
+          },
+          {
+            internalType: "uint16",
+            name: "priceEffectSpan",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "pledgeNest",
+            type: "uint16",
+          },
+        ],
+        internalType: "struct INestOpenMining.Config",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "getMinedBlocks",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "minedBlocks",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "totalShares",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint96",
+        name: "vault",
+        type: "uint96",
+      },
+    ],
+    name: "increase",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "indexAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "nestGovernanceAddress",
+        type: "address",
+      },
+    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "lastPriceList",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+    ],
+    name: "lastPriceList",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "lastPriceListAndTriggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "prices",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredAvgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredSigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+    ],
+    name: "lastPriceListAndTriggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "prices",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredAvgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredSigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "latestPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "latestPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "latestPriceAndTriggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "latestPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "latestPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredAvgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredSigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "latestPriceAndTriggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "latestPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "latestPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceBlockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredPriceValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredAvgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "triggeredSigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "offset",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "order",
+        type: "uint256",
+      },
+    ],
+    name: "list",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint32",
+            name: "index",
+            type: "uint32",
+          },
+          {
+            internalType: "address",
+            name: "miner",
+            type: "address",
+          },
+          {
+            internalType: "uint32",
+            name: "height",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "remainNum",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "ethNumBal",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "tokenNumBal",
+            type: "uint32",
+          },
+          {
+            internalType: "uint24",
+            name: "nestNum1k",
+            type: "uint24",
+          },
+          {
+            internalType: "uint8",
+            name: "level",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "shares",
+            type: "uint8",
+          },
+          {
+            internalType: "uint152",
+            name: "price",
+            type: "uint152",
+          },
+        ],
+        internalType: "struct INestOpenMining.PriceSheetView[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "migrate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "token0",
+            type: "address",
+          },
+          {
+            internalType: "uint96",
+            name: "unit",
+            type: "uint96",
+          },
+          {
+            internalType: "address",
+            name: "token1",
+            type: "address",
+          },
+          {
+            internalType: "uint96",
+            name: "rewardPerBlock",
+            type: "uint96",
+          },
+          {
+            internalType: "address",
+            name: "reward",
+            type: "address",
+          },
+          {
+            internalType: "uint16",
+            name: "postFeeUnit",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "singleFee",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "reductionRate",
+            type: "uint16",
+          },
+        ],
+        internalType: "struct INestOpenMining.ChannelConfig",
+        name: "config",
+        type: "tuple",
+      },
+    ],
+    name: "open",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "pay",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "scale",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "equivalent",
+        type: "uint256",
+      },
+    ],
+    name: "post",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "maxBiteNestedLevel",
+            type: "uint8",
+          },
+          {
+            internalType: "uint16",
+            name: "priceEffectSpan",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "pledgeNest",
+            type: "uint16",
+          },
+        ],
+        internalType: "struct INestOpenMining.Config",
+        name: "config",
+        type: "tuple",
+      },
+    ],
+    name: "setConfig",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "stat",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "takeNum",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "newEquivalent",
+        type: "uint256",
+      },
+    ],
+    name: "takeToken0",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "takeNum",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "newEquivalent",
+        type: "uint256",
+      },
+    ],
+    name: "takeToken1",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "totalETHRewards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "triggeredPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "triggeredPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "payback",
+        type: "address",
+      },
+    ],
+    name: "triggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "avgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "sigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "channelId",
+        type: "uint256",
+      },
+    ],
+    name: "triggeredPriceInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "avgPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "sigmaSQ",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "nestGovernanceAddress",
+        type: "address",
+      },
+    ],
+    name: "update",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 export class INestPriceFacade__factory {
-  static readonly abi = _abi
+  static readonly abi = _abi;
   static createInterface(): INestPriceFacadeInterface {
-    return new utils.Interface(_abi) as INestPriceFacadeInterface
+    return new utils.Interface(_abi) as INestPriceFacadeInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): INestPriceFacade {
-    return new Contract(address, _abi, signerOrProvider) as INestPriceFacade
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): INestPriceFacade {
+    return new Contract(address, _abi, signerOrProvider) as INestPriceFacade;
   }
 }

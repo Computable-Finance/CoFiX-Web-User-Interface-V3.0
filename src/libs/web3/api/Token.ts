@@ -67,15 +67,6 @@ abstract class Token extends Contract {
     return this.parse(this.api.Tokens.ETH.parse(1).div(value))
   }
 
-  async getETHAmount() {
-    const value = await this.getETHValue()
-    if (!value || value.isZero()) {
-      return new BigNumber(0)
-    }
-
-    return this.api.Tokens.ETH.amount(value)
-  }
-
   async getUSDTValue() {
     const value = await this.getValuePerUSDT()
     if (!value || value.isZero()) {
@@ -95,13 +86,6 @@ abstract class Token extends Contract {
   }
 
   async queryOracle() {
-    if (this.symbol === 'ETH') {
-      return {
-        k: toBigNumber(0),
-        tokenAmount: toBigNumber(1),
-      }
-    }
-
     if (!this.address || !this.api.Contracts.NestPriceFacade.contract) {
       return {
         k: toBigNumber(0),
@@ -110,23 +94,20 @@ abstract class Token extends Contract {
     }
 
     try {
-      const priceInfo = await this.api.Contracts.NestPriceFacade.contract.lastPriceListAndTriggeredPriceInfo(
-        this.address,
+      const priceInfo = await this.api.Contracts.NestPriceFacade.contract["lastPriceListAndTriggeredPriceInfo(uint256,uint256)"](
+        1,
         2
       )
-
-      // const k = await this.api.Contracts.CoFiXController.contract.calcRevisedK(
-      //   priceInfo.triggeredSigmaSQ,
+      // const k = await this.api.Contracts.CoFixPair.contract.calcRevisedK(
+      //   102739726027,
       //   priceInfo.prices[3],
       //   priceInfo.prices[2],
       //   priceInfo.prices[1],
       //   priceInfo.prices[0]
       // )
 
-      const k = 0.8
-
       return {
-        k: toBigNumber(k).shiftedBy(-18),
+        k: toBigNumber(0).shiftedBy(-18),
         tokenAmount: this.amount(priceInfo.prices[1]),
       }
     } catch (e) {

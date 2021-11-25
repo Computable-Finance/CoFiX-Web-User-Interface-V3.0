@@ -14,84 +14,114 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers'
-import { BytesLike } from '@ethersproject/bytes'
-import { Listener, Provider } from '@ethersproject/providers'
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons'
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface NestPriceFacadeInterface extends ethers.utils.Interface {
   functions: {
-    'lastPriceListAndTriggeredPriceInfo(address,uint256,address)': FunctionFragment
-    'lastPriceListAndTriggeredPriceInfoView(address,uint256)': FunctionFragment
-    'latestPrice(address,address)': FunctionFragment
-    'latestPriceAndTriggeredPriceInfo(address,address)': FunctionFragment
-    'latestPriceView(address)': FunctionFragment
-    'setPrice(address,uint256,uint256)': FunctionFragment
-  }
+    "lastPriceListAndTriggeredPriceInfo(address,uint256,address)": FunctionFragment;
+    "lastPriceListAndTriggeredPriceInfoView(address,uint256)": FunctionFragment;
+    "latestPrice(address,address)": FunctionFragment;
+    "latestPriceAndTriggeredPriceInfo(address,address)": FunctionFragment;
+    "latestPriceView(address)": FunctionFragment;
+    "setPrice(address,uint256,uint256)": FunctionFragment;
+  };
 
   encodeFunctionData(
-    functionFragment: 'lastPriceListAndTriggeredPriceInfo',
+    functionFragment: "lastPriceListAndTriggeredPriceInfo",
     values: [string, BigNumberish, string]
-  ): string
-  encodeFunctionData(functionFragment: 'lastPriceListAndTriggeredPriceInfoView', values: [string, BigNumberish]): string
-  encodeFunctionData(functionFragment: 'latestPrice', values: [string, string]): string
-  encodeFunctionData(functionFragment: 'latestPriceAndTriggeredPriceInfo', values: [string, string]): string
-  encodeFunctionData(functionFragment: 'latestPriceView', values: [string]): string
-  encodeFunctionData(functionFragment: 'setPrice', values: [string, BigNumberish, BigNumberish]): string
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastPriceListAndTriggeredPriceInfoView",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestPrice",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestPriceAndTriggeredPriceInfo",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestPriceView",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPrice",
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'lastPriceListAndTriggeredPriceInfo', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'lastPriceListAndTriggeredPriceInfoView', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPrice', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPriceAndTriggeredPriceInfo', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPriceView', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'setPrice', data: BytesLike): Result
+  decodeFunctionResult(
+    functionFragment: "lastPriceListAndTriggeredPriceInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lastPriceListAndTriggeredPriceInfoView",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestPriceAndTriggeredPriceInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestPriceView",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
 
-  events: {}
+  events: {};
 }
 
 export class NestPriceFacade extends BaseContract {
-  connect(signerOrProvider: Signer | Provider | string): this
-  attach(addressOrName: string): this
-  deployed(): Promise<this>
+  connect(signerOrProvider: Signer | Provider | string): this;
+  attach(addressOrName: string): this;
+  deployed(): Promise<this>;
 
   listeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): Array<TypedListener<EventArgsArray, EventArgsObject>>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
   off<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   on<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   once<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
 
-  listeners(eventName?: string): Array<Listener>
-  off(eventName: string, listener: Listener): this
-  on(eventName: string, listener: Listener): this
-  once(eventName: string, listener: Listener): this
-  removeListener(eventName: string, listener: Listener): this
-  removeAllListeners(eventName?: string): this
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
 
   queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
     event: TypedEventFilter<EventArgsArray, EventArgsObject>,
     fromBlockOrBlockhash?: string | number | undefined,
     toBlock?: string | number | undefined
-  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: NestPriceFacadeInterface
+  interface: NestPriceFacadeInterface;
 
   functions: {
     lastPriceListAndTriggeredPriceInfo(
@@ -99,7 +129,7 @@ export class NestPriceFacade extends BaseContract {
       count: BigNumberish,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     lastPriceListAndTriggeredPriceInfoView(
       tokenAddress: string,
@@ -107,45 +137,47 @@ export class NestPriceFacade extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-        prices: BigNumber[]
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
     latestPrice(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     latestPriceAndTriggeredPriceInfo(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     latestPriceView(
       tokenAddress: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
     setPrice(
       token: string,
       price: BigNumberish,
       dbn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
-  }
+    ): Promise<ContractTransaction>;
+  };
 
   lastPriceListAndTriggeredPriceInfo(
     tokenAddress: string,
     count: BigNumberish,
     payback: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   lastPriceListAndTriggeredPriceInfoView(
     tokenAddress: string,
@@ -153,37 +185,39 @@ export class NestPriceFacade extends BaseContract {
     overrides?: CallOverrides
   ): Promise<
     [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-      prices: BigNumber[]
-      triggeredPriceBlockNumber: BigNumber
-      triggeredPriceValue: BigNumber
-      triggeredAvgPrice: BigNumber
-      triggeredSigmaSQ: BigNumber
+      prices: BigNumber[];
+      triggeredPriceBlockNumber: BigNumber;
+      triggeredPriceValue: BigNumber;
+      triggeredAvgPrice: BigNumber;
+      triggeredSigmaSQ: BigNumber;
     }
-  >
+  >;
 
   latestPrice(
     tokenAddress: string,
     payback: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   latestPriceAndTriggeredPriceInfo(
     tokenAddress: string,
     payback: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   latestPriceView(
     tokenAddress: string,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+  ): Promise<
+    [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+  >;
 
   setPrice(
     token: string,
     price: BigNumberish,
     dbn: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     lastPriceListAndTriggeredPriceInfo(
@@ -193,13 +227,13 @@ export class NestPriceFacade extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-        prices: BigNumber[]
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
     lastPriceListAndTriggeredPriceInfoView(
       tokenAddress: string,
@@ -207,19 +241,21 @@ export class NestPriceFacade extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-        prices: BigNumber[]
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
     latestPrice(
       tokenAddress: string,
       payback: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
     latestPriceAndTriggeredPriceInfo(
       tokenAddress: string,
@@ -227,24 +263,31 @@ export class NestPriceFacade extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-        latestPriceBlockNumber: BigNumber
-        latestPriceValue: BigNumber
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        latestPriceBlockNumber: BigNumber;
+        latestPriceValue: BigNumber;
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
     latestPriceView(
       tokenAddress: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
-    setPrice(token: string, price: BigNumberish, dbn: BigNumberish, overrides?: CallOverrides): Promise<void>
-  }
+    setPrice(
+      token: string,
+      price: BigNumberish,
+      dbn: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+  };
 
-  filters: {}
+  filters: {};
 
   estimateGas: {
     lastPriceListAndTriggeredPriceInfo(
@@ -252,35 +295,38 @@ export class NestPriceFacade extends BaseContract {
       count: BigNumberish,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     lastPriceListAndTriggeredPriceInfoView(
       tokenAddress: string,
       count: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     latestPrice(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     latestPriceAndTriggeredPriceInfo(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    latestPriceView(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
+    latestPriceView(
+      tokenAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     setPrice(
       token: string,
       price: BigNumberish,
       dbn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
-  }
+    ): Promise<BigNumber>;
+  };
 
   populateTransaction: {
     lastPriceListAndTriggeredPriceInfo(
@@ -288,33 +334,36 @@ export class NestPriceFacade extends BaseContract {
       count: BigNumberish,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     lastPriceListAndTriggeredPriceInfoView(
       tokenAddress: string,
       count: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     latestPrice(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     latestPriceAndTriggeredPriceInfo(
       tokenAddress: string,
       payback: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    latestPriceView(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
+    latestPriceView(
+      tokenAddress: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     setPrice(
       token: string,
       price: BigNumberish,
       dbn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
-  }
+    ): Promise<PopulatedTransaction>;
+  };
 }

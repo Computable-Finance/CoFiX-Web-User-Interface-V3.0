@@ -11,659 +11,1906 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
+  Overrides,
+  PayableOverrides,
   CallOverrides,
-} from 'ethers'
-import { BytesLike } from '@ethersproject/bytes'
-import { Listener, Provider } from '@ethersproject/providers'
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons'
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface INestPriceFacadeInterface extends ethers.utils.Interface {
   functions: {
-    'triggeredPrice(address)': FunctionFragment
-    'triggeredPriceInfo(address)': FunctionFragment
-    'findPrice(address,uint256)': FunctionFragment
-    'latestPrice(address)': FunctionFragment
-    'lastPriceList(address,uint256)': FunctionFragment
-    'latestPriceAndTriggeredPriceInfo(address)': FunctionFragment
-    'lastPriceListAndTriggeredPriceInfo(address,uint256)': FunctionFragment
-    'triggeredPrice2(address)': FunctionFragment
-    'triggeredPriceInfo2(address)': FunctionFragment
-    'latestPrice2(address)': FunctionFragment
-  }
+    "_governance()": FunctionFragment;
+    "balanceOf(address,address)": FunctionFragment;
+    "changeGovernance(uint256,address)": FunctionFragment;
+    "close(uint256,uint256[])": FunctionFragment;
+    "decrease(uint256,uint96)": FunctionFragment;
+    "donate(uint256,uint256)": FunctionFragment;
+    "estimate(uint256)": FunctionFragment;
+    "findPrice(uint256,uint256,address)": FunctionFragment;
+    "getAccountCount()": FunctionFragment;
+    "getAccountIndex(address)": FunctionFragment;
+    "getChannelInfo(uint256)": FunctionFragment;
+    "getConfig()": FunctionFragment;
+    "getMinedBlocks(uint256,uint256)": FunctionFragment;
+    "increase(uint256,uint96)": FunctionFragment;
+    "indexAddress(uint256)": FunctionFragment;
+    "initialize(address)": FunctionFragment;
+    "lastPriceList(uint256,uint256,address)": FunctionFragment;
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)": FunctionFragment;
+    "latestPrice(uint256)": FunctionFragment;
+    "latestPriceAndTriggeredPriceInfo(uint256)": FunctionFragment;
+    "list(uint256,uint256,uint256,uint256)": FunctionFragment;
+    "migrate(address,uint256)": FunctionFragment;
+    "open(tuple)": FunctionFragment;
+    "pay(uint256,address,uint256)": FunctionFragment;
+    "post(uint256,uint256,uint256)": FunctionFragment;
+    "setConfig(tuple)": FunctionFragment;
+    "stat(uint256)": FunctionFragment;
+    "takeToken0(uint256,uint256,uint256,uint256)": FunctionFragment;
+    "takeToken1(uint256,uint256,uint256,uint256)": FunctionFragment;
+    "totalETHRewards(uint256)": FunctionFragment;
+    "triggeredPrice(uint256)": FunctionFragment;
+    "triggeredPriceInfo(uint256,address)": FunctionFragment;
+    "update(address)": FunctionFragment;
+    "withdraw(address,uint256)": FunctionFragment;
+  };
 
-  encodeFunctionData(functionFragment: 'triggeredPrice', values: [string]): string
-  encodeFunctionData(functionFragment: 'triggeredPriceInfo', values: [string]): string
-  encodeFunctionData(functionFragment: 'findPrice', values: [string, BigNumberish]): string
-  encodeFunctionData(functionFragment: 'latestPrice', values: [string]): string
-  encodeFunctionData(functionFragment: 'lastPriceList', values: [string, BigNumberish]): string
-  encodeFunctionData(functionFragment: 'latestPriceAndTriggeredPriceInfo', values: [string]): string
-  encodeFunctionData(functionFragment: 'lastPriceListAndTriggeredPriceInfo', values: [string, BigNumberish]): string
-  encodeFunctionData(functionFragment: 'triggeredPrice2', values: [string]): string
-  encodeFunctionData(functionFragment: 'triggeredPriceInfo2', values: [string]): string
-  encodeFunctionData(functionFragment: 'latestPrice2', values: [string]): string
+  encodeFunctionData(
+    functionFragment: "_governance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOf",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeGovernance",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "close",
+    values: [BigNumberish, BigNumberish[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decrease",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "donate",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "estimate",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "findPrice",
+    values: [BigNumberish, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAccountCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAccountIndex",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getChannelInfo",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "getConfig", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getMinedBlocks",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increase",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "indexAddress",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "initialize", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "lastPriceList",
+    values: [BigNumberish, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastPriceListAndTriggeredPriceInfo",
+    values: [BigNumberish, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestPrice",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestPriceAndTriggeredPriceInfo",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "list",
+    values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "migrate",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "open",
+    values: [
+      {
+        token0: string;
+        unit: BigNumberish;
+        token1: string;
+        rewardPerBlock: BigNumberish;
+        reward: string;
+        postFeeUnit: BigNumberish;
+        singleFee: BigNumberish;
+        reductionRate: BigNumberish;
+      }
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pay",
+    values: [BigNumberish, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "post",
+    values: [BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setConfig",
+    values: [
+      {
+        maxBiteNestedLevel: BigNumberish;
+        priceEffectSpan: BigNumberish;
+        pledgeNest: BigNumberish;
+      }
+    ]
+  ): string;
+  encodeFunctionData(functionFragment: "stat", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "takeToken0",
+    values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "takeToken1",
+    values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalETHRewards",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "triggeredPrice",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "triggeredPriceInfo",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(functionFragment: "update", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'triggeredPrice', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'triggeredPriceInfo', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'findPrice', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPrice', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'lastPriceList', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPriceAndTriggeredPriceInfo', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'lastPriceListAndTriggeredPriceInfo', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'triggeredPrice2', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'triggeredPriceInfo2', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'latestPrice2', data: BytesLike): Result
+  decodeFunctionResult(
+    functionFragment: "_governance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "changeGovernance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "close", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decrease", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "donate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "estimate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "findPrice", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAccountCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAccountIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getChannelInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getMinedBlocks",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "increase", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "indexAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lastPriceList",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lastPriceListAndTriggeredPriceInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestPriceAndTriggeredPriceInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "list", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "migrate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "open", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pay", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "post", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "stat", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "takeToken0", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "takeToken1", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalETHRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "triggeredPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "triggeredPriceInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "update", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
-  events: {}
+  events: {
+    "Open(uint256,address,uint256,address,address)": EventFragment;
+    "Post(uint256,address,uint256,uint256,uint256)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "Open"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Post"): EventFragment;
 }
 
 export class INestPriceFacade extends BaseContract {
-  connect(signerOrProvider: Signer | Provider | string): this
-  attach(addressOrName: string): this
-  deployed(): Promise<this>
+  connect(signerOrProvider: Signer | Provider | string): this;
+  attach(addressOrName: string): this;
+  deployed(): Promise<this>;
 
   listeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): Array<TypedListener<EventArgsArray, EventArgsObject>>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
   off<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   on<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   once<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
 
-  listeners(eventName?: string): Array<Listener>
-  off(eventName: string, listener: Listener): this
-  on(eventName: string, listener: Listener): this
-  once(eventName: string, listener: Listener): this
-  removeListener(eventName: string, listener: Listener): this
-  removeAllListeners(eventName?: string): this
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
 
   queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
     event: TypedEventFilter<EventArgsArray, EventArgsObject>,
     fromBlockOrBlockhash?: string | number | undefined,
     toBlock?: string | number | undefined
-  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: INestPriceFacadeInterface
+  interface: INestPriceFacadeInterface;
 
   functions: {
-    /**
-     * Get the latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice(
-      tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    _governance(overrides?: CallOverrides): Promise<[string]>;
 
-    /**
-     * Get the full information of latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo(
+    balanceOf(
       tokenAddress: string,
+      addr: string,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        avgPrice: BigNumber
-        sigmaSQ: BigNumber
-      }
-    >
+    ): Promise<[BigNumber]>;
 
-    /**
-     * Find the price at block number
-     * @param height Destination block number
-     * @param tokenAddress Destination token address
-     */
-    findPrice(
-      tokenAddress: string,
+    changeGovernance(
+      channelId: BigNumberish,
+      newGovernance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    close(
+      channelId: BigNumberish,
+      indices: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    decrease(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    donate(
+      channelId: BigNumberish,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    estimate(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "findPrice(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "findPrice(uint256,uint256)"(
+      channelId: BigNumberish,
       height: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
-    /**
-     * Get the latest effective price
-     * @param tokenAddress Destination token address
-     */
-    latestPrice(
-      tokenAddress: string,
+    getAccountCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getAccountIndex(
+      addr: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<[BigNumber]>;
 
-    /**
-     * Get the last (num) effective price
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceList(tokenAddress: string, count: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber[]]>
-
-    /**
-     * Returns the results of latestPrice() and triggeredPriceInfo()
-     * @param tokenAddress Destination token address
-     */
-    latestPriceAndTriggeredPriceInfo(
-      tokenAddress: string,
+    getChannelInfo(
+      channelId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-        latestPriceBlockNumber: BigNumber
-        latestPriceValue: BigNumber
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
-      }
-    >
+      [
+        [
+          BigNumber,
+          BigNumber,
+          BigNumber,
+          string,
+          BigNumber,
+          string,
+          BigNumber,
+          string,
+          BigNumber,
+          string,
+          number,
+          number,
+          number,
+          number
+        ] & {
+          channelId: BigNumber;
+          sheetCount: BigNumber;
+          feeInfo: BigNumber;
+          token0: string;
+          unit: BigNumber;
+          token1: string;
+          rewardPerBlock: BigNumber;
+          reward: string;
+          vault: BigNumber;
+          governance: string;
+          genesisBlock: number;
+          postFeeUnit: number;
+          singleFee: number;
+          reductionRate: number;
+        }
+      ]
+    >;
 
-    /**
-     * Returns lastPriceList and triggered price info
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceListAndTriggeredPriceInfo(
-      tokenAddress: string,
+    getConfig(
+      overrides?: CallOverrides
+    ): Promise<
+      [
+        [number, number, number] & {
+          maxBiteNestedLevel: number;
+          priceEffectSpan: number;
+          pledgeNest: number;
+        }
+      ]
+    >;
+
+    getMinedBlocks(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & {
+        minedBlocks: BigNumber;
+        totalShares: BigNumber;
+      }
+    >;
+
+    increase(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    indexAddress(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    initialize(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "lastPriceList(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "lastPriceList(uint256,uint256)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
+
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256)"(
+      channelId: BigNumberish,
       count: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-        prices: BigNumber[]
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
-    /**
-     * Get the latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice2(
+    "latestPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "latestPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "latestPriceAndTriggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+        latestPriceBlockNumber: BigNumber;
+        latestPriceValue: BigNumber;
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
+      }
+    >;
+
+    "latestPriceAndTriggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    list(
+      channelId: BigNumberish,
+      offset: BigNumberish,
+      count: BigNumberish,
+      order: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [
+        ([
+          number,
+          string,
+          number,
+          number,
+          number,
+          number,
+          number,
+          number,
+          number,
+          BigNumber
+        ] & {
+          index: number;
+          miner: string;
+          height: number;
+          remainNum: number;
+          ethNumBal: number;
+          tokenNumBal: number;
+          nestNum1k: number;
+          level: number;
+          shares: number;
+          price: BigNumber;
+        })[]
+      ]
+    >;
+
+    migrate(
       tokenAddress: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    open(
+      config: {
+        token0: string;
+        unit: BigNumberish;
+        token1: string;
+        rewardPerBlock: BigNumberish;
+        reward: string;
+        postFeeUnit: BigNumberish;
+        singleFee: BigNumberish;
+        reductionRate: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    pay(
+      channelId: BigNumberish,
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    post(
+      channelId: BigNumberish,
+      scale: BigNumberish,
+      equivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setConfig(
+      config: {
+        maxBiteNestedLevel: BigNumberish;
+        priceEffectSpan: BigNumberish;
+        pledgeNest: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    stat(
+      channelId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    takeToken0(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    takeToken1(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    totalETHRewards(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "triggeredPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "triggeredPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "triggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "triggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
+        blockNumber: BigNumber;
+        price: BigNumber;
+        avgPrice: BigNumber;
+        sigmaSQ: BigNumber;
       }
-    >
+    >;
 
-    /**
-     * Get the full information of latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo2(
+    update(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    withdraw(
       tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        avgPrice: BigNumber
-        sigmaSQ: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
-        ntokenAvgPrice: BigNumber
-        ntokenSigmaSQ: BigNumber
-      }
-    >
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+  };
 
-    /**
-     * Get the latest effective price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    latestPrice2(
-      tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
-      }
-    >
-  }
+  _governance(overrides?: CallOverrides): Promise<string>;
 
-  /**
-   * Get the latest trigger price
-   * @param tokenAddress Destination token address
-   */
-  triggeredPrice(
+  balanceOf(
     tokenAddress: string,
+    addr: string,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+  ): Promise<BigNumber>;
 
-  /**
-   * Get the full information of latest trigger price
-   * @param tokenAddress Destination token address
-   */
-  triggeredPriceInfo(
-    tokenAddress: string,
+  changeGovernance(
+    channelId: BigNumberish,
+    newGovernance: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  close(
+    channelId: BigNumberish,
+    indices: BigNumberish[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  decrease(
+    channelId: BigNumberish,
+    vault: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  donate(
+    channelId: BigNumberish,
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  estimate(
+    channelId: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      blockNumber: BigNumber
-      price: BigNumber
-      avgPrice: BigNumber
-      sigmaSQ: BigNumber
-    }
-  >
+  ): Promise<BigNumber>;
 
-  /**
-   * Find the price at block number
-   * @param height Destination block number
-   * @param tokenAddress Destination token address
-   */
-  findPrice(
-    tokenAddress: string,
+  "findPrice(uint256,uint256,address)"(
+    channelId: BigNumberish,
+    height: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "findPrice(uint256,uint256)"(
+    channelId: BigNumberish,
     height: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+  ): Promise<
+    [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+  >;
 
-  /**
-   * Get the latest effective price
-   * @param tokenAddress Destination token address
-   */
-  latestPrice(
-    tokenAddress: string,
-    overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+  getAccountCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-  /**
-   * Get the last (num) effective price
-   * @param count The number of prices that want to return
-   * @param tokenAddress Destination token address
-   */
-  lastPriceList(tokenAddress: string, count: BigNumberish, overrides?: CallOverrides): Promise<BigNumber[]>
+  getAccountIndex(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  /**
-   * Returns the results of latestPrice() and triggeredPriceInfo()
-   * @param tokenAddress Destination token address
-   */
-  latestPriceAndTriggeredPriceInfo(
-    tokenAddress: string,
+  getChannelInfo(
+    channelId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-      latestPriceBlockNumber: BigNumber
-      latestPriceValue: BigNumber
-      triggeredPriceBlockNumber: BigNumber
-      triggeredPriceValue: BigNumber
-      triggeredAvgPrice: BigNumber
-      triggeredSigmaSQ: BigNumber
+    [
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      string,
+      BigNumber,
+      string,
+      BigNumber,
+      string,
+      BigNumber,
+      string,
+      number,
+      number,
+      number,
+      number
+    ] & {
+      channelId: BigNumber;
+      sheetCount: BigNumber;
+      feeInfo: BigNumber;
+      token0: string;
+      unit: BigNumber;
+      token1: string;
+      rewardPerBlock: BigNumber;
+      reward: string;
+      vault: BigNumber;
+      governance: string;
+      genesisBlock: number;
+      postFeeUnit: number;
+      singleFee: number;
+      reductionRate: number;
     }
-  >
+  >;
 
-  /**
-   * Returns lastPriceList and triggered price info
-   * @param count The number of prices that want to return
-   * @param tokenAddress Destination token address
-   */
-  lastPriceListAndTriggeredPriceInfo(
-    tokenAddress: string,
+  getConfig(
+    overrides?: CallOverrides
+  ): Promise<
+    [number, number, number] & {
+      maxBiteNestedLevel: number;
+      priceEffectSpan: number;
+      pledgeNest: number;
+    }
+  >;
+
+  getMinedBlocks(
+    channelId: BigNumberish,
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { minedBlocks: BigNumber; totalShares: BigNumber }
+  >;
+
+  increase(
+    channelId: BigNumberish,
+    vault: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  indexAddress(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  initialize(
+    nestGovernanceAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "lastPriceList(uint256,uint256,address)"(
+    channelId: BigNumberish,
+    count: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "lastPriceList(uint256,uint256)"(
+    channelId: BigNumberish,
+    count: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
+  "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)"(
+    channelId: BigNumberish,
+    count: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "lastPriceListAndTriggeredPriceInfo(uint256,uint256)"(
+    channelId: BigNumberish,
     count: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-      prices: BigNumber[]
-      triggeredPriceBlockNumber: BigNumber
-      triggeredPriceValue: BigNumber
-      triggeredAvgPrice: BigNumber
-      triggeredSigmaSQ: BigNumber
+      prices: BigNumber[];
+      triggeredPriceBlockNumber: BigNumber;
+      triggeredPriceValue: BigNumber;
+      triggeredAvgPrice: BigNumber;
+      triggeredSigmaSQ: BigNumber;
     }
-  >
+  >;
 
-  /**
-   * Get the latest trigger price. (token and ntoken)
-   * @param tokenAddress Destination token address
-   */
-  triggeredPrice2(
+  "latestPrice(uint256)"(
+    channelId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+  >;
+
+  "latestPrice(uint256,address)"(
+    channelId: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "latestPriceAndTriggeredPriceInfo(uint256)"(
+    channelId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      latestPriceBlockNumber: BigNumber;
+      latestPriceValue: BigNumber;
+      triggeredPriceBlockNumber: BigNumber;
+      triggeredPriceValue: BigNumber;
+      triggeredAvgPrice: BigNumber;
+      triggeredSigmaSQ: BigNumber;
+    }
+  >;
+
+  "latestPriceAndTriggeredPriceInfo(uint256,address)"(
+    channelId: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  list(
+    channelId: BigNumberish,
+    offset: BigNumberish,
+    count: BigNumberish,
+    order: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    ([
+      number,
+      string,
+      number,
+      number,
+      number,
+      number,
+      number,
+      number,
+      number,
+      BigNumber
+    ] & {
+      index: number;
+      miner: string;
+      height: number;
+      remainNum: number;
+      ethNumBal: number;
+      tokenNumBal: number;
+      nestNum1k: number;
+      level: number;
+      shares: number;
+      price: BigNumber;
+    })[]
+  >;
+
+  migrate(
     tokenAddress: string,
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  open(
+    config: {
+      token0: string;
+      unit: BigNumberish;
+      token1: string;
+      rewardPerBlock: BigNumberish;
+      reward: string;
+      postFeeUnit: BigNumberish;
+      singleFee: BigNumberish;
+      reductionRate: BigNumberish;
+    },
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  pay(
+    channelId: BigNumberish,
+    to: string,
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  post(
+    channelId: BigNumberish,
+    scale: BigNumberish,
+    equivalent: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setConfig(
+    config: {
+      maxBiteNestedLevel: BigNumberish;
+      priceEffectSpan: BigNumberish;
+      pledgeNest: BigNumberish;
+    },
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  stat(
+    channelId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  takeToken0(
+    channelId: BigNumberish,
+    index: BigNumberish,
+    takeNum: BigNumberish,
+    newEquivalent: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  takeToken1(
+    channelId: BigNumberish,
+    index: BigNumberish,
+    takeNum: BigNumberish,
+    newEquivalent: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  totalETHRewards(
+    channelId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "triggeredPrice(uint256)"(
+    channelId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+  >;
+
+  "triggeredPrice(uint256,address)"(
+    channelId: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "triggeredPriceInfo(uint256,address)"(
+    channelId: BigNumberish,
+    payback: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "triggeredPriceInfo(uint256)"(
+    channelId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      blockNumber: BigNumber
-      price: BigNumber
-      ntokenBlockNumber: BigNumber
-      ntokenPrice: BigNumber
+      blockNumber: BigNumber;
+      price: BigNumber;
+      avgPrice: BigNumber;
+      sigmaSQ: BigNumber;
     }
-  >
+  >;
 
-  /**
-   * Get the full information of latest trigger price. (token and ntoken)
-   * @param tokenAddress Destination token address
-   */
-  triggeredPriceInfo2(
-    tokenAddress: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-      blockNumber: BigNumber
-      price: BigNumber
-      avgPrice: BigNumber
-      sigmaSQ: BigNumber
-      ntokenBlockNumber: BigNumber
-      ntokenPrice: BigNumber
-      ntokenAvgPrice: BigNumber
-      ntokenSigmaSQ: BigNumber
-    }
-  >
+  update(
+    nestGovernanceAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  /**
-   * Get the latest effective price. (token and ntoken)
-   * @param tokenAddress Destination token address
-   */
-  latestPrice2(
+  withdraw(
     tokenAddress: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      blockNumber: BigNumber
-      price: BigNumber
-      ntokenBlockNumber: BigNumber
-      ntokenPrice: BigNumber
-    }
-  >
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    /**
-     * Get the latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice(
-      tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    _governance(overrides?: CallOverrides): Promise<string>;
 
-    /**
-     * Get the full information of latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo(
+    balanceOf(
       tokenAddress: string,
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    changeGovernance(
+      channelId: BigNumberish,
+      newGovernance: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    close(
+      channelId: BigNumberish,
+      indices: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    decrease(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    donate(
+      channelId: BigNumberish,
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    estimate(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "findPrice(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      payback: string,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        avgPrice: BigNumber
-        sigmaSQ: BigNumber
-      }
-    >
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
-    /**
-     * Find the price at block number
-     * @param height Destination block number
-     * @param tokenAddress Destination token address
-     */
-    findPrice(
-      tokenAddress: string,
+    "findPrice(uint256,uint256)"(
+      channelId: BigNumberish,
       height: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
 
-    /**
-     * Get the latest effective price
-     * @param tokenAddress Destination token address
-     */
-    latestPrice(
-      tokenAddress: string,
+    getAccountCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getAccountIndex(
+      addr: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }>
+    ): Promise<BigNumber>;
 
-    /**
-     * Get the last (num) effective price
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceList(tokenAddress: string, count: BigNumberish, overrides?: CallOverrides): Promise<BigNumber[]>
-
-    /**
-     * Returns the results of latestPrice() and triggeredPriceInfo()
-     * @param tokenAddress Destination token address
-     */
-    latestPriceAndTriggeredPriceInfo(
-      tokenAddress: string,
+    getChannelInfo(
+      channelId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-        latestPriceBlockNumber: BigNumber
-        latestPriceValue: BigNumber
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+      [
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        string,
+        BigNumber,
+        string,
+        BigNumber,
+        string,
+        BigNumber,
+        string,
+        number,
+        number,
+        number,
+        number
+      ] & {
+        channelId: BigNumber;
+        sheetCount: BigNumber;
+        feeInfo: BigNumber;
+        token0: string;
+        unit: BigNumber;
+        token1: string;
+        rewardPerBlock: BigNumber;
+        reward: string;
+        vault: BigNumber;
+        governance: string;
+        genesisBlock: number;
+        postFeeUnit: number;
+        singleFee: number;
+        reductionRate: number;
       }
-    >
+    >;
 
-    /**
-     * Returns lastPriceList and triggered price info
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceListAndTriggeredPriceInfo(
-      tokenAddress: string,
+    getConfig(
+      overrides?: CallOverrides
+    ): Promise<
+      [number, number, number] & {
+        maxBiteNestedLevel: number;
+        priceEffectSpan: number;
+        pledgeNest: number;
+      }
+    >;
+
+    getMinedBlocks(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & {
+        minedBlocks: BigNumber;
+        totalShares: BigNumber;
+      }
+    >;
+
+    increase(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    indexAddress(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    initialize(
+      nestGovernanceAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "lastPriceList(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    "lastPriceList(uint256,uint256)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
+      }
+    >;
+
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256)"(
+      channelId: BigNumberish,
       count: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber[], BigNumber, BigNumber, BigNumber, BigNumber] & {
-        prices: BigNumber[]
-        triggeredPriceBlockNumber: BigNumber
-        triggeredPriceValue: BigNumber
-        triggeredAvgPrice: BigNumber
-        triggeredSigmaSQ: BigNumber
+        prices: BigNumber[];
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
       }
-    >
+    >;
 
-    /**
-     * Get the latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice2(
+    "latestPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "latestPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "latestPriceAndTriggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+        latestPriceBlockNumber: BigNumber;
+        latestPriceValue: BigNumber;
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
+      }
+    >;
+
+    "latestPriceAndTriggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+        latestPriceBlockNumber: BigNumber;
+        latestPriceValue: BigNumber;
+        triggeredPriceBlockNumber: BigNumber;
+        triggeredPriceValue: BigNumber;
+        triggeredAvgPrice: BigNumber;
+        triggeredSigmaSQ: BigNumber;
+      }
+    >;
+
+    list(
+      channelId: BigNumberish,
+      offset: BigNumberish,
+      count: BigNumberish,
+      order: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      ([
+        number,
+        string,
+        number,
+        number,
+        number,
+        number,
+        number,
+        number,
+        number,
+        BigNumber
+      ] & {
+        index: number;
+        miner: string;
+        height: number;
+        remainNum: number;
+        ethNumBal: number;
+        tokenNumBal: number;
+        nestNum1k: number;
+        level: number;
+        shares: number;
+        price: BigNumber;
+      })[]
+    >;
+
+    migrate(
       tokenAddress: string,
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    open(
+      config: {
+        token0: string;
+        unit: BigNumberish;
+        token1: string;
+        rewardPerBlock: BigNumberish;
+        reward: string;
+        postFeeUnit: BigNumberish;
+        singleFee: BigNumberish;
+        reductionRate: BigNumberish;
+      },
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    pay(
+      channelId: BigNumberish,
+      to: string,
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    post(
+      channelId: BigNumberish,
+      scale: BigNumberish,
+      equivalent: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setConfig(
+      config: {
+        maxBiteNestedLevel: BigNumberish;
+        priceEffectSpan: BigNumberish;
+        pledgeNest: BigNumberish;
+      },
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    stat(channelId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    takeToken0(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    takeToken1(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    totalETHRewards(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "triggeredPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "triggeredPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { blockNumber: BigNumber; price: BigNumber }
+    >;
+
+    "triggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
+        blockNumber: BigNumber;
+        price: BigNumber;
+        avgPrice: BigNumber;
+        sigmaSQ: BigNumber;
       }
-    >
+    >;
 
-    /**
-     * Get the full information of latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo2(
-      tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        avgPrice: BigNumber
-        sigmaSQ: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
-        ntokenAvgPrice: BigNumber
-        ntokenSigmaSQ: BigNumber
-      }
-    >
-
-    /**
-     * Get the latest effective price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    latestPrice2(
-      tokenAddress: string,
+    "triggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        blockNumber: BigNumber
-        price: BigNumber
-        ntokenBlockNumber: BigNumber
-        ntokenPrice: BigNumber
+        blockNumber: BigNumber;
+        price: BigNumber;
+        avgPrice: BigNumber;
+        sigmaSQ: BigNumber;
       }
-    >
-  }
+    >;
 
-  filters: {}
+    update(
+      nestGovernanceAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    withdraw(
+      tokenAddress: string,
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+  };
+
+  filters: {
+    Open(
+      channelId?: null,
+      token0?: null,
+      unit?: null,
+      token1?: null,
+      reward?: null
+    ): TypedEventFilter<
+      [BigNumber, string, BigNumber, string, string],
+      {
+        channelId: BigNumber;
+        token0: string;
+        unit: BigNumber;
+        token1: string;
+        reward: string;
+      }
+    >;
+
+    Post(
+      channelId?: null,
+      miner?: null,
+      index?: null,
+      scale?: null,
+      price?: null
+    ): TypedEventFilter<
+      [BigNumber, string, BigNumber, BigNumber, BigNumber],
+      {
+        channelId: BigNumber;
+        miner: string;
+        index: BigNumber;
+        scale: BigNumber;
+        price: BigNumber;
+      }
+    >;
+  };
 
   estimateGas: {
-    /**
-     * Get the latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
+    _governance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    /**
-     * Get the full information of latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
-
-    /**
-     * Find the price at block number
-     * @param height Destination block number
-     * @param tokenAddress Destination token address
-     */
-    findPrice(tokenAddress: string, height: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>
-
-    /**
-     * Get the latest effective price
-     * @param tokenAddress Destination token address
-     */
-    latestPrice(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
-
-    /**
-     * Get the last (num) effective price
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceList(tokenAddress: string, count: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>
-
-    /**
-     * Returns the results of latestPrice() and triggeredPriceInfo()
-     * @param tokenAddress Destination token address
-     */
-    latestPriceAndTriggeredPriceInfo(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
-
-    /**
-     * Returns lastPriceList and triggered price info
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceListAndTriggeredPriceInfo(
+    balanceOf(
       tokenAddress: string,
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    changeGovernance(
+      channelId: BigNumberish,
+      newGovernance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    close(
+      channelId: BigNumberish,
+      indices: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    decrease(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    donate(
+      channelId: BigNumberish,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    estimate(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "findPrice(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "findPrice(uint256,uint256)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getAccountCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getAccountIndex(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getChannelInfo(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getConfig(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getMinedBlocks(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    increase(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    indexAddress(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "lastPriceList(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "lastPriceList(uint256,uint256)"(
+      channelId: BigNumberish,
       count: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    /**
-     * Get the latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice2(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    /**
-     * Get the full information of latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo2(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    /**
-     * Get the latest effective price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    latestPrice2(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>
-  }
+    "latestPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "latestPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "latestPriceAndTriggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "latestPriceAndTriggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    list(
+      channelId: BigNumberish,
+      offset: BigNumberish,
+      count: BigNumberish,
+      order: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    migrate(
+      tokenAddress: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    open(
+      config: {
+        token0: string;
+        unit: BigNumberish;
+        token1: string;
+        rewardPerBlock: BigNumberish;
+        reward: string;
+        postFeeUnit: BigNumberish;
+        singleFee: BigNumberish;
+        reductionRate: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    pay(
+      channelId: BigNumberish,
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    post(
+      channelId: BigNumberish,
+      scale: BigNumberish,
+      equivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setConfig(
+      config: {
+        maxBiteNestedLevel: BigNumberish;
+        priceEffectSpan: BigNumberish;
+        pledgeNest: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    stat(
+      channelId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    takeToken0(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    takeToken1(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    totalETHRewards(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "triggeredPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "triggeredPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "triggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "triggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    update(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    withdraw(
+      tokenAddress: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+  };
 
   populateTransaction: {
-    /**
-     * Get the latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
+    _governance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    /**
-     * Get the full information of latest trigger price
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
-
-    /**
-     * Find the price at block number
-     * @param height Destination block number
-     * @param tokenAddress Destination token address
-     */
-    findPrice(tokenAddress: string, height: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>
-
-    /**
-     * Get the latest effective price
-     * @param tokenAddress Destination token address
-     */
-    latestPrice(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
-
-    /**
-     * Get the last (num) effective price
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceList(tokenAddress: string, count: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>
-
-    /**
-     * Returns the results of latestPrice() and triggeredPriceInfo()
-     * @param tokenAddress Destination token address
-     */
-    latestPriceAndTriggeredPriceInfo(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
-
-    /**
-     * Returns lastPriceList and triggered price info
-     * @param count The number of prices that want to return
-     * @param tokenAddress Destination token address
-     */
-    lastPriceListAndTriggeredPriceInfo(
+    balanceOf(
       tokenAddress: string,
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    changeGovernance(
+      channelId: BigNumberish,
+      newGovernance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    close(
+      channelId: BigNumberish,
+      indices: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    decrease(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    donate(
+      channelId: BigNumberish,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    estimate(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "findPrice(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "findPrice(uint256,uint256)"(
+      channelId: BigNumberish,
+      height: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getAccountCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getAccountIndex(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getChannelInfo(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getConfig(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getMinedBlocks(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    increase(
+      channelId: BigNumberish,
+      vault: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    indexAddress(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "lastPriceList(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "lastPriceList(uint256,uint256)"(
+      channelId: BigNumberish,
       count: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    /**
-     * Get the latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPrice2(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256,address)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    /**
-     * Get the full information of latest trigger price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    triggeredPriceInfo2(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
+    "lastPriceListAndTriggeredPriceInfo(uint256,uint256)"(
+      channelId: BigNumberish,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    /**
-     * Get the latest effective price. (token and ntoken)
-     * @param tokenAddress Destination token address
-     */
-    latestPrice2(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>
-  }
+    "latestPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "latestPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "latestPriceAndTriggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "latestPriceAndTriggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    list(
+      channelId: BigNumberish,
+      offset: BigNumberish,
+      count: BigNumberish,
+      order: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    migrate(
+      tokenAddress: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    open(
+      config: {
+        token0: string;
+        unit: BigNumberish;
+        token1: string;
+        rewardPerBlock: BigNumberish;
+        reward: string;
+        postFeeUnit: BigNumberish;
+        singleFee: BigNumberish;
+        reductionRate: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    pay(
+      channelId: BigNumberish,
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    post(
+      channelId: BigNumberish,
+      scale: BigNumberish,
+      equivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setConfig(
+      config: {
+        maxBiteNestedLevel: BigNumberish;
+        priceEffectSpan: BigNumberish;
+        pledgeNest: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    stat(
+      channelId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    takeToken0(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    takeToken1(
+      channelId: BigNumberish,
+      index: BigNumberish,
+      takeNum: BigNumberish,
+      newEquivalent: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    totalETHRewards(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "triggeredPrice(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "triggeredPrice(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "triggeredPriceInfo(uint256,address)"(
+      channelId: BigNumberish,
+      payback: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "triggeredPriceInfo(uint256)"(
+      channelId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    update(
+      nestGovernanceAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    withdraw(
+      tokenAddress: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+  };
 }
