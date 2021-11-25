@@ -10,7 +10,6 @@ import RiskModal from './shared/RiskModal'
 
 const Swap = loadable(() => import('./Swap'))
 const Pool = loadable(() => import('./Pool'))
-const Repurchase = loadable(() => import('./Repurchase'))
 
 function App() {
   return (
@@ -29,10 +28,6 @@ function App() {
 
           <Route path="/pool">
             <Pool />
-          </Route>
-
-          <Route path="/repurchase">
-            <Repurchase />
           </Route>
 
           <Redirect to="/swap" />
