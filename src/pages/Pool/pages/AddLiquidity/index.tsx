@@ -23,19 +23,16 @@ const AddLiquidity: FC = () => {
   }>()
 
   const {api} = useWeb3()
-  const [symbol, setSymbol] = useState(['', ''])
-  const [amount, setAmount] = useState(['', ''])
-  const {info: poolInfo} = usePoolInfo<PoolInfo>(symbol[0], symbol[1])
+  const [symbol, setSymbol] = useState(params.token0)
+  const [amount, setAmount] = useState('0')
+  const {info: poolInfo} = usePoolInfo<PoolInfo>(params.token0, params.token1)
 
-  const [insufficient0, setInsufficient0] = useState(false)
   const [insufficient1, setInsufficient1] = useState(false)
 
   useEffect(() => {
     if (!api) {
       return
     }
-
-    setSymbol([params.token0, params.token1])
     const token0 = api.Tokens[params.token0]
     if (!token0) {
       history.push('/pool')
@@ -48,37 +45,24 @@ const AddLiquidity: FC = () => {
     }
   }, [api, params])
 
-  const handleToken0AmountChange = (a: string) => {
-    setAmount([a, amount[1]])
-  }
-
-  const handleToken1AmountChange = (a: string) => {
-    setAmount([amount[0], a])
+  const handleChange = (symbol: string, amount: string) => {
+    setSymbol(symbol)
+    setAmount(amount)
   }
 
   const handleAddLiquidity = useAddLiquidity({
-    token0: {symbol: symbol[0], amount: amount[0]},
-    token1: {symbol: symbol[1], amount: amount[1]}
+    token0: {symbol: params.token0, amount: symbol === params.token0 ? amount : "0" },
+    token1: {symbol: params.token1, amount: symbol === params.token1 ? amount : "0" }
   })
 
   return (
     <Card backward onBackwardClick={() => history.push(`/pool`)} title={t`Add Liquidity`}>
       <TokenInput
-        selectable={false}
-        symbol={symbol[0]}
+        selectable={true}
+        symbol={symbol}
         title={`${t`Input`}${t`Amount`}`}
-        value={amount[0]}
-        onChange={handleToken0AmountChange}
-        checkInsufficientBalance
-        onInsufficientBalance={(i) => setInsufficient0(i)}
-      />
-
-      <TokenInput
-        selectable={false}
-        symbol={symbol[1]}
-        title={`${t`Input`}${t`Amount`}`}
-        value={amount[1]}
-        onChange={handleToken1AmountChange}
+        value={amount}
+        onChange={handleChange}
         checkInsufficientBalance
         onInsufficientBalance={(i) => setInsufficient1(i)}
       />
@@ -95,7 +79,7 @@ const AddLiquidity: FC = () => {
           }}
           onClick={handleAddLiquidity.handler}
           disabled={
-            insufficient0 || insufficient1
+            insufficient1
           }
         >
           <Trans>Add Liquidity</Trans>
