@@ -1,7 +1,6 @@
 import {
-  TokenCOFI,
-  TokenNEST, TokenNHBTC,
-  TokenPETH,
+  TokenNEST,
+  TokenPETH, TokenPUSD,
   TokenUSDC,
   TokenUSDT,
   TokenWETH,
@@ -47,13 +46,14 @@ export const NEST: TokenProps = {
   formatPrecision: 2,
 }
 
-export const COFI: TokenProps = {
-  symbol: 'COFI',
-  Icon: TokenCOFI,
+export const PUSD: TokenProps = {
+  symbol: 'PUSD',
+  Icon: TokenPUSD,
   addresses: {
-    [Mainnet.chainId]: '0x1a23a6BfBAdB59fa563008c0fB7cf96dfCF34Ea1',
-    [Testnet.chainId]: '0x61EA050b28Ccca539F0faf79Fd26F6Df31b9f15B',
+    [Mainnet.chainId]: '0x3DA5c9aafc6e6D6839E62e2fB65825869019F291',
+    [Testnet.chainId]: '0x3DA5c9aafc6e6D6839E62e2fB65825869019F291',
   },
+  formatPrecision: 2,
 }
 
 export const WETH: TokenProps = {
@@ -65,13 +65,5 @@ export const WETH: TokenProps = {
   },
 }
 
-export const NHBTC: TokenProps = {
-  symbol: 'NHBTC',
-  Icon: TokenNHBTC,
-  addresses: {
-    [Mainnet.chainId]: '0x1f832091faf289ed4f50fe7418cfbd2611225d46',
-    [Testnet.chainId]: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
-  },
-}
 
-export const ERC20TokenWhitelist = [USDT, NEST, COFI, NHBTC]
+export const ERC20TokenWhitelist = [USDT, NEST, PUSD]
