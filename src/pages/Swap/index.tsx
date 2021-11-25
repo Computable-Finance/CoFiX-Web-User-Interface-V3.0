@@ -135,7 +135,7 @@ const Swap: FC = () => {
             onFocus={() => setChange('src')}
           />
           <button className="token-input-pair-middleButton" onClick={handleSwitch}>
-            <SwitchOutline />
+            <SwitchOutline/>
           </button>
 
           <TokenInput
@@ -143,7 +143,7 @@ const Swap: FC = () => {
             symbol={dest.symbol}
             value={dest.amount}
             balanceTitle={t`Pool Balance:`}
-            balance={balance.balance }
+            balance={balance.balance}
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient2(b)}
             noExtra={
@@ -159,7 +159,7 @@ const Swap: FC = () => {
         <Field
           name={t`Trading Price`}
           loading={swap.loading}
-          value={ src.symbol !== dest.symbol ?  `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
+          value={src.symbol !== dest.symbol ? `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
             `1 ${src.symbol} = -- ${dest.symbol}`}
           tooltip={
             <>
@@ -255,7 +255,7 @@ const Swap: FC = () => {
         </TransactionButtonGroup>
       </Card>
     </section>
-  )
+  );
 
   const paths = useMemo(() => {
     if (swap.paths) {
