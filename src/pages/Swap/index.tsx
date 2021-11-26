@@ -27,6 +27,7 @@ const Swap: FC = () => {
     dest: { symbol: 'USDT', amount: '' },
   })
   const swap = useSwap(pair)
+  console.log(swap)
   const [confirm, setConfirm] = useState(false)
   const { checkRisk } = useRiskModal()
   const [insufficient, setInsufficient] = useState(false)

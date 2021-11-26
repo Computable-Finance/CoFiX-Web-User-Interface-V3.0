@@ -175,7 +175,7 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
     const amountIn = toBigNumber(amount)
-    if (src === 'USDT' && dest === this.pair[1].symbol) {
+    if (src === 'USDT' && dest === this.pair[0].symbol) {
       const fee = amountIn.multipliedBy(this.theta).div(10000)
       const c = toBigNumber(
         await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
@@ -190,17 +190,15 @@ class CoFiXPair extends ERC20Token {
         amountOut: amountOut,
         oracleFee: toBigNumber(0.005),
       }
-    } else if (src === this.pair[1].symbol && dest === 'USDT') {
-      let amountOut = amountIn.div(tokenAmount)
 
+    } else if (src === this.pair[0].symbol && dest === 'USDT') {
+      let amountOut = amountIn.div(tokenAmount)
       const c = toBigNumber(
         await this.contract.impactCostForBuyInETH(this.api.Tokens.ETH.parse(amountOut).toFixed(0))
       ).shiftedBy(-18)
-
       amountOut = amountOut.div(toBigNumber(1).plus(k).plus(c))
       const fee = amountOut.multipliedBy(this.theta).div(10000)
       amountOut = amountOut.minus(fee)
-
       return {
         fee: {
           symbol: 'ETH',

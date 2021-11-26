@@ -178,6 +178,7 @@ class API {
     if (path.length < 2) {
       throw new Error(`can not swap from ${src} to ${dest}`)
     }
+    console.log(path)
 
     let oracleAmountIn = toBigNumber(amount)
     let realAmountIn = toBigNumber(amount)
@@ -208,6 +209,7 @@ class API {
     const oracleOut = oracleAmountIn
     const amountOut = realAmountIn
 
+    console.log(oracleOut, amountOut, fee, path, oracleFee)
     return {
       oracleOut,
       amountOut,
