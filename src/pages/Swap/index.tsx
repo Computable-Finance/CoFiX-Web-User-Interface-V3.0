@@ -16,7 +16,9 @@ import { toBigNumber } from 'src/libs/web3/util'
 
 import { RiskAction, useRiskModal } from '../shared/RiskModal'
 import TransactionButtonGroup from '../shared/TransactionButtonGroup'
-import usePoolBalance from '../../hooks/usePoolBalance'
+import usePoolInfo from "../../hooks/usePoolInfo";
+import {PoolInfo} from "../../libs/web3/api/CoFiXPair";
+import BigNumber from "bignumber.js";
 
 let ver = 0
 const Swap: FC = () => {
@@ -27,13 +29,28 @@ const Swap: FC = () => {
     dest: { symbol: 'USDT', amount: '' },
   })
   const swap = useSwap(pair)
-  console.log(swap)
   const [confirm, setConfirm] = useState(false)
   const { checkRisk } = useRiskModal()
   const [insufficient, setInsufficient] = useState(false)
   const [insufficient2, setInsufficient2] = useState(false)
   const [change, setChange] = useState('')
-  const balance = usePoolBalance(pair.src.symbol, pair.dest.symbol)
+  const { info: poolInfo } = usePoolInfo<PoolInfo>(pair.src.symbol, pair.dest.symbol)
+  const [balance, setBalance] = useState<{
+    amount: BigNumber
+    value: BigNumber
+    formatAmount: string
+  }>()
+
+  useEffect(() => {
+    console.log(poolInfo)
+    if (poolInfo){
+      setBalance({
+        amount: poolInfo.amounts[dest.symbol === "USDT" ? 1 : 0],
+        formatAmount: poolInfo.formatAmounts[dest.symbol === "USDT" ? 1 : 0],
+        value: poolInfo.amounts[dest.symbol === "USDT" ? 1 : 0],
+      })
+    }
+  }, [pair, poolInfo])
 
   const handleSwitch = () => {
     setPair((pair) => ({
@@ -144,7 +161,7 @@ const Swap: FC = () => {
             symbol={dest.symbol}
             value={dest.amount}
             balanceTitle={t`Pool Balance:`}
-            balance={balance.balance}
+            balance={balance}
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient2(b)}
             onChange={(amount: string, symbol: string) => handleChange('dest', amount, symbol)}
@@ -156,8 +173,8 @@ const Swap: FC = () => {
         <Field
           name={t`Trading Price`}
           loading={swap.loading}
-          value={src.symbol !== dest.symbol ? `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
-            `1 ${src.symbol} = -- ${dest.symbol}`}
+          value={src.symbol !== dest.symbol ? `2000 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
+            `2000 ${src.symbol} = -- ${dest.symbol}`}
           tooltip={
             <>
               <h1>
@@ -181,12 +198,9 @@ const Swap: FC = () => {
               <ul>
                 <li>
                   <span>
-                    {(src.symbol === 'USDT' && dest.symbol === 'ETH') ||
-                    (src.symbol === 'ETH' && dest.symbol === 'USDT')
-                      ? t`Uniswap Price`
-                      : t`NEST Oracle Price`}
+                      {t`NEST Oracle Price`}
                   </span>
-                  <span>{`1 ${src.symbol} = ${swap?.amount?.oracleFormat || '--'} ${dest.symbol}`}</span>
+                  <span>{`2000 ${src.symbol} = ${swap?.amount?.oracleFormat || '--'} ${dest.symbol}`}</span>
                 </li>
 
                 <li>
