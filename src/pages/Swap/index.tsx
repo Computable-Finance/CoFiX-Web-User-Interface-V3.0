@@ -25,8 +25,8 @@ const Swap: FC = () => {
   const { api } = useWeb3()
 
   const [pair, setPair] = useState({
-    src: { symbol: 'NEST', amount: '' },
-    dest: { symbol: 'USDT', amount: '' },
+    src: { symbol: 'NEST', amount: "0" },
+    dest: { symbol: 'USDT', amount: "0" },
   })
   const swap = useSwap(pair)
   const [confirm, setConfirm] = useState(false)
@@ -42,7 +42,6 @@ const Swap: FC = () => {
   }>()
 
   useEffect(() => {
-    console.log(poolInfo)
     if (poolInfo){
       setBalance({
         amount: poolInfo.amounts[dest.symbol === "USDT" ? 1 : 0],
@@ -146,6 +145,7 @@ const Swap: FC = () => {
             title={t`FROM`}
             symbol={src.symbol}
             value={src.amount}
+            editable
             onChange={(amount: string, symbol: string) => handleChange('src', amount, symbol)}
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient(b)}
@@ -162,6 +162,7 @@ const Swap: FC = () => {
             value={dest.amount}
             balanceTitle={t`Pool Balance:`}
             balance={balance}
+            editable
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient2(b)}
             onChange={(amount: string, symbol: string) => handleChange('dest', amount, symbol)}

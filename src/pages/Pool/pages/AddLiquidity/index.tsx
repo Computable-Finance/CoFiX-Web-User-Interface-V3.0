@@ -9,11 +9,9 @@ import TokenInput from 'src/components/TokenInput'
 import useAddLiquidity from 'src/libs/web3/hooks/useAddLiquidity'
 import {TransactionType} from 'src/libs/web3/hooks/useTransaction'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import {toBigNumber} from 'src/libs/web3/util'
 import TransactionButtonGroup from 'src/pages/shared/TransactionButtonGroup'
 import usePoolInfo from "../../../../hooks/usePoolInfo";
 import {PoolInfo} from "../../../../libs/web3/api/CoFiXPair";
-import Button from "../../../../components/Button";
 
 const AddLiquidity: FC = () => {
   const history = useHistory()
@@ -45,7 +43,7 @@ const AddLiquidity: FC = () => {
     }
   }, [api, params])
 
-  const handleChange = (symbol: string, amount: string) => {
+  const handleChange = async (amount: string, symbol: string) => {
     setSymbol(symbol)
     setAmount(amount)
   }
@@ -58,12 +56,13 @@ const AddLiquidity: FC = () => {
   return (
     <Card backward onBackwardClick={() => history.push(`/pool`)} title={t`Add Liquidity`}>
       <TokenInput
-        selectable={true}
+        selectable
         symbol={symbol}
         title={`${t`Input`}${t`Amount`}`}
         value={amount}
+        editable
         tokens={[params.token0, params.token1]}
-        onChange={handleChange}
+        onChange={(amount: string, symbol: string) => handleChange(amount, symbol)}
         checkInsufficientBalance
         onInsufficientBalance={(i) => setInsufficient1(i)}
       />
@@ -72,32 +71,18 @@ const AddLiquidity: FC = () => {
 
       <Field name={t`Expected share`} value={`${handleAddLiquidity.liquidity || '--'}`}/>
 
-      {toBigNumber(amount[1]).gt(0) ? (
-        <TransactionButtonGroup
-          approve={{
-            transactionType: TransactionType.AddLiquidity,
-            token: [symbol[0], symbol[1] || symbol[0]],
-          }}
-          onClick={handleAddLiquidity.handler}
-          disabled={
-            insufficient1
-          }
-        >
-          <Trans>Add Liquidity</Trans>
-        </TransactionButtonGroup>
-      ) : (
-        <Button
-          block
-          gradient
-          primary
-          onClick={handleAddLiquidity.handler}
-          disabled={
-            insufficient1 || toBigNumber(amount[1]).lte(0)
-          }
-        >
-          <Trans>Add Liquidity</Trans>
-        </Button>
-      )}
+      <TransactionButtonGroup
+        approve={{
+          transactionType: TransactionType.AddLiquidity,
+          token: [symbol[0], symbol[1] || symbol[0]],
+        }}
+        onClick={handleAddLiquidity.handler}
+        disabled={
+          insufficient1
+        }
+      >
+        <Trans>Add Liquidity</Trans>
+      </TransactionButtonGroup>
 
     </Card>
   )
