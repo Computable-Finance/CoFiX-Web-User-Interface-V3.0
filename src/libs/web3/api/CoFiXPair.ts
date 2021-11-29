@@ -166,11 +166,11 @@ class CoFiXPair extends ERC20Token {
     }
 
     if (!this.contract) {
-      throw new Error(`coifx pair ${this.symbol} not found`)
+      throw new Error(`cofix pair ${this.symbol} not found`)
     }
 
     if (!this.api.chainId) {
-      throw new Error(`coifx pair ${this.symbol} not found`)
+      throw new Error(`cofix pair ${this.symbol} not found`)
     }
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
@@ -180,19 +180,20 @@ class CoFiXPair extends ERC20Token {
       const c = toBigNumber(
         await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
       ).shiftedBy(-18)
-      const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(toBigNumber(1).plus(k).plus(c))
+      const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(2000).div(toBigNumber(1).plus(k).plus(c))
+      console.log(amountIn.multipliedBy(tokenAmount).div(2000).toString(), amountOut.toString())
       return {
         fee: {
           symbol: 'ETH',
           amount: fee,
         },
-        oracleOut: amountIn.multipliedBy(tokenAmount),
+        oracleOut: amountIn.multipliedBy(tokenAmount).div(2000),
         amountOut: amountOut,
         oracleFee: toBigNumber(0.005),
       }
 
     } else if (src === this.pair[0].symbol && dest === 'USDT') {
-      let amountOut = amountIn.div(tokenAmount)
+      let amountOut = amountIn.div(tokenAmount).multipliedBy(2000)
       const c = toBigNumber(
         await this.contract.impactCostForBuyInETH(this.api.Tokens.ETH.parse(amountOut).toFixed(0))
       ).shiftedBy(-18)
@@ -204,7 +205,7 @@ class CoFiXPair extends ERC20Token {
           symbol: 'ETH',
           amount: fee,
         },
-        oracleOut: amountIn.div(tokenAmount),
+        oracleOut: amountIn.div(tokenAmount).multipliedBy(2000),
         amountOut: amountOut,
         oracleFee: toBigNumber(0.005),
       }

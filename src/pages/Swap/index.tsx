@@ -174,8 +174,8 @@ const Swap: FC = () => {
         <Field
           name={t`Trading Price`}
           loading={swap.loading}
-          value={src.symbol !== dest.symbol ? `2000 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
-            `2000 ${src.symbol} = -- ${dest.symbol}`}
+          value={src.symbol !== dest.symbol ? `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
+            `1 ${src.symbol} = -- ${dest.symbol}`}
           tooltip={
             <>
               <h1>
@@ -201,7 +201,7 @@ const Swap: FC = () => {
                   <span>
                       {t`NEST Oracle Price`}
                   </span>
-                  <span>{`2000 ${src.symbol} = ${swap?.amount?.oracleFormat || '--'} ${dest.symbol}`}</span>
+                  <span>{`1 ${src.symbol} = ${swap?.amount?.oracleFormat || '--'} ${dest.symbol}`}</span>
                 </li>
 
                 <li>

@@ -31,45 +31,81 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
       }
 
       if (content.token0.symbol && content.token1.symbol) {
-        // find pair
         const pair = api.CoFiXPairs[content.token0.symbol][content.token1.symbol]
         const poolInfo = await pair.getPoolInfo()
         if (!poolInfo) {
           return
         }
-        const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
+        // NEST
+        if (toBigNumber(content.token0.amount).gt(0)){
+          const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
 
-        let liquidity = toBigNumber(content.token0.amount).plus(toBigNumber(content.token1.amount).multipliedBy(toBigNumber(1).div(tokenAmount)))
+          let liquidity = toBigNumber(content.token0.amount).multipliedBy(toBigNumber(1).div(tokenAmount))
 
-        const totalVault = poolInfo.amounts[0].plus(poolInfo.amounts[1].multipliedBy(toBigNumber(1).div(tokenAmount)))
+          const totalVault = poolInfo.amounts[0].plus(poolInfo.amounts[0].multipliedBy(toBigNumber(1).div(tokenAmount)))
 
-        if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
-          liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
-        } else {
-          liquidity = liquidity.multipliedBy(toBigNumber(1))
-        }
+          if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
+            liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
+          } else {
+            liquidity = liquidity.multipliedBy(toBigNumber(1))
+          }
 
-        if (!liquidity.isNaN()) {
-          content.liquidity = liquidity.toFixed(6)
-          setLiquidity(content.liquidity)
-        }
-        const newArgs = {
-          pool: pair.address || '',
-          token: pair.pair[1].address || '',
-          amountETH: pair.pair[0].parse(content.token0.amount).toFixed(0),
-          amountToken: pair.pair[1].parse(content.token1.amount).toFixed(0),
-          liquidity: liquidity.toFixed(6),
-          liquidityMin: liquidity
-            .multipliedBy(1 - slippageTolerance)
-            .shiftedBy(18)
-            .toFixed(0),
-          to: api.account || '',
-          oracleCallFee: api.chainId === 1 ? "0.001" : "0.01",
-          sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === 1 ? 0.001 : 0.01).plus(toBigNumber(content.token0.amount))).toFixed(0),
-        }
+          if (!liquidity.isNaN()) {
+            content.liquidity = liquidity.toFixed(6)
+            setLiquidity(content.liquidity)
+          }
+          const newArgs = {
+            pool: pair.address || '',
+            token: pair.pair[0].address || '',
+            amountETH: "0",
+            amountToken: pair.pair[0].parse(content.token0.amount).toFixed(0),
+            liquidity: liquidity.toFixed(6),
+            liquidityMin: liquidity
+              .multipliedBy(1 - slippageTolerance)
+              .shiftedBy(18)
+              .toFixed(0),
+            to: api.account || '',
+            oracleCallFee: "0.005",
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber("0.005")).toFixed(0),
+          }
+          if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
+            setArgs(newArgs)
+          }
+        }else {
+          // USDT
+          const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
 
-        if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
-          setArgs(newArgs)
+          let liquidity = toBigNumber(content.token1.amount).multipliedBy(toBigNumber(1).div(tokenAmount))
+
+          const totalVault = poolInfo.amounts[1].plus(poolInfo.amounts[1].multipliedBy(toBigNumber(1).div(tokenAmount)))
+
+          if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
+            liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
+          } else {
+            liquidity = liquidity.multipliedBy(toBigNumber(1))
+          }
+
+          if (!liquidity.isNaN()) {
+            content.liquidity = liquidity.toFixed(6)
+            setLiquidity(content.liquidity)
+          }
+          const newArgs = {
+            pool: pair.address || '',
+            token: pair.pair[1].address || '',
+            amountETH: "0",
+            amountToken: pair.pair[1].parse(content.token1.amount).toFixed(0),
+            liquidity: liquidity.toFixed(6),
+            liquidityMin: liquidity
+              .multipliedBy(1 - slippageTolerance)
+              .shiftedBy(18)
+              .toFixed(0),
+            to: api.account || '',
+            oracleCallFee: "0.005",
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber("0.005")).toFixed(0),
+          }
+          if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
+            setArgs(newArgs)
+          }
         }
       } else {
         setArgs(undefined)

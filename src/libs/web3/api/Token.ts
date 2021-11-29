@@ -86,7 +86,7 @@ abstract class Token extends Contract {
   }
 
   async queryOracle() {
-    if (!this.address || !this.api.Contracts.NestPriceFacade.contract) {
+    if (!this.address || !this.api.Contracts.NestPriceFacade.contract || !this.api.CoFiXPairs["NEST"]["USDT"].contract) {
       return {
         k: toBigNumber(0),
         tokenAmount: this.amount(await this.getValuePerETH()),
@@ -98,16 +98,17 @@ abstract class Token extends Contract {
         1,
         2
       )
-      // const k = await this.api.Contracts.CoFixPair.contract.calcRevisedK(
-      //   102739726027,
-      //   priceInfo.prices[3],
-      //   priceInfo.prices[2],
-      //   priceInfo.prices[1],
-      //   priceInfo.prices[0]
-      // )
+
+      const k = await this.api.CoFiXPairs["NEST"]["USDT"].contract.calcRevisedK(
+        102739726027,
+        priceInfo.prices[3],
+        priceInfo.prices[2],
+        priceInfo.prices[1],
+        priceInfo.prices[0]
+      )
 
       return {
-        k: toBigNumber(0).shiftedBy(-18),
+        k: toBigNumber(k).shiftedBy(-18),
         tokenAmount: this.amount(priceInfo.prices[1]),
       }
     } catch (e) {
