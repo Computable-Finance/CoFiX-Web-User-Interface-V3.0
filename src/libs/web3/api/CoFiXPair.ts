@@ -31,21 +31,6 @@ export type PoolInfo = {
   tokenAmount: BigNumber
 }
 
-export type StakeInfo = {
-  xTokenInPool: {
-    value: BigNumber
-    amount: BigNumber
-    formatAmount: string
-  }
-  dailyMined: BigNumber
-  stakedXToken: {
-    value: BigNumber
-    amount: BigNumber
-    formatAmount: string
-  }
-  stakedRatio: string
-}
-
 export type CoFiXPairProps = ERC20TokenProps & {
   pair: [string, string]
 
@@ -102,15 +87,13 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
 
-    const [balances, ethAmounts, usdtAmounts, pairBalance, pairTotalSupply] =
+    const [balances, pairBalance, pairTotalSupply] =
       await Promise.all([
         Promise.all([tokens[0].balanceOf(this.address), tokens[1].balanceOf(this.address)]),
-        Promise.all([tokens[0].getValuePerETH(), tokens[1].getValuePerETH()]),
-        Promise.all([tokens[0].getUSDTAmount(), tokens[1].getUSDTAmount()]),
-
         this.balanceOf(this.api.account || ''),
         this.totalSupply(),
       ])
+
 
     const amounts = [tokens[0].amount(balances[0] || 0), tokens[1].amount(balances[1] || 0)]
     const formatAmounts = [
@@ -118,17 +101,18 @@ class CoFiXPair extends ERC20Token {
       tokens[1].format(tokens[1].amount(balances[1] || 0)),
     ]
 
-    if (!ethAmounts[0] || !ethAmounts[1] || !usdtAmounts[0] || !usdtAmounts[1]) {
+    const swapInfo = await this.api.getSwapInfo('NEST', 'USDT', toBigNumber('1'))
+
+    if (!swapInfo?.amountOut) {
       return
     }
 
-    const totalFunds = amounts[0].multipliedBy(usdtAmounts[0]).plus(amounts[1].multipliedBy(usdtAmounts[1]))
+    // TVL: totalFounds
+    const totalFunds = amounts[0].multipliedBy(swapInfo?.amountOut).plus(amounts[1].multipliedBy(1))
 
     let nav = new BigNumber(1)
     if (!totalFunds.isZero()) {
-      const navPerShare = await this.contract.getNAVPerShare(ethAmounts[0].toFixed(0), ethAmounts[1].toFixed(0))
-
-      nav = new BigNumber(navPerShare.toString()).div(new BigNumber(10).pow(18))
+      nav = pairTotalSupply.div(totalFunds).shiftedBy(-18)
     }
 
     const myPoolRatio = new BigNumber(0)

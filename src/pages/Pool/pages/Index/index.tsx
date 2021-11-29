@@ -67,7 +67,6 @@ const Pool: FC = () => {
                 <div className={`${classPrefix}-header`}>
                   <div className={`${classPrefix}-title`}>
                     <span>{`${token0.symbol}-${token1.symbol} ${t`Pool`}`}</span>
-                    {/* <Tag>{`${t`Mining`} x2`}</Tag> */}
                   </div>
                 </div>
 
