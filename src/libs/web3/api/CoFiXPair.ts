@@ -111,7 +111,7 @@ class CoFiXPair extends ERC20Token {
 
     let nav = new BigNumber(1)
     if (!pairTotalSupply.isZero()) {
-      nav = totalFunds.div(pairTotalSupply).shiftedBy(18)
+      nav = totalFunds.shiftedBy(18).div(pairTotalSupply)
     }
 
     const myPoolRatio = new BigNumber(0)
