@@ -107,12 +107,11 @@ class CoFiXPair extends ERC20Token {
       return
     }
 
-    // TVL: totalFounds
     const totalFunds = amounts[0].multipliedBy(swapInfo?.amountOut).plus(amounts[1].multipliedBy(1))
 
     let nav = new BigNumber(1)
-    if (!totalFunds.isZero()) {
-      nav = pairTotalSupply.div(totalFunds).shiftedBy(-18)
+    if (!pairTotalSupply.isZero()) {
+      nav = totalFunds.div(pairTotalSupply).shiftedBy(18)
     }
 
     const myPoolRatio = new BigNumber(0)
@@ -165,7 +164,6 @@ class CoFiXPair extends ERC20Token {
         await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
       ).shiftedBy(-18)
       const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(2000).div(toBigNumber(1).plus(k).plus(c))
-      console.log(amountIn.multipliedBy(tokenAmount).div(2000).toString(), amountOut.toString())
       return {
         fee: {
           symbol: 'ETH',

@@ -33,22 +33,13 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
       if (content.token0.symbol && content.token1.symbol) {
         const pair = api.CoFiXPairs[content.token0.symbol][content.token1.symbol]
         const poolInfo = await pair.getPoolInfo()
-        if (!poolInfo) {
+        const swapInfo = await api.getSwapInfo(content.token0.symbol, content.token1.symbol, toBigNumber(1))
+        if (!poolInfo || !swapInfo?.amountOut) {
           return
         }
-        // NEST
-        if (toBigNumber(content.token0.amount).gt(0)){
-          const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
 
-          let liquidity = toBigNumber(content.token0.amount).multipliedBy(toBigNumber(1).div(tokenAmount))
-
-          const totalVault = poolInfo.amounts[0].plus(poolInfo.amounts[0].multipliedBy(toBigNumber(1).div(tokenAmount)))
-
-          if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
-            liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
-          } else {
-            liquidity = liquidity.multipliedBy(toBigNumber(1))
-          }
+        if (toBigNumber(content.token0.amount).gt(0) && content.token0.symbol !== 'USDT'){
+          const liquidity = toBigNumber(content.token0.amount).multipliedBy(swapInfo?.amountOut).div(poolInfo.nav)
 
           if (!liquidity.isNaN()) {
             content.liquidity = liquidity.toFixed(6)
@@ -71,19 +62,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
           }
-        }else {
-          // USDT
-          const tokenAmount = poolInfo.tokenAmount.multipliedBy(toBigNumber(1).plus(poolInfo.k)).div(toBigNumber(1))
-
-          let liquidity = toBigNumber(content.token1.amount).multipliedBy(toBigNumber(1).div(tokenAmount))
-
-          const totalVault = poolInfo.amounts[1].plus(poolInfo.amounts[1].multipliedBy(toBigNumber(1).div(tokenAmount)))
-
-          if (poolInfo.xtokenTotalSupply.amount.gt(0) && totalVault.gt(0)){
-            liquidity = liquidity.multipliedBy(poolInfo.xtokenTotalSupply.amount).div(totalVault)
-          } else {
-            liquidity = liquidity.multipliedBy(toBigNumber(1))
-          }
+        } else {
+          const liquidity = toBigNumber(content.token1.amount).div(poolInfo.nav)
 
           if (!liquidity.isNaN()) {
             content.liquidity = liquidity.toFixed(6)
