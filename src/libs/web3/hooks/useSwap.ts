@@ -99,7 +99,7 @@ const useSwap = (content: TansactionSwapContent) => {
       }
 
       let ethValue = oracleCallFee
-      if (srcToken.symbol === 'ETH') {
+      if (srcToken.symbol === 'BNB') {
         ethValue = ethValue.plus(srcToken.parse(content.src.amount))
       }
 

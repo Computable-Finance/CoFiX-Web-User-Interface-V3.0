@@ -1,4 +1,4 @@
-import { TokenETH } from 'src/components/Icon'
+import {TokenBNB} from 'src/components/Icon'
 import Token from './Token'
 import { toBigNumber } from '../util'
 import API from '.'
@@ -8,8 +8,8 @@ import { ADDRESS_ZERO } from '../constants/constant'
 class ETHToken extends Token {
   constructor(api: API) {
     super(api, {
-      symbol: 'ETH',
-      Icon: TokenETH,
+      symbol: 'BNB',
+      Icon: TokenBNB,
       addresses: ADDRESS_ZERO,
       decimals: 18,
       formatPrecision: 8,
