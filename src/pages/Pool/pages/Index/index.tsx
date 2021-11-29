@@ -120,7 +120,6 @@ const Pool: FC = () => {
               block
               gradient
               primary
-              disabled={token0.symbol === 'ETH' && token1.symbol === 'USDT'}
               onClick={async () => {
                 try {
                   await checkRisk(RiskAction.Pool)
@@ -133,14 +132,6 @@ const Pool: FC = () => {
             >
               <Trans>Add Liquidity</Trans>
             </Button>
-
-            {token0.symbol === 'ETH' && token1.symbol === 'USDT' && (
-              <div className={`${classPrefix}-footer`}>
-                <span>
-                  <Trans>The current fund pool is no longer mined</Trans>
-                </span>
-              </div>
-            )}
           </div>
 
           <div className={`${classPrefix}-info-container`}>
