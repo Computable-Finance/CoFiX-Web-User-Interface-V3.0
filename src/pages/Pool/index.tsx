@@ -4,7 +4,6 @@ import {FC} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import CollapseCard from 'src/components/CollapaseCard'
 import {Trans, t} from '@lingui/macro'
-import Card from 'src/components/Card'
 
 import loadable from '@loadable/component'
 
@@ -17,25 +16,6 @@ const Pool: FC = () => {
 
   return (
     <div className={`cofi-page ${classPrefix}`}>
-      <section className={`${classPrefix}-notice`}>
-        <Card>
-          <section>
-            <p>
-              <Trans>
-                CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive
-                mining rewards.
-                The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from
-                the old version of the fund pool as soon as possible.
-              </Trans>
-
-              <a href="https://v21.cofix.tech" className="link" target="_blank" rel="noreferrer">
-                <Trans>Jump to the old version</Trans>
-              </a>
-            </p>
-          </section>
-        </Card>
-      </section>
-
       <Switch>
         <Route path="/pool" exact>
           <Index/>
