@@ -68,6 +68,7 @@ const RemoveLiquidity: FC = () => {
       <TokenInput
         selectable={false}
         symbol={xtoken?.symbol}
+        editable
         balance={poolInfo?.xtokenBalance}
         value={amount}
         onChange={(v) => setAmount(v)}
