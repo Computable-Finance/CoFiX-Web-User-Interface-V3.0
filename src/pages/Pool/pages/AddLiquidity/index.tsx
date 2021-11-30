@@ -107,7 +107,7 @@ const AddLiquidity: FC = () => {
           primary
           onClick={handleAddLiquidity.handler}
           disabled={
-            insufficient1 || toBigNumber(amount[1]).lte(0)
+            insufficient0 || toBigNumber(amount[0]).lte(0)
           }
         >
           <Trans>Add Liquidity</Trans>
