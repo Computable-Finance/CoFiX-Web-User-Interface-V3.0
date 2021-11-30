@@ -1,16 +1,16 @@
 import { CoFiXRouterProps } from '../api/CoFiXRouter'
 import { NestPriceFacadeProps } from '../api/NestPriceFacade'
-import { Bnbt } from './chains'
+import { BSCT } from './chains'
 
 export const NestPriceFacade: NestPriceFacadeProps = {
   addresses: {
-    [Bnbt.chainId]: '0xF2f9E62f52389EF223f5Fa8b9926e95386935277',
+    [BSCT.chainId]: '0xF2f9E62f52389EF223f5Fa8b9926e95386935277',
   },
 }
 
 export const CoFiXRouter: CoFiXRouterProps = {
   addresses: {
-    [Bnbt.chainId]: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84',
+    [BSCT.chainId]: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84',
   },
 }
 

@@ -22,12 +22,12 @@ type Chain = {
   infoURL: string
 }
 
-export const Bnbt = {
+export const BSCT = {
   name: 'Smart Chain - Testnet',
   chainId: 97,
-  shortName: 'bnbt',
+  shortName: 'bsct',
   chain: 'BSC',
-  network: 'bnbt',
+  network: 'BSCT',
   networkId: 97,
   nativeCurrency: {
     name: 'BNB',
@@ -35,9 +35,14 @@ export const Bnbt = {
     decimals: 18,
   },
   rpc: [`https://data-seed-prebsc-1-s1.binance.org:8545/`],
-  faucets: ['https://faucet.ropsten.be?${ADDRESS}'],
-  explorers: [],
-  infoURL: 'https://github.com/ethereum/ropsten',
+  faucets: ['https://testnet.binance.org/faucet-smart'],
+  explorers: [
+    {
+      name: "testnet bscscan",
+      url: "https://testnet.bscscan.com",
+      standard: "https://testnet.bscscan.com"}
+  ],
+  infoURL: 'https://binance.com',
 }
 
-export const SupportedChains: Array<Chain> = [Bnbt]
+export const SupportedChains: Array<Chain> = [BSCT]
