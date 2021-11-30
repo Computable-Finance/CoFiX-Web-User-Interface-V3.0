@@ -52,15 +52,6 @@ abstract class Token extends Contract {
     return this.parse(this.api.Tokens.ETH.parse(1).div(value))
   }
 
-  async getUSDTValue() {
-    const value = await this.getValuePerUSDT()
-    if (!value || value.isZero()) {
-      return new BigNumber(0)
-    }
-
-    return this.parse(this.api.Tokens.USDT.parse(1).div(value))
-  }
-
   abstract balanceOf(address: string): Promise<BigNumber>
   abstract totalSupply(): Promise<BigNumber>
   abstract getValuePerETH(): Promise<BigNumber>
