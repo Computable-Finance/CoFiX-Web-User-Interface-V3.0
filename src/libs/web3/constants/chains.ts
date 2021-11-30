@@ -27,7 +27,7 @@ export const BSCT = {
   chainId: 97,
   shortName: 'bsct',
   chain: 'BSC',
-  network: 'BSCT',
+  network: 'BSC Testnet',
   networkId: 97,
   nativeCurrency: {
     name: 'BNB',
