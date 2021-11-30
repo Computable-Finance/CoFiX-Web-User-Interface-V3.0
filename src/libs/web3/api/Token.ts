@@ -61,15 +61,6 @@ abstract class Token extends Contract {
     return this.parse(this.api.Tokens.USDT.parse(1).div(value))
   }
 
-  async getUSDTAmount() {
-    const value = await this.getUSDTValue()
-    if (!value || value.isZero()) {
-      return new BigNumber(0)
-    }
-
-    return this.api.Tokens.USDT.amount(value)
-  }
-
   async queryOracle() {
     if (!this.address || !this.api.Contracts.NestPriceFacade.contract || !this.api.CoFiXPairs["NEST"]["USDT"].contract) {
       return {
