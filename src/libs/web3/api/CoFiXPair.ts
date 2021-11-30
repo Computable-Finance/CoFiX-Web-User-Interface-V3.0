@@ -85,7 +85,7 @@ class CoFiXPair extends ERC20Token {
 
     const tokens = [this.api.Tokens[this.pair[0].symbol], this.api.Tokens[this.pair[1].symbol]]
 
-    const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
+    const { k, tokenAmount } = await this.queryOracle()
 
     const [balances, pairBalance, pairTotalSupply] =
       await Promise.all([
@@ -150,6 +150,42 @@ class CoFiXPair extends ERC20Token {
     return this.poolInfo
   }
 
+  async queryOracle() {
+    if (!this.address || !this.api.Contracts.NestPriceFacade.contract || !this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract) {
+      return {
+        k: toBigNumber(0),
+        tokenAmount: this.amount(await this.getValuePerETH()),
+      }
+    }
+
+    try {
+      const priceInfo = await this.api.Contracts.NestPriceFacade.contract["lastPriceListAndTriggeredPriceInfo(uint256,uint256)"](
+        1,
+        2
+      )
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const k = await this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract.calcRevisedK(
+        102739726027,
+        priceInfo.prices[3],
+        priceInfo.prices[2],
+        priceInfo.prices[1],
+        priceInfo.prices[0]
+      )
+
+      return {
+        k: toBigNumber(k).shiftedBy(-18),
+        tokenAmount: this.amount(priceInfo.prices[1]),
+      }
+    } catch (e) {
+      return {
+        k: toBigNumber(0),
+        tokenAmount: this.amount(await this.getValuePerETH()),
+      }
+    }
+  }
+
   async swap(src: string, dest: string, amount: BigNumber | BigNumberish) {
     if (!this.impactCostVOL) {
       throw new Error(`cofix pair ${this.symbol} not init`)
@@ -163,7 +199,7 @@ class CoFiXPair extends ERC20Token {
       throw new Error(`cofix pair ${this.symbol} not found`)
     }
 
-    const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
+    const { k, tokenAmount } = await this.queryOracle()
     const amountIn = toBigNumber(amount)
     if (src === 'USDT' && dest === this.pair[0].symbol) {
       const fee = amountIn.multipliedBy(this.theta).div(10000)

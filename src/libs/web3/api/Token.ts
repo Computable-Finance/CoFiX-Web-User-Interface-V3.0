@@ -61,40 +61,6 @@ abstract class Token extends Contract {
     return this.parse(this.api.Tokens.USDT.parse(1).div(value))
   }
 
-  async queryOracle() {
-    if (!this.address || !this.api.Contracts.NestPriceFacade.contract || !this.api.CoFiXPairs["NEST"]["USDT"].contract) {
-      return {
-        k: toBigNumber(0),
-        tokenAmount: this.amount(await this.getValuePerETH()),
-      }
-    }
-
-    try {
-      const priceInfo = await this.api.Contracts.NestPriceFacade.contract["lastPriceListAndTriggeredPriceInfo(uint256,uint256)"](
-        1,
-        2
-      )
-
-      const k = await this.api.CoFiXPairs["NEST"]["USDT"].contract.calcRevisedK(
-        102739726027,
-        priceInfo.prices[3],
-        priceInfo.prices[2],
-        priceInfo.prices[1],
-        priceInfo.prices[0]
-      )
-
-      return {
-        k: toBigNumber(k).shiftedBy(-18),
-        tokenAmount: this.amount(priceInfo.prices[1]),
-      }
-    } catch (e) {
-      return {
-        k: toBigNumber(0),
-        tokenAmount: this.amount(await this.getValuePerETH()),
-      }
-    }
-  }
-
   abstract balanceOf(address: string): Promise<BigNumber>
   abstract totalSupply(): Promise<BigNumber>
   abstract getValuePerETH(): Promise<BigNumber>
