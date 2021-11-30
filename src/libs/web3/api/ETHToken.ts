@@ -1,4 +1,4 @@
-import {TokenBNB} from 'src/components/Icon'
+import { TokenBNB } from 'src/components/Icon'
 import Token from './Token'
 import { toBigNumber } from '../util'
 import API from '.'

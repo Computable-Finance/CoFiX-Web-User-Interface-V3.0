@@ -60,7 +60,6 @@ const PoolSelector: FC<Props> = ({ ...props }) => {
     return api.CoFiXPairs[symbol[0]][symbol[1]]
   }, [api, symbol])
 
-
   if (!api) {
     return <></>
   }
@@ -100,9 +99,9 @@ const PoolSelector: FC<Props> = ({ ...props }) => {
                     }}
                   >
                     <Button block primary={p.symbol === pair.symbol}>
-                      <div style={{display: "flex", alignItems: "center"}}>
-                        <t0.Icon/>
-                        <t1.Icon/>
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <t0.Icon />
+                        <t1.Icon />
                       </div>
 
                       <div>{`${t0.symbol}-${t1.symbol}`}</div>
@@ -115,8 +114,7 @@ const PoolSelector: FC<Props> = ({ ...props }) => {
         </Card>
       </Popup>
     )
-  }
-  else {
+  } else {
     return <></>
   }
 }

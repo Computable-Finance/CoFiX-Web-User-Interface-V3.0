@@ -16,17 +16,17 @@ import { toBigNumber } from 'src/libs/web3/util'
 
 import { RiskAction, useRiskModal } from '../shared/RiskModal'
 import TransactionButtonGroup from '../shared/TransactionButtonGroup'
-import usePoolInfo from "../../hooks/usePoolInfo";
-import {PoolInfo} from "../../libs/web3/api/CoFiXPair";
-import BigNumber from "bignumber.js";
+import usePoolInfo from '../../hooks/usePoolInfo'
+import { PoolInfo } from '../../libs/web3/api/CoFiXPair'
+import BigNumber from 'bignumber.js'
 
 let ver = 0
 const Swap: FC = () => {
   const { api } = useWeb3()
 
   const [pair, setPair] = useState({
-    src: { symbol: 'NEST', amount: "0" },
-    dest: { symbol: 'USDT', amount: "0" },
+    src: { symbol: 'NEST', amount: '0' },
+    dest: { symbol: 'USDT', amount: '0' },
   })
   const swap = useSwap(pair)
   const [confirm, setConfirm] = useState(false)
@@ -42,11 +42,11 @@ const Swap: FC = () => {
   }>()
 
   useEffect(() => {
-    if (poolInfo){
+    if (poolInfo) {
       setBalance({
-        amount: poolInfo.amounts[dest.symbol === "USDT" ? 1 : 0],
-        formatAmount: poolInfo.formatAmounts[dest.symbol === "USDT" ? 1 : 0],
-        value: poolInfo.amounts[dest.symbol === "USDT" ? 1 : 0],
+        amount: poolInfo.amounts[dest.symbol === 'USDT' ? 1 : 0],
+        formatAmount: poolInfo.formatAmounts[dest.symbol === 'USDT' ? 1 : 0],
+        value: poolInfo.amounts[dest.symbol === 'USDT' ? 1 : 0],
       })
     }
   }, [pair, poolInfo])
@@ -153,7 +153,7 @@ const Swap: FC = () => {
             onFocus={() => setChange('src')}
           />
           <button className="token-input-pair-middleButton" onClick={handleSwitch}>
-            <SwitchOutline/>
+            <SwitchOutline />
           </button>
 
           <TokenInput
@@ -174,8 +174,11 @@ const Swap: FC = () => {
         <Field
           name={t`Trading Price`}
           loading={swap.loading}
-          value={src.symbol !== dest.symbol ? `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}` :
-            `1 ${src.symbol} = -- ${dest.symbol}`}
+          value={
+            src.symbol !== dest.symbol
+              ? `1 ${src.symbol} = ${swap?.amount?.finalFormat || '--'} ${dest.symbol}`
+              : `1 ${src.symbol} = -- ${dest.symbol}`
+          }
           tooltip={
             <>
               <h1>
@@ -198,9 +201,7 @@ const Swap: FC = () => {
             <div className={`${classPrefix}-trading-price-container`}>
               <ul>
                 <li>
-                  <span>
-                      {t`NEST Oracle Price`}
-                  </span>
+                  <span>{t`NEST Oracle Price`}</span>
                   <span>{`1 ${src.symbol} = ${swap?.amount?.oracleFormat || '--'} ${dest.symbol}`}</span>
                 </li>
 
@@ -253,7 +254,14 @@ const Swap: FC = () => {
             transactionType: TransactionType.Swap,
             token: [src.symbol, dest.symbol],
           }}
-          disabled={!src.amount || toBigNumber(src.amount).lte(0) || !swap.ratio || insufficient || insufficient2 || src.symbol === dest.symbol}
+          disabled={
+            !src.amount ||
+            toBigNumber(src.amount).lte(0) ||
+            !swap.ratio ||
+            insufficient ||
+            insufficient2 ||
+            src.symbol === dest.symbol
+          }
           onClick={async () => {
             try {
               await checkRisk(RiskAction.Swap)
@@ -267,7 +275,7 @@ const Swap: FC = () => {
         </TransactionButtonGroup>
       </Card>
     </section>
-  );
+  )
 
   const paths = useMemo(() => {
     if (swap.paths) {
@@ -290,9 +298,7 @@ const Swap: FC = () => {
             value={
               <>
                 {Object.keys(swap.swapInfo.fee).map((token) => (
-                  <div key={token}>
-                    {api?.Tokens[token].format(swap?.swapInfo?.fee[token] || '')} BNB
-                  </div>
+                  <div key={token}>{api?.Tokens[token].format(swap?.swapInfo?.fee[token] || '')} BNB</div>
                 ))}
               </>
             }

@@ -1,8 +1,8 @@
-import {useCallback, useEffect, useState} from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useSlippageTolerance from 'src/hooks/useSlippageTolerance'
 
-import {deadline, toBigNumber} from '../util'
-import useTransaction, {TransactionAddLiquidityContent, TransactionType} from './useTransaction'
+import { deadline, toBigNumber } from '../util'
+import useTransaction, { TransactionAddLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
 
 const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
@@ -38,7 +38,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
           return
         }
 
-        if (toBigNumber(content.token0.amount).gt(0) && content.token0.symbol !== 'USDT'){
+        if (toBigNumber(content.token0.amount).gt(0) && content.token0.symbol !== 'USDT') {
           const liquidity = toBigNumber(content.token0.amount).multipliedBy(swapInfo?.amountOut).div(poolInfo.nav)
 
           if (!liquidity.isNaN()) {
@@ -48,7 +48,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
           const newArgs = {
             pool: pair.address || '',
             token: pair.pair[0].address || '',
-            amountETH: "0",
+            amountETH: '0',
             amountToken: pair.pair[0].parse(content.token0.amount).toFixed(0),
             liquidity: liquidity.toFixed(6),
             liquidityMin: liquidity
@@ -56,8 +56,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: "0.005",
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber("0.005")).toFixed(0),
+            oracleCallFee: '0.005',
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
@@ -72,7 +72,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
           const newArgs = {
             pool: pair.address || '',
             token: pair.pair[1].address || '',
-            amountETH: "0",
+            amountETH: '0',
             amountToken: pair.pair[1].parse(content.token1.amount).toFixed(0),
             liquidity: liquidity.toFixed(6),
             liquidityMin: liquidity
@@ -80,8 +80,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: "0.005",
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber("0.005")).toFixed(0),
+            oracleCallFee: '0.005',
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
@@ -91,13 +91,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
         setArgs(undefined)
       }
     })()
-  }, [
-    api,
-    content.token0.amount,
-    content.token0.symbol,
-    content.token1.amount,
-    content.token1.symbol,
-  ])
+  }, [api, content.token0.amount, content.token0.symbol, content.token1.amount, content.token1.symbol])
 
   const handler = useCallback(async () => {
     return await push(

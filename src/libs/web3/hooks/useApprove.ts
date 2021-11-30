@@ -33,7 +33,7 @@ const useApprove = (content?: TransactionApproveContent) => {
     }
   }, [api, content?.token?.[0], content?.token?.[1], content?.transactionType])
 
-  // use true as default for a better expierence
+  // use true as default for a better experience
   const [allowance, setAllowance] = useState(true)
 
   const check = useCallback(async () => {

@@ -1,12 +1,12 @@
-import {Web3Provider} from '@ethersproject/providers'
-import CoFiXPair, {CoFiXPairProps} from './CoFiXPair'
-import CoFiXRouter, {CoFiXRouterProps} from './CoFiXRouter'
-import ERC20Token, {ERC20TokenProps} from './ERC20Token'
-import NestPriceFacade, {NestPriceFacadeProps} from './NestPriceFacade'
+import { Web3Provider } from '@ethersproject/providers'
+import CoFiXPair, { CoFiXPairProps } from './CoFiXPair'
+import CoFiXRouter, { CoFiXRouterProps } from './CoFiXRouter'
+import ERC20Token, { ERC20TokenProps } from './ERC20Token'
+import NestPriceFacade, { NestPriceFacadeProps } from './NestPriceFacade'
 import ETHToken from './ETHToken'
 import Token from './Token'
-import {toBigNumber} from '../util'
-import {BigNumberish} from 'ethers'
+import { toBigNumber } from '../util'
+import { BigNumberish } from 'ethers'
 import BigNumber from 'bignumber.js'
 
 export type SwapInfo = {
@@ -86,10 +86,9 @@ class API {
       }, Object.create(null)),
     }
 
-
     this.Contracts = {
       NestPriceFacade: new NestPriceFacade(this, props.NestPriceFacade),
-      CoFiXRouter: new CoFiXRouter(this, props.CoFiXRouter)
+      CoFiXRouter: new CoFiXRouter(this, props.CoFiXRouter),
     }
 
     const map: Record<string, Record<string, CoFiXPair>> = {}

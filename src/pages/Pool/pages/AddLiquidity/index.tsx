@@ -1,17 +1,17 @@
 import './styles'
 
-import {t, Trans} from '@lingui/macro'
-import {FC, useEffect, useState} from 'react'
-import {useHistory, useParams} from 'react-router-dom'
+import { t, Trans } from '@lingui/macro'
+import { FC, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import Card from 'src/components/Card'
 import Field from 'src/components/Field'
 import TokenInput from 'src/components/TokenInput'
 import useAddLiquidity from 'src/libs/web3/hooks/useAddLiquidity'
-import {TransactionType} from 'src/libs/web3/hooks/useTransaction'
+import { TransactionType } from 'src/libs/web3/hooks/useTransaction'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import TransactionButtonGroup from 'src/pages/shared/TransactionButtonGroup'
-import usePoolInfo from "../../../../hooks/usePoolInfo";
-import {PoolInfo} from "../../../../libs/web3/api/CoFiXPair";
+import usePoolInfo from '../../../../hooks/usePoolInfo'
+import { PoolInfo } from '../../../../libs/web3/api/CoFiXPair'
 
 const AddLiquidity: FC = () => {
   const history = useHistory()
@@ -20,10 +20,10 @@ const AddLiquidity: FC = () => {
     token1: string
   }>()
 
-  const {api} = useWeb3()
+  const { api } = useWeb3()
   const [symbol, setSymbol] = useState(params.token0)
   const [amount, setAmount] = useState('0')
-  const {info: poolInfo} = usePoolInfo<PoolInfo>(params.token0, params.token1)
+  const { info: poolInfo } = usePoolInfo<PoolInfo>(params.token0, params.token1)
 
   const [insufficient1, setInsufficient1] = useState(false)
 
@@ -49,8 +49,8 @@ const AddLiquidity: FC = () => {
   }
 
   const handleAddLiquidity = useAddLiquidity({
-    token0: {symbol: params.token0, amount: symbol === params.token0 ? amount : "0" },
-    token1: {symbol: params.token1, amount: symbol === params.token1 ? amount : "0" }
+    token0: { symbol: params.token0, amount: symbol === params.token0 ? amount : '0' },
+    token1: { symbol: params.token1, amount: symbol === params.token1 ? amount : '0' },
   })
 
   return (
@@ -67,9 +67,9 @@ const AddLiquidity: FC = () => {
         onInsufficientBalance={(i) => setInsufficient1(i)}
       />
 
-      <Field name={t`Current Net Worth`} value={poolInfo ? poolInfo.nav.toFormat(8) : '--'}/>
+      <Field name={t`Current Net Worth`} value={poolInfo ? poolInfo.nav.toFormat(8) : '--'} />
 
-      <Field name={t`Expected share`} value={`${handleAddLiquidity.liquidity || '--'}`}/>
+      <Field name={t`Expected share`} value={`${handleAddLiquidity.liquidity || '--'}`} />
 
       <TransactionButtonGroup
         approve={{
@@ -77,13 +77,10 @@ const AddLiquidity: FC = () => {
           token: [symbol[0], symbol[1] || symbol[0]],
         }}
         onClick={handleAddLiquidity.handler}
-        disabled={
-          insufficient1
-        }
+        disabled={insufficient1}
       >
         <Trans>Add Liquidity</Trans>
       </TransactionButtonGroup>
-
     </Card>
   )
 }

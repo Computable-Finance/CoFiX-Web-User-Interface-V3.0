@@ -1,9 +1,9 @@
 import './styles'
 
-import {FC} from 'react'
-import {Switch, Route, Redirect} from 'react-router-dom'
+import { FC } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import CollapseCard from 'src/components/CollapaseCard'
-import {Trans, t} from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 
 import loadable from '@loadable/component'
 
@@ -18,18 +18,18 @@ const Pool: FC = () => {
     <div className={`cofi-page ${classPrefix}`}>
       <Switch>
         <Route path="/pool" exact>
-          <Index/>
+          <Index />
         </Route>
 
         <Route path="/pool/add-liquidity/:token0/:token1?" exact>
-          <AddLiquidity/>
+          <AddLiquidity />
         </Route>
 
         <Route path="/pool/remove-liquidity/:token0/:token1?" exact>
-          <RemoveLiquidity/>
+          <RemoveLiquidity />
         </Route>
 
-        <Redirect to="/pool"/>
+        <Redirect to="/pool" />
       </Switch>
 
       <section>

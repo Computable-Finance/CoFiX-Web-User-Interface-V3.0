@@ -1,11 +1,11 @@
 import './styles'
 
-import {t, Trans} from '@lingui/macro'
-import {FC, useEffect, useRef, useState} from 'react'
+import { t, Trans } from '@lingui/macro'
+import { FC, useEffect, useRef, useState } from 'react'
 import Popup from 'reactjs-popup'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import {createContainer} from 'unstated-next'
+import { createContainer } from 'unstated-next'
 
 export enum RiskAction {
   Swap,
@@ -30,7 +30,7 @@ const container = createContainer(() => {
     setShow(true)
 
     return new Promise((resolve, reject) => {
-      setPromise({resolve, reject})
+      setPromise({ resolve, reject })
     })
   }
 
@@ -59,7 +59,7 @@ export const RiskModalProvider = container.Provider
 export const useRiskModal = container.useContainer
 
 const RiskModal: FC = () => {
-  const {action, approve, show, setShow} = useRiskModal()
+  const { action, approve, show, setShow } = useRiskModal()
   const [isReadSwap, setIsReadSwap] = useState(false)
   const [isReadPool, setIsReadPool] = useState(false)
   const [isReadRepurchase, setIsReadRepurchase] = useState(false)
@@ -80,7 +80,7 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
-                <input style={{ display: "none" }}/>
+                <input style={{ display: 'none' }} />
                 <Trans>
                   To enter the CoFiX 3.0 agreement, users/smart contracts participating in the transaction need to fully
                   understand the transaction rules and understand the following risks. Users who do not understand the
@@ -136,11 +136,13 @@ const RiskModal: FC = () => {
               </p>
             </section>
 
-            <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadSwap(e.target.checked)}/>
-              <label htmlFor="opt-in" className={"tips-info"}>
-                <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
-                  caused by the risks.</Trans>
+            <div className={'tips'}>
+              <input type="checkbox" className={'tips-checkbox'} onChange={(e) => setIsReadSwap(e.target.checked)} />
+              <label htmlFor="opt-in" className={'tips-info'}>
+                <Trans>
+                  I have read carefully and fully understand the above risks, and I am willing to bear the losses caused
+                  by the risks.
+                </Trans>
               </label>
             </div>
           </>
@@ -151,11 +153,11 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
-                <input style={{ display: "none" }}/>
+                <input style={{ display: 'none' }} />
                 <Trans>
                   To provide liquidity for the CoFiX 3.0 protocol (becoming an LP user/smart contract), it is necessary
-                  to fully understand the market-making rules and understand the following risks.
-                  Users who do not understand the rules or cannot bear the risks are not recommended to participate:
+                  to fully understand the market-making rules and understand the following risks. Users who do not
+                  understand the rules or cannot bear the risks are not recommended to participate:
                 </Trans>
               </p>
             </section>
@@ -222,10 +224,12 @@ const RiskModal: FC = () => {
               </p>
             </section>
 
-            <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadPool(e.target.checked)}/>
-              <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
-                caused by the risks.</Trans>
+            <div className={'tips'}>
+              <input type="checkbox" className={'tips-checkbox'} onChange={(e) => setIsReadPool(e.target.checked)} />
+              <Trans>
+                I have read carefully and fully understand the above risks, and I am willing to bear the losses caused
+                by the risks.
+              </Trans>
             </div>
           </>
         )
@@ -235,10 +239,11 @@ const RiskModal: FC = () => {
           <>
             <section>
               <p>
-                <input style={{ display: "none" }}/>
+                <input style={{ display: 'none' }} />
                 <Trans>
                   Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully
-                  understand the resale rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:
+                  understand the resale rules and understand the following risks. Users who do not understand the rules
+                  or cannot bear the risks are not recommended to participate:
                 </Trans>
               </p>
             </section>
@@ -289,11 +294,17 @@ const RiskModal: FC = () => {
                 </Trans>
               </p>
             </section>
-            <div className={"tips"}>
-              <input type="checkbox" className={"tips-checkbox"} onChange={(e) => setIsReadRepurchase(e.target.checked)}/>
-              <label htmlFor="opt-in" className={"tips-info"}>
-                <Trans>I have read carefully and fully understand the above risks, and I am willing to bear the losses
-                  caused by the risks.</Trans>
+            <div className={'tips'}>
+              <input
+                type="checkbox"
+                className={'tips-checkbox'}
+                onChange={(e) => setIsReadRepurchase(e.target.checked)}
+              />
+              <label htmlFor="opt-in" className={'tips-info'}>
+                <Trans>
+                  I have read carefully and fully understand the above risks, and I am willing to bear the losses caused
+                  by the risks.
+                </Trans>
               </label>
             </div>
           </>
@@ -308,11 +319,16 @@ const RiskModal: FC = () => {
   return (
     <Popup modal open={show} onClose={() => setShow(false)} ref={modal} closeOnDocumentClick={false}>
       <Card title={t`Risk Warning`} className={`${classPrefix}-card`}>
-        <div className={`${classPrefix}-card-content`}>
-          {content}
-        </div>
+        <div className={`${classPrefix}-card-content`}>{content}</div>
 
-        <Button block primary disabled={!(action === 0 && isReadSwap || action === 1 && isReadPool || action === 2 && isReadRepurchase)} onClick={() => approve(action)}>
+        <Button
+          block
+          primary
+          disabled={
+            !((action === 0 && isReadSwap) || (action === 1 && isReadPool) || (action === 2 && isReadRepurchase))
+          }
+          onClick={() => approve(action)}
+        >
           <Trans>Sure</Trans>
         </Button>
 

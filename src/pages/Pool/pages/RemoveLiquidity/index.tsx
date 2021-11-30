@@ -15,7 +15,7 @@ import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import useXToken from 'src/libs/web3/hooks/useXToken'
 import { toBigNumber } from 'src/libs/web3/util'
 import TransactionButtonGroup from 'src/pages/shared/TransactionButtonGroup'
-import TokenReceive from "../../../../components/TokenReceive";
+import TokenReceive from '../../../../components/TokenReceive'
 
 const RemoveLiquidity: FC = () => {
   const history = useHistory()
@@ -51,7 +51,7 @@ const RemoveLiquidity: FC = () => {
     }
   }, [api, params])
 
-  useEffect(()=> {
+  useEffect(() => {
     if (poolInfo?.xtokenTotalSupply.value) {
       setPercent(toBigNumber(amount).div(poolInfo?.xtokenTotalSupply.amount).toNumber())
     }
@@ -94,9 +94,9 @@ const RemoveLiquidity: FC = () => {
         }
       />
 
-      <Field name={t`Current Net Worth`} value={poolInfo ? poolInfo.nav.toFormat(8) : '--'}/>
+      <Field name={t`Current Net Worth`} value={poolInfo ? poolInfo.nav.toFormat(8) : '--'} />
 
-      <Field name={t`Pool total share`} value={poolInfo?.xtokenTotalSupply.amount.toFormat(8)}/>
+      <Field name={t`Pool total share`} value={poolInfo?.xtokenTotalSupply.amount.toFormat(8)} />
 
       <TransactionButtonGroup
         approve={{

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { toBigNumber, deadline } from '../util'
 import useTransaction, { TransactionRemoveLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
-import {ADDRESS_ZERO} from "../constants/constant";
+import { ADDRESS_ZERO } from '../constants/constant'
 
 const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
   const { api } = useWeb3()
@@ -47,7 +47,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
             {
               symbol: pair.pair[1].symbol,
               amount: pair.pair[1].format(token1AmountOut),
-            }
+            },
           ]
         } else {
           content.receive = [
@@ -66,7 +66,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           pool: pair.address || '',
           token: ADDRESS_ZERO,
           liquidity: liquidity.shiftedBy(18).toFixed(0),
-          amountETHMin: "0",
+          amountETHMin: '0',
           to: api.account || '',
           oracleCallFee: '0.005',
           sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
@@ -91,7 +91,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
         if (!args || !api) {
           return
         }
-        console.log( args.pool,args.token, args.liquidity, args.amountETHMin, args.to, deadline(), args.sendETHValue,)
+        console.log(args.pool, args.token, args.liquidity, args.amountETHMin, args.to, deadline(), args.sendETHValue)
         return api.Contracts.CoFiXRouter.contract?.removeLiquidityGetTokenAndETH(
           args.pool,
           args.token,

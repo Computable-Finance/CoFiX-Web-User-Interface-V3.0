@@ -1,19 +1,19 @@
 import './styles'
 
-import {t, Trans} from '@lingui/macro'
-import {FC, useState} from 'react'
+import { t, Trans } from '@lingui/macro'
+import { FC, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import {Link, useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import {Asset, BarGraphOutline, DollarOutline, Empty, Percent, PercentageSignOutline} from 'src/components/Icon'
+import { Asset, BarGraphOutline, DollarOutline, Empty, Percent, PercentageSignOutline } from 'src/components/Icon'
 import usePoolInfo from 'src/hooks/usePoolInfo'
 import useToken from 'src/hooks/useToken'
-import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
+import { PoolInfo } from 'src/libs/web3/api/CoFiXPair'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import PoolSelector from 'src/pages/shared/PoolSelector'
-import {RiskAction, useRiskModal} from "../../../shared/RiskModal";
-import {toBigNumber} from "../../../../libs/web3/util";
+import { RiskAction, useRiskModal } from '../../../shared/RiskModal'
+import { toBigNumber } from '../../../../libs/web3/util'
 
 const Item: FC<{
   Icon: typeof DollarOutline
@@ -35,7 +35,7 @@ const Item: FC<{
 
 const Pool: FC = () => {
   const { api } = useWeb3()
-  const {checkRisk} = useRiskModal()
+  const { checkRisk } = useRiskModal()
   const [pair, setPair] = useState(['NEST', 'USDT'])
   const { info: poolInfo } = usePoolInfo<PoolInfo>(pair[0], pair[1])
 
@@ -123,10 +123,9 @@ const Pool: FC = () => {
                 try {
                   await checkRisk(RiskAction.Pool)
                   history.push(`/pool/add-liquidity/${token0.symbol}/${token1.symbol}`)
-                }catch(_) {
+                } catch (_) {
                   // comment for eslint
                 }
-
               }}
             >
               <Trans>Add Liquidity</Trans>
@@ -142,20 +141,20 @@ const Pool: FC = () => {
                 <div className={`${classPrefix}-section`}>
                   <ul className={`${classPrefix}-ul`}>
                     <li>
-                      <Asset/>
+                      <Asset />
                       <div>
                         <span>
                           <Trans>My Share</Trans>
                         </span>
                         {poolInfo ? (
-                          <span>{poolInfo ? `${ poolInfo.xtokenBalance.amount.toFormat(8) }` : '--'}</span>
+                          <span>{poolInfo ? `${poolInfo.xtokenBalance.amount.toFormat(8)}` : '--'}</span>
                         ) : (
                           <Skeleton width={200} />
                         )}
                       </div>
                     </li>
                     <li>
-                      <Percent/>
+                      <Percent />
                       <div>
                         <span>
                           <Trans>Ratio</Trans>
@@ -172,7 +171,7 @@ const Pool: FC = () => {
               </Card>
             )}
 
-            {!poolInfo || poolInfo?.emptyLiquidity || poolInfo?.xtokenBalance.amount.lt(toBigNumber(0.00000001))  || (
+            {!poolInfo || poolInfo?.emptyLiquidity || poolInfo?.xtokenBalance.amount.lt(toBigNumber(0.00000001)) || (
               <Button block>
                 <Link to={`/pool/remove-liquidity/${token0.symbol}/${token1.symbol}`}>
                   <Trans>Remove Liquidity</Trans>
@@ -185,11 +184,7 @@ const Pool: FC = () => {
     </section>
   )
 
-  return (
-    <>
-      {sectionPairPool}
-    </>
-  )
+  return <>{sectionPairPool}</>
 }
 
 export default Pool

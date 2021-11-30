@@ -38,9 +38,10 @@ export const BSCT = {
   faucets: ['https://testnet.binance.org/faucet-smart'],
   explorers: [
     {
-      name: "testnet bscscan",
-      url: "https://testnet.bscscan.com",
-      standard: "https://testnet.bscscan.com"}
+      name: 'testnet bscscan',
+      url: 'https://testnet.bscscan.com',
+      standard: 'https://testnet.bscscan.com',
+    },
   ],
   infoURL: 'https://binance.com',
 }

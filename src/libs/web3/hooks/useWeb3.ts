@@ -6,10 +6,7 @@ import { Connector } from '../connectors'
 import { createContainer } from 'unstated-next'
 import { ERC20TokenWhitelist } from '../constants/tokens'
 import { CoFiXPairWhitelist } from '../constants/pairs'
-import {
-  CoFiXRouter,
-  NestPriceFacade,
-} from '../constants/contracts'
+import { CoFiXRouter, NestPriceFacade } from '../constants/contracts'
 
 const _useWeb3 = <T extends Web3Provider>() => {
   const core = useWeb3React<T>()
@@ -42,7 +39,7 @@ const _useWeb3 = <T extends Web3Provider>() => {
       CoFiXPairs: CoFiXPairWhitelist,
 
       NestPriceFacade: NestPriceFacade,
-      CoFiXRouter: CoFiXRouter
+      CoFiXRouter: CoFiXRouter,
     })
     api.init().then(async () => {
       setAPI(api)

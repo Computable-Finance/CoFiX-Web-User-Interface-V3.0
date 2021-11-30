@@ -26,7 +26,7 @@ export type PoolInfo = {
     value: BigNumber
     amount: BigNumber
     formatAmount: string
-  },
+  }
   k: BigNumber
   tokenAmount: BigNumber
 }
@@ -73,7 +73,7 @@ class CoFiXPair extends ERC20Token {
       return
     }
 
-    const config = await this.contract.getConfig();
+    const config = await this.contract.getConfig()
     this.theta = toBigNumber(config.theta)
     this.impactCostVOL = toBigNumber(config.impactCostVOL)
   }
@@ -87,13 +87,11 @@ class CoFiXPair extends ERC20Token {
 
     const { k, tokenAmount } = await this.queryOracle()
 
-    const [balances, pairBalance, pairTotalSupply] =
-      await Promise.all([
-        Promise.all([tokens[0].balanceOf(this.address), tokens[1].balanceOf(this.address)]),
-        this.balanceOf(this.api.account || ''),
-        this.totalSupply(),
-      ])
-
+    const [balances, pairBalance, pairTotalSupply] = await Promise.all([
+      Promise.all([tokens[0].balanceOf(this.address), tokens[1].balanceOf(this.address)]),
+      this.balanceOf(this.api.account || ''),
+      this.totalSupply(),
+    ])
 
     const amounts = [tokens[0].amount(balances[0] || 0), tokens[1].amount(balances[1] || 0)]
     const formatAmounts = [
@@ -144,14 +142,19 @@ class CoFiXPair extends ERC20Token {
         amount: pairTotalSupply.div(new BigNumber(10).pow(18)),
         formatAmount: pairTotalSupply.div(new BigNumber(10).pow(18)).toString(),
       },
-      k, tokenAmount,
+      k,
+      tokenAmount,
     }
 
     return this.poolInfo
   }
 
   async queryOracle() {
-    if (!this.address || !this.api.Contracts.NestPriceFacade.contract || !this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract) {
+    if (
+      !this.address ||
+      !this.api.Contracts.NestPriceFacade.contract ||
+      !this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract
+    ) {
       return {
         k: toBigNumber(0),
         tokenAmount: this.amount(await this.getValuePerETH()),
@@ -159,10 +162,9 @@ class CoFiXPair extends ERC20Token {
     }
 
     try {
-      const priceInfo = await this.api.Contracts.NestPriceFacade.contract["lastPriceListAndTriggeredPriceInfo(uint256,uint256)"](
-        1,
-        2
-      )
+      const priceInfo = await this.api.Contracts.NestPriceFacade.contract[
+        'lastPriceListAndTriggeredPriceInfo(uint256,uint256)'
+      ](1, 2)
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -216,7 +218,6 @@ class CoFiXPair extends ERC20Token {
         amountOut: amountOut,
         oracleFee: toBigNumber(0.005),
       }
-
     } else if (src === this.pair[0].symbol && dest === 'USDT') {
       let amountOut = amountIn.div(tokenAmount).multipliedBy(2000)
       const c = toBigNumber(

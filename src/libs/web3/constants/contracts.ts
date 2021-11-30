@@ -13,4 +13,3 @@ export const CoFiXRouter: CoFiXRouterProps = {
     [BSCT.chainId]: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84',
   },
 }
-
