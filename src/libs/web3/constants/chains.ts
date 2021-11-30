@@ -22,38 +22,12 @@ type Chain = {
   infoURL: string
 }
 
-export const Mainnet = {
-  name: 'BSC Mainnet',
-  chainId: 56,
-  shortName: 'bnb',
-  chain: 'BSC',
-  network: 'mainnet',
-  networkId: 56,
-  nativeCurrency: {
-    name: 'BNB',
-    symbol: 'BNB',
-    decimals: 18,
-  },
-  rpc: [
-    `https://bsc-dataseed.binance.org/`,
-  ],
-  faucets: [],
-  explorers: [
-    {
-      name: 'bscscan',
-      url: 'https://bscscan.com',
-      standard: 'EIP3091',
-    },
-  ],
-  infoURL: 'https://ethereum.org',
-}
-
-export const Testnet = {
-  name: 'BSC Testnet',
+export const Bnbt = {
+  name: 'Smart Chain - Testnet',
   chainId: 97,
   shortName: 'bnbt',
   chain: 'BSC',
-  network: 'testnet',
+  network: 'bnbt',
   networkId: 97,
   nativeCurrency: {
     name: 'BNB',
@@ -66,4 +40,4 @@ export const Testnet = {
   infoURL: 'https://github.com/ethereum/ropsten',
 }
 
-export const SupportedChains: Array<Chain> = [Mainnet, Testnet]
+export const SupportedChains: Array<Chain> = [Bnbt]

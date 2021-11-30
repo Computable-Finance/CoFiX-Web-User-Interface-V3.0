@@ -1,15 +1,14 @@
 import { TokenUSDT } from 'src/components/Icon'
 
 import { CoFiXPairProps } from '../api/CoFiXPair'
-import { Mainnet, Testnet } from './chains'
+import { Bnbt } from './chains'
 
 export const NESTUSDT: CoFiXPairProps = {
   symbol: 'NEST-USDT',
   Icon: TokenUSDT,
   pair: ['NEST', 'USDT'],
   addresses: {
-    [Mainnet.chainId]: '0x278f5d08bEa1989BEfcC09A20ad60fB39702D556',
-    [Testnet.chainId]: '0xF9e8D1C6Ed54295a4a630085E6D982a37d9d2f85',
+    [Bnbt.chainId]: '0xF9e8D1C6Ed54295a4a630085E6D982a37d9d2f85',
   },
   cofiAmountPerBlock: 3,
   cofiRewardPercentage: 0.9,

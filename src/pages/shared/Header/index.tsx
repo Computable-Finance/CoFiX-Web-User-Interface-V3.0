@@ -6,7 +6,7 @@ import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CoFiXLogoSmall, CoFiXLogoWithText, CoFiXVersion } from 'src/components/Icon'
 import Tag from 'src/components/Tag'
-import { Mainnet, SupportedChains } from 'src/libs/web3/constants/chains'
+import { SupportedChains } from 'src/libs/web3/constants/chains'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 import { MenuButton } from 'src/pages/shared/Menu'
 import WalletConnect from 'src/pages/shared/WalletConnect'
@@ -44,7 +44,7 @@ const Nav: FC = () => {
 const Header: FC = () => {
   const classPrefix = 'cofi-header'
   const { chainId } = useWeb3()
-  const chain = SupportedChains.find((c) => c.chainId === chainId && chainId !== Mainnet.chainId)
+  const chain = SupportedChains.find((c) => c.chainId === chainId)
 
   return (
     <div className="container">
