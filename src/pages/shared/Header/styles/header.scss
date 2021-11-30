@@ -43,7 +43,6 @@
     @include tablet {
       position: absolute;
       right: $space * 2;
-      top: $space;
       transform: translateY(-50%);
 
       display: flex;

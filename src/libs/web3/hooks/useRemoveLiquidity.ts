@@ -101,6 +101,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           deadline(),
           {
             value: args.sendETHValue,
+            gasLimit: 100000,
           }
         )
       }
