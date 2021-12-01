@@ -18,12 +18,12 @@ const useInactiveListener = (suppress = false) => {
 
     ethereum.on('chainChanged', ()=> {
       if (api?.chainId === 1 || api?.chainId === 4) {
-        window.location.href = "https://cofix.tech"
-      }
-      if (api?.chainId === 56) {
-        window.location.href = "https://bsc.cofix.tech"
-      }
-      if (api?.chainId === 97) {
+        window.location.href = 'https://cofix.tech'
+      } else if (api?.chainId === 56) {
+        window.location.href = 'https://bsc.cofix.tech'
+      } else if (api?.chainId === 97) {
+        refresh()
+      } else {
         refresh()
       }
     })
