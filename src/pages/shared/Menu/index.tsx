@@ -37,10 +37,10 @@ const Menu: FC<Props> = (props) => {
       content: <Trans>Community</Trans>,
     },
     {
-      id: 'switch-to-v2.1',
-      link: 'https://v21.cofix.tech',
+      id: 'switch-to-bsc-mainnet',
+      link: 'https://bsc.cofix.tech',
       icon: <Switch />,
-      content: <Trans>Switch to v2.1</Trans>,
+      content: <Trans>Switch to BSC</Trans>,
     },
   ]
 
@@ -91,7 +91,7 @@ const Menu: FC<Props> = (props) => {
         ))}
       </ul>
 
-      <div className="divider"></div>
+      <div className="divider"/>
 
       <ul className={`${classPrefix}-lang`}>
         {langs.map((l) => (
