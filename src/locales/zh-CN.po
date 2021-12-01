@@ -295,8 +295,8 @@ msgid "Swap Route"
 msgstr "交易路由"
 
 #: src/pages/shared/Menu/index.tsx
-msgid "Switch to BSC"
-msgstr "切换到 BSC"
+msgid "Switch to ETH"
+msgstr "切换到 ETH"
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx

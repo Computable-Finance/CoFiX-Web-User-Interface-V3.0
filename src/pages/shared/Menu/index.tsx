@@ -38,9 +38,9 @@ const Menu: FC<Props> = (props) => {
     },
     {
       id: 'switch-to-bsc-mainnet',
-      link: 'https://bsc.cofix.tech',
+      link: 'https://cofix.tech',
       icon: <Switch />,
-      content: <Trans>Switch to BSC</Trans>,
+      content: <Trans>Switch to ETH</Trans>,
     },
   ]
 

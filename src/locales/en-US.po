@@ -295,8 +295,8 @@ msgid "Swap Route"
 msgstr "Swap Route"
 
 #: src/pages/shared/Menu/index.tsx
-msgid "Switch to BSC"
-msgstr "Switch to BSC"
+msgid "Switch to ETH"
+msgstr "Switch to ETH"
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx
