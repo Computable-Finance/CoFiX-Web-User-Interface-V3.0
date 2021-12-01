@@ -16,16 +16,8 @@ msgid "1. In the CoFiX protocol, market making can enter unilateral assets. The 
 msgstr "1. 在 CoFiX 协议中做市可以打入单边资产，系统会根据当前资金池的净值，计算做市的份额，当价格在波动时会造成净值变化，可能存在无常损失，LP 一定要进行手动对冲才能减少或避免无常损失；"
 
 #: src/pages/shared/RiskModal/index.tsx
-msgid "1. The COFI price comes from the NEST oracle machine. Due to the characteristics of the blockchain itself, the actual settlement price may be different from the price displayed on this page, because the sale back code is executed using the effective price of the oracle at the time of the sale back;"
-msgstr "1. COFI 价格来源于NEST 预言机，由于区块链本身的特性实际结算价格可能与此页面显示的价格不同，因为回售代码在执行时，使用的是回售时刻预言机的生效价格；"
-
-#: src/pages/shared/RiskModal/index.tsx
 msgid "1. The price of the CoFiX 3.0 protocol comes from the NEST oracle, which will deviate from the centralized exchange;"
 msgstr "1. CoFiX 3.0 协议的价格来源于NEST预言机，会与中心化交易所存在偏差；"
-
-#: src/pages/shared/RiskModal/index.tsx
-msgid "2. After CoFiX V3.0, 0.1% of each transaction enters the DAO contract for resale. When the CoFIX transaction volume is too low, there will not be enough ETH in the DAO balance for resale;"
-msgstr "2. CoFiX V3.0 后 每笔交易的 0.1% 进入 DAO 合约进行回售，当 CoFIX 交易量过低时，DAO 余额中不会有太充分的ETH进行回售；"
 
 #: src/pages/shared/RiskModal/index.tsx
 msgid "2. The difference in the number of the two tokens in the CoFiX fund pool may be very large, and the market maker may not be able to withdraw the designated token when withdrawing liquidity;"
@@ -34,10 +26,6 @@ msgstr "2. CoFiX 的资金池中的 2 个 Token 的数量差距可能非常巨�
 #: src/pages/shared/RiskModal/index.tsx
 msgid "2. There is a spread between the actual exchange price of the transaction and the price of the NEST oracle, and the spread will increase the transaction cost. Therefore, the number of transactions obtained in CoFiX 3.0 may be less than in the exchange;"
 msgstr "2. 交易的实际兑换价格于NEST预言机的价格存在点差，点差会增加交易成本，因此在 CoFiX 3.0 中进行交易获得数量可能会比在交易所中少；"
-
-#: src/pages/shared/RiskModal/index.tsx
-msgid "3. CoFiX Dao sell-back quota is released according to the block, each block releases 500 COFI, and the sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait a few blocks before continuing to participate;"
-msgstr "3. CoFiX Dao 的回售额度按照区块释放，每个区块释放 500 COFI，回售额度有上限，如果已达到当前额度上限，则可能要等待几个区块后才能继续参与；"
 
 #: src/pages/shared/RiskModal/index.tsx
 msgid "3. The price of the oracle used in the calculation of the LP share may deviate from the exchange price to a certain extent, causing the expected share and the actual share to be inconsistent. The risk is more obvious when the NEST oracle quotes density is small, and the LP can choose after the NEST price takes effect (For example, within 20 blocks) to purchase or redeem to reduce the risk;"
@@ -56,16 +44,8 @@ msgid "4. In extreme cases, such as long-term pending transactions, CoFiX 3.0 wi
 msgstr "4. 在极端情况下，如长时间 pending 的交易，CoFiX 3.0 会出现交易失败，矿工费被以太坊系统收取，并不会退回。"
 
 #: src/pages/shared/RiskModal/index.tsx
-msgid "4. In order to ensure the safety of the system, when the COFI price fluctuates sharply, the resale may fail, and the failure of the resale will result in the loss of the miners fee and the oracle call fee;"
-msgstr "4. 为了保证系统安全性，当 COFI 价格剧烈波动时进行回售可能会失败，回售失败会损失矿工费和预言机调用费；"
-
-#: src/pages/shared/RiskModal/index.tsx
 msgid "5. Although the CoFiX protocol carries out some security controls, there may be undiscovered loopholes in external oracles and smart contracts, which may cause the transaction price to deviate from the market price extremely, resulting in losses."
 msgstr "5. 虽然 CoFiX 协议进行一些安全控制，但是外部预言机和智能合约可能存在未被发现的漏洞，可能会对交易价格极端偏离市场价，从而造成亏损。"
-
-#: src/pages/shared/RiskModal/index.tsx
-msgid "5. As the market price fluctuates, participating in the resale may not always be beneficial; smart contracts have been tested, but the contract code has inherent risks, please use it at your own risk"
-msgstr "5. 随着市场价格波动，参与回售可能并不总是有利；智能合约经过测试，但合约代码存在固有风险，使用时请风险自负"
 
 #: src/pages/shared/RiskModal/index.tsx
 msgid "5. The price of the CoFiX protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may have the risk of risk-free arbitrage (although the system model has been multi-layered protection), once the system has arbitrage risk , Will bring risks to all LPs;"
@@ -75,24 +55,14 @@ msgstr "5. CoFiX 协议的价格来源于 NEST 预言机，若预言机被攻击
 msgid "6. Once the smart contract hides the undiscovered bug, it will cause unexpected risks. Because the blockchain system itself has the characteristics of non-tampering, the bug may not be repairable, and all participating users/smart contracts need to understand the risk;"
 msgstr "6. 一旦智能合约隐藏了未发现的 bug，会造成意想不到的风险，因为区块链系统本身具有不可篡改的特性，该 bug 可能无法修复，所有参与的用户/智能合约都需要了解该风险；"
 
-#: src/pages/Repurchase/index.tsx
-msgid "About Repurchase"
-msgstr "关于回售"
-
-#: src/pages/Repurchase/index.tsx
-msgid "Accumulated repurchase in DAO (COFI)"
-msgstr "DAO 累计回售量（COFI）"
-
 #: src/libs/web3/hooks/useTransaction.ts
 #: src/libs/web3/hooks/useTransaction.ts
-#: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 msgid "Add Liquidity"
 msgstr "添加流动性"
 
-#: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
 #: src/pages/Pool/pages/Index/index.tsx
@@ -120,18 +90,6 @@ msgstr "单击下面的按钮连接到 CoFiX Dapp"
 #: src/pages/shared/TransactionModal/index.tsx
 msgid "Close"
 msgstr "关闭"
-
-#: src/pages/Repurchase/index.tsx
-msgid "CoFiX 3.0 has re-upgraded the fund pool. After the upgrade, all the handling fees are billed in ETH, and 0.1% of the transaction handling fee is entered into the DAO contract. After the upgrade, the DAO contract only displays the ETH balance. The USD anchor currency in the DAO contract is traded into ETH during the upgrade and placed in the DAO contract"
-msgstr "CoFiX 3.0 已重新升级资金池，升级后手续费全部使用 ETH 计费，交易手续费的 0.1% 进入 DAO 合约，升级后 DAO 合约只展示 ETH 余额，DAO 合约中的 USD 锚定币在升级时交易成 ETH，放到 DAO 合约中"
-
-#: src/pages/Pool/index.tsx
-msgid "CoFiX 3.0 newly upgraded the fund pool contract. After the upgrade, market makers will no longer receive mining rewards. The CoFiX 2.1 fund pool needs to be manually migrated to CoFiX 3.0 version. Please withdraw funds from the old version of the fund pool as soon as possible."
-msgstr "CoFiX 3.0 全新升级资金池合约，升级后做市商将不再获得挖矿奖励，CoFiX 2.1 的资金池需要手动迁移到 CoFiX 3.0 版本，请尽快从旧版资金池取出资金。"
-
-#: src/pages/Repurchase/index.tsx
-msgid "CoFiX DAO contract address:"
-msgstr "CoFiX DAO 合约地址："
 
 #: src/pages/Swap/index.tsx
 msgid "CoFiX Dapp is the most efficient Token Swap on Ethereum."
@@ -161,30 +119,10 @@ msgstr "连接 CoFiX"
 msgid "Connected"
 msgstr "已连接"
 
-#: src/pages/Repurchase/index.tsx
-msgid "Current Circulation (COFI)"
-msgstr "当前流通量（COFI）"
-
 #: src/pages/Pool/pages/AddLiquidity/index.tsx
 #: src/pages/Pool/pages/RemoveLiquidity/index.tsx
 msgid "Current Net Worth"
 msgstr "当前净值"
-
-#: src/pages/Repurchase/index.tsx
-msgid "Current Repurchase Price"
-msgstr "当前回售价格"
-
-#: src/pages/Repurchase/index.tsx
-msgid "Current available amount of repurchase"
-msgstr "当前可回售数量（COFI）"
-
-#: src/pages/Repurchase/index.tsx
-msgid "DAO balance"
-msgstr "DAO 余额"
-
-#: src/pages/Repurchase/index.tsx
-msgid "DAO balance（ETH）"
-msgstr "当前DAO余额（ETH）"
 
 #: src/pages/shared/WalletConnect/Status/Modal/index.tsx
 msgid "Disconnect"
@@ -194,21 +132,9 @@ msgstr "断开"
 msgid "Document"
 msgstr "文档"
 
-#: src/libs/web3/constants/anchor-pool.ts
-msgid "ETH Anchor"
-msgstr "ETH 锚定币"
-
 #: src/pages/Pool/pages/Index/index.tsx
 msgid "Empty Liquidity"
 msgstr "当前没有添加流动性"
-
-#: src/pages/shared/RiskModal/index.tsx
-msgid "Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully understand the resale rules and understand the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
-msgstr "进入 CoFiX 3.0 协议，参与回售的用户/智能合约，需要充分了解回售规则并明白以下风险，没有理解规则或不能承受风险的用户不建议参与："
-
-#: src/pages/Repurchase/index.tsx
-msgid "Estimated Receive:"
-msgstr "预计获得："
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx
@@ -239,7 +165,6 @@ msgstr "如何计算？"
 
 #: src/pages/shared/RiskModal/index.tsx
 #: src/pages/shared/RiskModal/index.tsx
-#: src/pages/shared/RiskModal/index.tsx
 msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
 msgstr "我已仔细阅读并充分理解以上风险，并愿意承担风险造成的损失。"
 
@@ -252,17 +177,8 @@ msgid "Includes Risk Compensation,Trading Fee and Price Impact"
 msgstr "包含做市风险补偿，交易费和价格冲击成本"
 
 #: src/pages/Pool/pages/AddLiquidity/index.tsx
-#: src/pages/Pool/pages/AddLiquidity/index.tsx
 msgid "Input"
 msgstr "输入"
-
-#: src/pages/Repurchase/index.tsx
-msgid "Input Repurchase Amount"
-msgstr "输入参与回售数量"
-
-#: src/pages/Pool/index.tsx
-msgid "Jump to the old version"
-msgstr "跳转至旧版"
 
 #: src/libs/web3/connectors/injected.tsx
 msgid "MetaMask"
@@ -338,9 +254,6 @@ msgid "Remove Liquidity"
 msgstr "移除流动性"
 
 #: src/libs/web3/hooks/useTransaction.ts
-#: src/pages/Repurchase/index.tsx
-#: src/pages/Repurchase/index.tsx
-#: src/pages/shared/Header/index.tsx
 msgid "Repurchase"
 msgstr "回售"
 
@@ -382,8 +295,8 @@ msgid "Swap Route"
 msgstr "交易路由"
 
 #: src/pages/shared/Menu/index.tsx
-msgid "Switch to v2.1"
-msgstr "切换到 v2.1"
+msgid "Switch to BSC"
+msgstr "切换到 BSC"
 
 #: src/pages/Swap/index.tsx
 #: src/pages/Swap/index.tsx
@@ -398,10 +311,6 @@ msgstr "资金总额（$）"
 #: src/pages/Swap/index.tsx
 msgid "The Trade Price is calculated based on the Decentralized NEST Oracle Price, the Computable Risk Compensation Coefficient, the Price Impact, and a Trading Fee. Trading Fee goes to all the COFI holders."
 msgstr "兑换价格基于去中心化预言机 NEST Oracle 提供价格，结合精确量化的风险补偿系数和额外的交易手续费计算得出。"
-
-#: src/pages/Pool/pages/Index/index.tsx
-msgid "The current fund pool is no longer mined"
-msgstr "当前资金池已不出矿"
 
 #: src/pages/Pool/pages/RemoveLiquidity/index.tsx
 msgid "The fund pool is priced in ETH, and the share * net value is the amount of ETH that can be received. The withdrawal of non-ETH currency needs to be converted according to the current exchange rate."
@@ -439,10 +348,6 @@ msgstr "交易已拒绝"
 #: src/pages/shared/TransactionModal/index.tsx
 msgid "Transaction Submitted"
 msgstr "交易已提交"
-
-#: src/pages/Swap/index.tsx
-msgid "Uniswap Price"
-msgstr "Uniswap 价格"
 
 #: src/libs/web3/hooks/useTransaction.ts
 msgid "Unsupported Content"
