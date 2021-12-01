@@ -169,7 +169,6 @@ class CoFiXPair extends ERC20Token {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const k = await this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract.calcRevisedK(
-        102739726027,
         priceInfo.prices[3],
         priceInfo.prices[2],
         priceInfo.prices[1],
