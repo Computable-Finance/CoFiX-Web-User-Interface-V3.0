@@ -115,6 +115,7 @@ export const MenuButton: FC<
   return (
     <Popup
       modal={props.modal}
+      position={"bottom right"}
       trigger={
         <button className="cofi-menu-button">
           <Ellipsis />
