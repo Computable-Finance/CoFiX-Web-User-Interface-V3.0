@@ -1,8 +1,16 @@
 # CoFiX-Web-User-Interface-V3.0
 
-CoFiX Web User Interface on BSC Testnet.
+CoFiX Web User Interface on BSC and Testnet.
 
 ## Chain information
+
+| name               | value                                 |
+| ------------------ | ------------------------------------- |
+| Network Name       | Smart Chain                           |
+| RPC URL            | https://bsc-dataseed.binance.org/     |
+| ChainID            | 56                                    | 
+| Symbol             | BNB                                   | 
+| Block Explorer URL | https://bscscan.com                   |
 
 | name               | value                                           |
 | ------------------ | ----------------------------------------------- |
