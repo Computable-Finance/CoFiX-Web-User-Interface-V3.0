@@ -22,6 +22,30 @@ type Chain = {
   infoURL: string
 }
 
+export const BSC = {
+  name: 'Smart Chain',
+  chainId: 56,
+  shortName: 'bsc',
+  chain: 'BSC',
+  network: 'BSC',
+  networkId: 56,
+  nativeCurrency: {
+    name: 'BNB',
+    symbol: 'BNB',
+    decimals: 18,
+  },
+  rpc: [`https://bsc-dataseed.binance.org/`],
+  faucets: [],
+  explorers: [
+    {
+      name: 'bscscan',
+      url: 'https://bscscan.com',
+      standard: 'EIP3091',
+    },
+  ],
+  infoURL: 'https://binance.org',
+}
+
 export const BSCT = {
   name: 'Smart Chain - Testnet',
   chainId: 97,
@@ -35,7 +59,7 @@ export const BSCT = {
     decimals: 18,
   },
   rpc: [`https://data-seed-prebsc-1-s1.binance.org:8545/`],
-  faucets: ['https://testnet.binance.org/faucet-smart'],
+  faucets: [],
   explorers: [
     {
       name: 'testnet bscscan',
@@ -46,4 +70,5 @@ export const BSCT = {
   infoURL: 'https://binance.com',
 }
 
-export const SupportedChains: Array<Chain> = [BSCT]
+export const SupportedChains: Array<Chain> = [BSC, BSCT]
+
