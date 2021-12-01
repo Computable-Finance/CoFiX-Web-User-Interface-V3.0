@@ -9,9 +9,7 @@ import useEagerConnect from './hooks/useEagerConnect'
 import useInactiveListener from './hooks/useInactiveListener'
 
 function getLibrary(provider: any): TypeWeb3Provider {
-  const library = new ethers.providers.Web3Provider(provider)
-
-  return library
+  return new ethers.providers.Web3Provider(provider)
 }
 
 const Inner: FC = ({ children }) => {

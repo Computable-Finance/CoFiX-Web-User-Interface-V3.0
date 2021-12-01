@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import useWeb3 from './useWeb3'
 
 const useInactiveListener = (suppress = false) => {
-  const { active, error, activate, refresh } = useWeb3()
+  const { active, error, activate, refresh, api } = useWeb3()
 
   useEffect(() => {
     const { ethereum } = window
@@ -16,7 +16,17 @@ const useInactiveListener = (suppress = false) => {
       return
     }
 
-    ethereum.on('chainChanged', refresh)
+    ethereum.on('chainChanged', ()=> {
+      if (api?.chainId === 1 || api?.chainId === 4) {
+        window.location.href = "https://cofix.tech"
+      }
+      if (api?.chainId === 56) {
+        window.location.href = "https://bsc.cofix.tech"
+      }
+      if (api?.chainId === 97) {
+        refresh()
+      }
+    })
     ethereum.on('accountsChanged', refresh)
 
     return () => {
