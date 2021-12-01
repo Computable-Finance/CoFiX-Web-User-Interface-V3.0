@@ -72,7 +72,6 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
           receive: content.receive,
         }
-        console.log(newArgs)
 
         if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
           setArgs(newArgs)
@@ -91,7 +90,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
         if (!args || !api) {
           return
         }
-        console.log(args.pool, args.token, args.liquidity, args.amountETHMin, args.to, deadline(), args.sendETHValue)
+
         return api.Contracts.CoFiXRouter.contract?.removeLiquidityGetTokenAndETH(
           args.pool,
           args.token,

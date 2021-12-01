@@ -10,7 +10,6 @@ import { createContainer } from 'unstated-next'
 export enum RiskAction {
   Swap,
   Pool,
-  Repurchase,
 }
 
 const container = createContainer(() => {
@@ -62,7 +61,6 @@ const RiskModal: FC = () => {
   const { action, approve, show, setShow } = useRiskModal()
   const [isReadSwap, setIsReadSwap] = useState(false)
   const [isReadPool, setIsReadPool] = useState(false)
-  const [isReadRepurchase, setIsReadRepurchase] = useState(false)
   const modal = useRef<any>()
 
   useEffect(() => {
@@ -234,82 +232,6 @@ const RiskModal: FC = () => {
           </>
         )
 
-      case RiskAction.Repurchase:
-        return (
-          <>
-            <section>
-              <p>
-                <input style={{ display: 'none' }} />
-                <Trans>
-                  Entering the CoFiX 3.0 agreement, users/smart contracts participating in the resale need to fully
-                  understand the resale rules and understand the following risks. Users who do not understand the rules
-                  or cannot bear the risks are not recommended to participate:
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
-                  1. The COFI price comes from the NEST oracle machine. Due to the characteristics of the blockchain
-                  itself, the actual settlement price may be different from the price displayed on this page, because
-                  the sale back code is executed using the effective price of the oracle at the time of the sale back;
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
-                  2. After CoFiX V3.0, 0.1% of each transaction enters the DAO contract for resale. When the CoFIX
-                  transaction volume is too low, there will not be enough ETH in the DAO balance for resale;
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
-                  3. CoFiX Dao sell-back quota is released according to the block, each block releases 500 COFI, and the
-                  sell-back quota has an upper limit. If the current quota limit has been reached, you may have to wait
-                  a few blocks before continuing to participate;
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
-                  4. In order to ensure the safety of the system, when the COFI price fluctuates sharply, the resale may
-                  fail, and the failure of the resale will result in the loss of the miners fee and the oracle call fee;
-                </Trans>
-              </p>
-            </section>
-
-            <section>
-              <p>
-                <Trans>
-                  5. As the market price fluctuates, participating in the resale may not always be beneficial; smart
-                  contracts have been tested, but the contract code has inherent risks, please use it at your own risk
-                </Trans>
-              </p>
-            </section>
-            <div className={'tips'}>
-              <input
-                type="checkbox"
-                className={'tips-checkbox'}
-                onChange={(e) => setIsReadRepurchase(e.target.checked)}
-              />
-              <label htmlFor="opt-in" className={'tips-info'}>
-                <Trans>
-                  I have read carefully and fully understand the above risks, and I am willing to bear the losses caused
-                  by the risks.
-                </Trans>
-              </label>
-            </div>
-          </>
-        )
-
       default:
         return <></>
     }
@@ -325,7 +247,7 @@ const RiskModal: FC = () => {
           block
           primary
           disabled={
-            !((action === 0 && isReadSwap) || (action === 1 && isReadPool) || (action === 2 && isReadRepurchase))
+            !((action === 0 && isReadSwap) || (action === 1 && isReadPool))
           }
           onClick={() => approve(action)}
         >
