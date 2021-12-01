@@ -91,7 +91,7 @@ const Menu: FC<Props> = (props) => {
         ))}
       </ul>
 
-      <div className="divider"></div>
+      <div className="divider"/>
 
       <ul className={`${classPrefix}-lang`}>
         {langs.map((l) => (
@@ -115,6 +115,7 @@ export const MenuButton: FC<
   return (
     <Popup
       modal={props.modal}
+      position={"bottom right"}
       trigger={
         <button className="cofi-menu-button">
           <Ellipsis />
