@@ -14,6 +14,7 @@ type Props = {
 
 const Modal: FC<Props> = (props) => {
   const { activate } = useWeb3()
+  const { ethereum } = window
 
   const classPrefix = 'cofi-wallet-connect-button-modal'
 
@@ -31,7 +32,63 @@ const Modal: FC<Props> = (props) => {
 
       <ul>
         {SupportedConnectors.map((p) => (
-          <li key={p.id} onClick={() => activate(p)}>
+          <li key={p.id} onClick={ async () => {
+              const chainId = await ethereum.request({method: 'eth_chainId'})
+              if (chainId === '0x38' || chainId === '0x61'){
+                activate(p)
+              } else {
+                try {
+                  await ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x38' }],
+                  });
+                  activate(p);
+                } catch (switchError) {
+                  if (switchError.code === 4902) {
+                    try {
+                      await ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                          {
+                            chainId: '0x38',
+                            chainName: 'Smart Chain',
+                            nativeCurrency: {
+                              name: 'BNB',
+                              symbol: 'BNB',
+                              decimals: 18,
+                            },
+                            blockExplorerUrls: ['https://bscscan.com'],
+                            rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                          }
+                        ],
+                      });
+                    } catch (addError) {
+                      console.log(addError)
+                    }
+                    try {
+                      await ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                          {
+                            chainId: '0x61',
+                            chainName: 'Smart Chain - Testnet',
+                            nativeCurrency: {
+                              name: 'BNB',
+                              symbol: 'BNB',
+                              decimals: 18,
+                            },
+                            blockExplorerUrls: ['https://testnet.bscscan.com'],
+                            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+                          }
+                        ],
+                      });
+                    } catch (addError) {
+                      console.log(addError)
+                    }
+                  }
+                }
+              }
+          }}>
             <Button className={`${classPrefix}-button`}>
               <p.Icon />
 

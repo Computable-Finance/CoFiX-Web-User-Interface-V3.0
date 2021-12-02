@@ -32,7 +32,7 @@ const _useWeb3 = <T extends Web3Provider>() => {
   useEffect(() => {
     const api = new API({
       provider: core.library as any,
-      chainId: core.chainId || 56,
+      chainId: core.chainId,
       account: core.account || undefined,
 
       ERC20Tokens: ERC20TokenWhitelist,
