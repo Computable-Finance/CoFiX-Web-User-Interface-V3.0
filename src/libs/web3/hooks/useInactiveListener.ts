@@ -16,7 +16,16 @@ const useInactiveListener = (suppress = false) => {
       return
     }
 
-    ethereum.on('chainChanged', refresh)
+    ethereum.on('chainChanged', async () => {
+      const chainId = await ethereum.request({ method: 'eth_chainId' })
+      if (chainId === '0x38' || chainId === '0x61') {
+        refresh()
+      } else if (chainId === '0x1' || chainId === '0x4'){
+        window.location.href = 'https://cofix.tech'
+      } else {
+        refresh()
+      }
+    })
     ethereum.on('accountsChanged', refresh)
 
     return () => {
