@@ -14,6 +14,7 @@ type Props = {
 
 const Modal: FC<Props> = (props) => {
   const { activate } = useWeb3()
+  const { ethereum } = window
 
   const classPrefix = 'cofi-wallet-connect-button-modal'
 
@@ -31,7 +32,26 @@ const Modal: FC<Props> = (props) => {
 
       <ul>
         {SupportedConnectors.map((p) => (
-          <li key={p.id} onClick={() => activate(p)}>
+          <li key={p.id} onClick={async() => {
+            if (p.id === 'metamask') {
+              const chainId = await ethereum.request({method: 'eth_chainId'})
+              if (chainId === '0x1' || chainId === '0x4') {
+                activate(p)
+              } else {
+                try {
+                  await ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{chainId: '0x1'}],
+                  });
+                  activate(p);
+                } catch (switchError) {
+                  console.log(switchError)
+                }
+              }
+            } else {
+              activate(p)
+            }
+          }}>
             <Button className={`${classPrefix}-button`}>
               <p.Icon />
 
