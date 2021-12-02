@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import useWeb3 from './useWeb3'
 
 const useInactiveListener = (suppress = false) => {
-  const { active, error, activate, refresh, api } = useWeb3()
+  const { active, error, activate, refresh } = useWeb3()
 
   useEffect(() => {
     const { ethereum } = window
@@ -16,13 +16,12 @@ const useInactiveListener = (suppress = false) => {
       return
     }
 
-    ethereum.on('chainChanged', ()=> {
-      if (api?.chainId === 1 || api?.chainId === 4) {
+    ethereum.on('chainChanged', async () => {
+      const chainId = await ethereum.request({ method: 'eth_chainId' })
+      if (chainId === '0x1' || chainId === '0x4') {
         refresh()
-      } else if (api?.chainId === 56) {
-        window.location.href = "https://bsc.cofix.tech"
-      } else if (api?.chainId === 97) {
-        window.location.href = "https://bsct.cofix.tech"
+      } else if (chainId === '0x38' || chainId === '0x61'){
+        window.location.href = 'https://bsc.cofix.tech'
       } else {
         refresh()
       }
