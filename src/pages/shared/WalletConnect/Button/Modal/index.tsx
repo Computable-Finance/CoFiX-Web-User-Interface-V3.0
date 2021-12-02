@@ -1,11 +1,11 @@
 import './styles'
 
-import { Trans } from '@lingui/macro'
-import { FC } from 'react'
+import {Trans} from '@lingui/macro'
+import {FC} from 'react'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import { CoFiXLogo } from 'src/components/Icon'
-import { SupportedConnectors } from 'src/libs/web3/connectors'
+import {CoFiXLogo} from 'src/components/Icon'
+import {SupportedConnectors} from 'src/libs/web3/connectors'
 import useWeb3 from 'src/libs/web3/hooks/useWeb3'
 
 type Props = {
@@ -13,14 +13,14 @@ type Props = {
 }
 
 const Modal: FC<Props> = (props) => {
-  const { activate } = useWeb3()
-  const { ethereum } = window
+  const {activate} = useWeb3()
+  const {ethereum} = window
 
   const classPrefix = 'cofi-wallet-connect-button-modal'
 
   return (
     <Card closable className={`${classPrefix}`} onClose={props.onClose}>
-      <CoFiXLogo />
+      <CoFiXLogo/>
 
       <div className={`${classPrefix}-title`}>
         <Trans>Connect to CoFiX</Trans>
@@ -32,15 +32,16 @@ const Modal: FC<Props> = (props) => {
 
       <ul>
         {SupportedConnectors.map((p) => (
-          <li key={p.id} onClick={ async () => {
+          <li key={p.id} onClick={async () => {
+            if (p.id === 'metamask') {
               const chainId = await ethereum.request({method: 'eth_chainId'})
-              if (chainId === '0x38' || chainId === '0x61'){
+              if (chainId === '0x38' || chainId === '0x61') {
                 activate(p)
               } else {
                 try {
                   await ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x38' }],
+                    params: [{chainId: '0x38'}],
                   });
                   activate(p);
                 } catch (switchError) {
@@ -88,9 +89,12 @@ const Modal: FC<Props> = (props) => {
                   }
                 }
               }
+            } else {
+              activate(p)
+            }
           }}>
             <Button className={`${classPrefix}-button`}>
-              <p.Icon />
+              <p.Icon/>
 
               {p.name}
             </Button>
