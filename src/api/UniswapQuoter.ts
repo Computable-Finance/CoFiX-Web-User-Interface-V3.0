@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
-import { BigNumberish } from 'ethers'
-import { UniswapQuoter__factory, UniswapQuoter as TypeUniswapQuoter } from 'src/abis/types/uniswap'
-import API from '.'
-import Contract, { ContractProps } from './Contract'
+import {BigNumberish} from 'ethers'
+import {UniswapQuoter as TypeUniswapQuoter, UniswapQuoter__factory} from 'src/abis/types/uniswap'
+import API from './index'
+import Contract, {ContractProps} from './Contract'
 
 export type UniswapQuoterProps = ContractProps
 
@@ -22,8 +22,7 @@ class UniswapQuoter extends Contract {
       return new BigNumber(0)
     }
 
-    const value = await this.contract.callStatic.quoteExactInputSingle(tokenIn, tokenOut, 500, amountIn, 0)
-    return value
+    return await this.contract.callStatic.quoteExactInputSingle(tokenIn, tokenOut, 500, amountIn, 0)
   }
 
   async quoteExactOutputSingle(tokenIn: string, tokenOut: string, amountOut: BigNumberish) {
@@ -31,8 +30,7 @@ class UniswapQuoter extends Contract {
       return new BigNumber(0)
     }
 
-    const value = await this.contract.callStatic.quoteExactOutputSingle(tokenIn, tokenOut, 500, amountOut, 0)
-    return value
+    return await this.contract.callStatic.quoteExactOutputSingle(tokenIn, tokenOut, 500, amountOut, 0)
   }
 }
 

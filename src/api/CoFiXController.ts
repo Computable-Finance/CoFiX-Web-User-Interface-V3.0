@@ -1,5 +1,5 @@
 import { CoFiXController__factory, CoFiXController as TypeCoFiXController } from 'src/abis/types/cofix'
-import API from '.'
+import API from './index'
 import Contract, { ContractProps } from './Contract'
 
 export type CoFiXControllerProps = ContractProps

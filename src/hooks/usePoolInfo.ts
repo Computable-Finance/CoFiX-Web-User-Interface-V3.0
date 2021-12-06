@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { PoolInfo } from 'src/libs/web3/api/CoFiXPair'
+import useWeb3 from 'src/hooks/useWeb3'
+import { PoolInfo } from 'src/api/CoFiXPair'
 import useInterval from '@use-it/interval'
-import { AnchorPoolInfo } from 'src/libs/web3/api/CoFiXAnchorPool'
+import { AnchorPoolInfo } from 'src/api/CoFiXAnchorPool'
 
 const usePoolInfo = <T extends PoolInfo | AnchorPoolInfo>(token0: string, token1?: string) => {
   const { api } = useWeb3()

@@ -10,7 +10,7 @@ import {
   getTransactionTitle,
   Transaction,
   TransactionReceiptStatus,
-} from 'src/libs/web3/hooks/useTransaction'
+} from 'src/hooks/useTransaction'
 
 type Props = {
   transaction: Transaction

@@ -6,13 +6,13 @@ import {useHistory, useParams} from 'react-router-dom'
 import Card from 'src/components/Card'
 import Field from 'src/components/Field'
 import TokenInput from 'src/components/TokenInput'
-import useAddLiquidity from 'src/libs/web3/hooks/useAddLiquidity'
-import {TransactionType} from 'src/libs/web3/hooks/useTransaction'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import {toBigNumber} from 'src/libs/web3/util'
+import useAddLiquidity from 'src/hooks/useAddLiquidity'
+import {TransactionType} from 'src/hooks/useTransaction'
+import useWeb3 from 'src/hooks/useWeb3'
+import {toBigNumber} from 'src/utils/util'
 import TransactionButtonGroup from 'src/pages/shared/TransactionButtonGroup'
 import usePoolInfo from "../../../../hooks/usePoolInfo";
-import {PoolInfo} from "../../../../libs/web3/api/CoFiXPair";
+import {PoolInfo} from "../../../../api/CoFiXPair";
 import Button from "../../../../components/Button";
 
 const AddLiquidity: FC = () => {

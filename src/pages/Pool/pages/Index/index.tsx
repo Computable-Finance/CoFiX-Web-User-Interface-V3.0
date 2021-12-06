@@ -9,11 +9,11 @@ import Card from 'src/components/Card'
 import {Asset, BarGraphOutline, DollarOutline, Empty, Percent, PercentageSignOutline} from 'src/components/Icon'
 import usePoolInfo from 'src/hooks/usePoolInfo'
 import useToken from 'src/hooks/useToken'
-import {PoolInfo} from 'src/libs/web3/api/CoFiXPair'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import {PoolInfo} from 'src/api/CoFiXPair'
+import useWeb3 from 'src/hooks/useWeb3'
 import PoolSelector from 'src/pages/shared/PoolSelector'
 import {RiskAction, useRiskModal} from "../../../shared/RiskModal";
-import {toBigNumber} from "../../../../libs/web3/util";
+import {toBigNumber} from "../../../../utils/util";
 
 const Item: FC<{
   Icon: typeof DollarOutline

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { DAOInfo } from 'src/libs/web3/api/CoFixDAO'
+import useWeb3 from 'src/hooks/useWeb3'
+import { DAOInfo } from 'src/api/CoFixDAO'
 import useInterval from '@use-it/interval'
 
 const useDAOInfo = () => {

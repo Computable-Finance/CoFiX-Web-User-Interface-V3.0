@@ -1,17 +1,15 @@
-import { FC } from 'react'
+import {FC} from 'react'
 
-import { Web3ReactProvider } from '@web3-react/core'
-import { Web3Provider as TypeWeb3Provider } from '@ethersproject/providers'
-import { Provider as Web3Provider } from './hooks/useWeb3'
-import { Provider as TransactionProvider } from './hooks/useTransaction'
+import {Web3ReactProvider} from '@web3-react/core'
+import {Web3Provider as TypeWeb3Provider} from '@ethersproject/providers'
+import {Provider as Web3Provider} from './hooks/useWeb3'
+import {Provider as TransactionProvider} from './hooks/useTransaction'
 import * as ethers from 'ethers'
 import useEagerConnect from './hooks/useEagerConnect'
 import useInactiveListener from './hooks/useInactiveListener'
 
 function getLibrary(provider: any): TypeWeb3Provider {
-  const library = new ethers.providers.Web3Provider(provider)
-
-  return library
+  return new ethers.providers.Web3Provider(provider)
 }
 
 const Inner: FC = ({ children }) => {

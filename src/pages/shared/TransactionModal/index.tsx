@@ -7,7 +7,7 @@ import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import { FailOutline, Loading, SuccessOutline } from 'src/components/Icon'
 import useEtherScanHost from 'src/hooks/useEtherScanHost'
-import useTransaction, { TransactionStatus } from 'src/libs/web3/hooks/useTransaction'
+import useTransaction, { TransactionStatus } from 'src/hooks/useTransaction'
 
 const TransactionModal: FC = () => {
   const { showModal, closeModal, current } = useTransaction()

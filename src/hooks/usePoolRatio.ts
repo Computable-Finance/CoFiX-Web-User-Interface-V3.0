@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 
 const usePoolRatio = (token0: string, token1: string) => {
   const { api } = useWeb3()

@@ -5,8 +5,8 @@ import { FC } from 'react'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import { CoFiXLogo } from 'src/components/Icon'
-import { SupportedConnectors } from 'src/libs/web3/connectors'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import { SupportedConnectors } from 'src/connectors'
+import useWeb3 from 'src/hooks/useWeb3'
 
 type Props = {
   onClose?: () => void

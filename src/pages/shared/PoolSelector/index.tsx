@@ -10,8 +10,8 @@ import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import { ArrowDownOutline } from 'src/components/Icon'
 import useToken from 'src/hooks/useToken'
-import CoFiXPair from 'src/libs/web3/api/CoFiXPair'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import CoFiXPair from 'src/api/CoFiXPair'
+import useWeb3 from 'src/hooks/useWeb3'
 
 type Props = {
   symbol: Array<string>

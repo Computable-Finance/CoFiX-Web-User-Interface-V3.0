@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 import BigNumber from 'bignumber.js'
 import useInterval from '@use-it/interval'
 

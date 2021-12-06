@@ -12,8 +12,8 @@ import useTransaction, {
   TransactionReceiptStatus,
   TransactionStatus,
   TransactionType,
-} from 'src/libs/web3/hooks/useTransaction'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+} from 'src/hooks/useTransaction'
+import useWeb3 from 'src/hooks/useWeb3'
 
 type Props = { onClose?: () => void }
 

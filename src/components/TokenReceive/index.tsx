@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import {QuestionOutline, TokenXToken} from 'src/components/Icon'
 import useToken from 'src/hooks/useToken'
 import usePoolInfo from "../../hooks/usePoolInfo";
-import {PoolInfo} from "../../libs/web3/api/CoFiXPair";
+import {PoolInfo} from "../../api/CoFiXPair";
 import Popup from "reactjs-popup";
 
 type Props = {

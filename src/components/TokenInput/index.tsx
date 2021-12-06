@@ -12,8 +12,8 @@ import { ArrowDownOutline, TokenXToken } from 'src/components/Icon'
 import useGasFee from 'src/hooks/useGasFee'
 import useToken from 'src/hooks/useToken'
 import useTokenBalance from 'src/hooks/useTokenBalance'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { toBigNumber } from 'src/libs/web3/util'
+import useWeb3 from 'src/hooks/useWeb3'
+import { toBigNumber } from 'src/utils/util'
 
 import Modal from './Modal'
 
@@ -223,8 +223,8 @@ const TokenInput: FC<Props> = ({ ...props }) => {
               className={`${classPrefix}-input`}
               value={value}
               onChange={handleInput}
-              placeholder={props.editable === false ? '--' : '0.0'}
-              disabled={props.editable === false}
+              placeholder={!props.editable ? '--' : '0.0'}
+              disabled={!props.editable}
               style={{
                 display: props.loading || shouldShowBalanceLoading ? 'none' : 'unset',
               }}

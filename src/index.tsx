@@ -4,8 +4,8 @@ import 'src/components/Icon'
 import BigNumber from 'bignumber.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import I18nProvider from 'src/libs/i18n/provider'
-import Web3Provider from 'src/libs/web3/provider'
+import Provider from 'src/provider'
+import I18nProvider from 'src/i18n'
 
 import App from './pages/App'
 import { RiskModalProvider } from './pages/shared/RiskModal'
@@ -15,11 +15,11 @@ export const rootElement = document.getElementById('root')
 const app = (
   <React.StrictMode>
     <I18nProvider>
-      <Web3Provider>
+      <Provider>
         <RiskModalProvider>
           <App />
         </RiskModalProvider>
-      </Web3Provider>
+      </Provider>
     </I18nProvider>
   </React.StrictMode>
 )

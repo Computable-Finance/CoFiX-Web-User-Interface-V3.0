@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 
 import Button from './Button'
 import Status from './Status'

@@ -1,7 +1,7 @@
 import { CoFiXVaultForStaking__factory, CoFiXVaultForStaking as TypeCoFiXVaultForStaking } from 'src/abis/types/cofix'
-import API from '.'
+import API from './index'
 import Contract, { ContractProps } from './Contract'
-import { toBigNumber } from '../util'
+import { toBigNumber } from '../utils/util'
 
 export type CoFiXVaultForStakingProps = ContractProps
 

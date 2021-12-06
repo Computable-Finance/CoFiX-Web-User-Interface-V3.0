@@ -1,7 +1,7 @@
 import { CoFiXDAO__factory, CoFiXDAO as TypeCoFiXDAO } from 'src/abis/types/cofix'
-import API from '.'
+import API from './index'
 import Contract, { ContractProps } from './Contract'
-import { toBigNumber } from '../util'
+import { toBigNumber } from '../utils/util'
 import BigNumber from 'bignumber.js'
 import { ADDRESS_ZERO } from '../constants/constant'
 

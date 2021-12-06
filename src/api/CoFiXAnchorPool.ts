@@ -1,11 +1,11 @@
 import { CoFiXAnchorPool__factory, CoFiXAnchorPool as TypeCoFiXAnchorPool } from 'src/abis/types/cofix'
 import { TokenXToken } from 'src/components/Icon'
-import API from '.'
+import API from '../api'
 import { ADDRESS_ZERO, BLOCK_DAILY, TIME_TO_NEXT_BLOCK } from '../constants/constant'
 import Contract, { ContractProps } from './Contract'
 import ERC20Token from './ERC20Token'
 import BigNumber from 'bignumber.js'
-import { toBigNumber } from '../util'
+import { toBigNumber } from '../utils/util'
 import { BigNumberish } from 'ethers'
 
 export type CoFiXAnchorPoolProps = ContractProps & {
