@@ -4,7 +4,7 @@ import './styles'
 import Card from 'src/components/Card'
 import { t } from '@lingui/macro'
 import { useState } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 import Button from 'src/components/Button'
 import { useMemo } from 'react'
 
@@ -59,11 +59,9 @@ const Modal: FC<Props> = (props) => {
             return false
           }
 
-          if (t.address.toLowerCase().indexOf(search.toLowerCase()) > -1) {
-            return true
-          }
+          return t.address.toLowerCase().indexOf(search.toLowerCase()) > -1;
 
-          return false
+
         }).map((t) => (
           <li key={t.symbol}>
             <Button className={`${classPrefix}-button`} onClick={handleSelect(t.symbol)}>

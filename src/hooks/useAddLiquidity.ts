@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import useSlippageTolerance from 'src/hooks/useSlippageTolerance'
 
-import { deadline, toBigNumber } from '../util'
+import { deadline, toBigNumber } from '../utils/util'
 import useTransaction, { TransactionAddLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
 

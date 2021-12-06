@@ -12,8 +12,8 @@ import { ArrowDownOutline, TokenXToken } from 'src/components/Icon'
 import useGasFee from 'src/hooks/useGasFee'
 import useToken from 'src/hooks/useToken'
 import useTokenBalance from 'src/hooks/useTokenBalance'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { toBigNumber } from 'src/libs/web3/util'
+import useWeb3 from 'src/hooks/useWeb3'
+import { toBigNumber } from 'src/utils/util'
 
 import Modal from './Modal'
 

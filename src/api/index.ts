@@ -5,7 +5,7 @@ import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import NestPriceFacade, { NestPriceFacadeProps } from './NestPriceFacade'
 import ETHToken from './ETHToken'
 import Token from './Token'
-import { toBigNumber } from '../util'
+import { toBigNumber } from '../utils/util'
 import { BigNumberish } from 'ethers'
 import BigNumber from 'bignumber.js'
 

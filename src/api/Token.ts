@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
 import { BigNumberish } from 'ethers'
-import API from '.'
+import API from './index'
 import Contract, { ContractProps } from './Contract'
-import { formatNumber, toBigNumber } from '../util'
+import { formatNumber, toBigNumber } from '../utils/util'
 import { TokenETH } from 'src/components/Icon'
 
 export type TokenProps = ContractProps & {

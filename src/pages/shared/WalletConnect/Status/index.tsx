@@ -5,8 +5,8 @@ import { useState } from 'react'
 import Popup from 'reactjs-popup'
 import Button from 'src/components/Button'
 import { Loading } from 'src/components/Icon'
-import useTransaction, { TransactionReceiptStatus, TransactionStatus } from 'src/libs/web3/hooks/useTransaction'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useTransaction, { TransactionReceiptStatus, TransactionStatus } from 'src/hooks/useTransaction'
+import useWeb3 from 'src/hooks/useWeb3'
 
 import Modal from './Modal'
 

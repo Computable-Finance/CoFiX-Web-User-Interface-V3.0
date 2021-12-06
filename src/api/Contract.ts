@@ -1,5 +1,5 @@
 import { BaseContract } from 'ethers'
-import API from '.'
+import API from './index'
 
 export type ContractProps = {
   addresses: Record<number, string> | string

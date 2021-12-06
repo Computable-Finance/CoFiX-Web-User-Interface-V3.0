@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react'
 import './styles'
 import { ArrowLeftOutline, ArrowRightOutline } from 'src/components/Icon'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 import { useMemo } from 'react'
 import useToken from 'src/hooks/useToken'
 

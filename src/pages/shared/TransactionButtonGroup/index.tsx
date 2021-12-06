@@ -5,13 +5,13 @@ import { FC, useState } from 'react'
 import Button from 'src/components/Button'
 import ButtonGroup from 'src/components/Button/Group'
 import { Loading } from 'src/components/Icon'
-import useApprove from 'src/libs/web3/hooks/useApprove'
+import useApprove from 'src/hooks/useApprove'
 import useTransaction, {
   Transaction,
   TransactionApproveContent,
   TransactionReceiptStatus,
-} from 'src/libs/web3/hooks/useTransaction'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+} from 'src/hooks/useTransaction'
+import useWeb3 from 'src/hooks/useWeb3'
 
 import WalletConnectButton from '../WalletConnect/Button'
 

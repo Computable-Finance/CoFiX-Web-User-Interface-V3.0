@@ -2,8 +2,8 @@ import BigNumber from 'bignumber.js'
 import { BigNumberish } from 'ethers'
 import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types/cofix'
 
-import API from '.'
-import { toBigNumber } from '../util'
+import API from './index'
+import { toBigNumber } from '../utils/util'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import Token from './Token'
 

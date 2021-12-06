@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { toBigNumber, deadline } from '../util'
+import { toBigNumber, deadline } from '../utils/util'
 import useTransaction, { TransactionRemoveLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
 import { ADDRESS_ZERO } from '../constants/constant'

@@ -1,4 +1,7 @@
+import { FC, useEffect } from 'react'
 import { i18n } from '@lingui/core'
+
+import { I18nProvider } from '@lingui/react'
 import { en, zh } from 'make-plural/plurals'
 
 import { detect, fromUrl, fromStorage, fromNavigator } from '@lingui/detect-locale'
@@ -30,3 +33,14 @@ export async function dynamicActivate(locale: string = defaultLocale) {
     window.localStorage.setItem('lang', locale)
   }
 }
+
+
+const I18n: FC = ({ children }) => {
+  useEffect(() => {
+    dynamicActivate()
+  }, [])
+
+  return <I18nProvider i18n={i18n}>{children}</I18nProvider>
+}
+
+export default I18n

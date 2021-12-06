@@ -1,7 +1,7 @@
 import { TokenBNB } from 'src/components/Icon'
 import Token from './Token'
-import { toBigNumber } from '../util'
-import API from '.'
+import { toBigNumber } from '../utils/util'
+import API from './index'
 import BigNumber from 'bignumber.js'
 import { ADDRESS_ZERO } from '../constants/constant'
 

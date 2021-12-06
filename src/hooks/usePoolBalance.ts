@@ -1,6 +1,6 @@
-import { toBigNumber } from '../libs/web3/util'
-import useSwap from '../libs/web3/hooks/useSwap'
-import useWeb3 from '../libs/web3/hooks/useWeb3'
+import { toBigNumber } from '../utils/util'
+import useSwap from './useSwap'
+import useWeb3 from './useWeb3'
 import { useEffect, useState } from 'react'
 
 const usePoolBalance = (src: string, dest: string) => {

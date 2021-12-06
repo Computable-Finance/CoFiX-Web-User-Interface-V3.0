@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
-import { BSCT } from 'src/libs/web3/constants/chains'
+import useWeb3 from 'src/hooks/useWeb3'
+import { BSCT } from 'src/constants/chains'
 
 const useEtherScanHost = () => {
   const { api } = useWeb3()

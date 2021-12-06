@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro'
 import { FC } from 'react'
 import Popup from 'reactjs-popup'
 import { Community, Document, Ellipsis, Github, LangCN, LangEN, Switch, Whitepaper } from 'src/components/Icon'
-import { dynamicActivate } from 'src/libs/i18n/config'
+import { dynamicActivate } from 'src/i18n'
 
 type Props = {
   onSelect?: (menu: string) => void

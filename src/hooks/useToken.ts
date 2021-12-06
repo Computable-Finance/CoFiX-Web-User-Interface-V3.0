@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import useWeb3 from 'src/libs/web3/hooks/useWeb3'
+import useWeb3 from 'src/hooks/useWeb3'
 
 const useToken = (symbol: string) => {
   const { api, inited } = useWeb3()
