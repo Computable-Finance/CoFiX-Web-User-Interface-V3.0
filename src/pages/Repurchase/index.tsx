@@ -93,6 +93,7 @@ const Repurchase: FC = () => {
             title={t`Input Repurchase Amount`}
             symbol="COFI"
             selectable={false}
+            editable
             value={amount}
             onChange={(v) => {
               setAmount(v)

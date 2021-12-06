@@ -128,6 +128,7 @@ const Swap: FC = () => {
             title={t`FROM`}
             symbol={src.symbol}
             value={src.amount}
+            editable
             onChange={(amount: string, symbol: string) => handleChange('src', amount, symbol)}
             checkInsufficientBalance
             onInsufficientBalance={(b) => setInsufficient(b)}
@@ -142,6 +143,7 @@ const Swap: FC = () => {
             title={t`TO(ESTIMATED)`}
             symbol={dest.symbol}
             value={dest.amount}
+            editable
             balanceTitle={t`Pool Balance:`}
             balance={balance.balance }
             checkInsufficientBalance

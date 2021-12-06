@@ -66,6 +66,7 @@ const AddLiquidity: FC = () => {
       <TokenInput
         selectable={false}
         symbol={symbol[0]}
+        editable
         title={`${t`Input`}${t`Amount`}`}
         value={amount[0]}
         onChange={handleToken0AmountChange}
@@ -76,6 +77,7 @@ const AddLiquidity: FC = () => {
       <TokenInput
         selectable={false}
         symbol={symbol[1]}
+        editable
         title={`${t`Input`}${t`Amount`}`}
         value={amount[1]}
         onChange={handleToken1AmountChange}

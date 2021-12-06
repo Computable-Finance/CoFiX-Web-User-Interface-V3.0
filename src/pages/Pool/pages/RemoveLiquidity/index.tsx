@@ -70,6 +70,7 @@ const RemoveLiquidity: FC = () => {
         symbol={xtoken?.symbol}
         balance={poolInfo?.xtokenBalance}
         value={amount}
+        editable
         onChange={(v) => setAmount(v)}
         checkInsufficientBalance
         onInsufficientBalance={(i) => setInsufficient(i)}
