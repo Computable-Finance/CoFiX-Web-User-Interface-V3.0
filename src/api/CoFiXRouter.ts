@@ -7,13 +7,13 @@ export type CoFiXRouterProps = ContractProps
 class CoFiXRouter extends Contract {
   contract?: TypeCoFiXRouter
 
-  private _pairFor: {
+  private readonly _pairFor: {
     [symbol: string]: {
       [symbol: string]: string
     }
   }
 
-  private _routerPath: {
+  private readonly _routerPath: {
     [symbol: string]: {
       [symbol: string]: Array<string>
     }

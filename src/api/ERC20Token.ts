@@ -8,7 +8,7 @@ export type ERC20TokenProps = TokenProps
 
 class ERC20Token extends Token {
   contract?: ERC20 | CoFiXERC20
-  private _allowance: {
+  private readonly _allowance: {
     [symbol: string]: boolean
   }
 

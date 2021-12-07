@@ -21,7 +21,7 @@ abstract class Token extends Contract {
   isXToken: boolean
   cofiAmountPerBlock?: number
 
-  constructor(api: API, props: TokenProps) {
+  protected constructor(api: API, props: TokenProps) {
     super(api, props)
 
     this.symbol = props.symbol
