@@ -215,7 +215,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.multipliedBy(tokenAmount).div(2000),
         amountOut: amountOut,
-        oracleFee: toBigNumber(0.005),
+        oracleFee: toBigNumber(0.0002),
       }
     } else if (src === this.pair[0].symbol && dest === 'USDT') {
       let amountOut = amountIn.div(tokenAmount).multipliedBy(2000)
@@ -232,7 +232,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.div(tokenAmount).multipliedBy(2000),
         amountOut: amountOut,
-        oracleFee: toBigNumber(0.005),
+        oracleFee: toBigNumber(0.0002),
       }
     } else {
       throw new Error(`can not swap ${src} to ${dest}`)
