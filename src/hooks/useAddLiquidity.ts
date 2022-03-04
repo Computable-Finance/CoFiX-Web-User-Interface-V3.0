@@ -56,8 +56,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: '0.005',
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
+            oracleCallFee: '0.0002',
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.0002')).toFixed(0),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
@@ -80,8 +80,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: '0.005',
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.005')).toFixed(0),
+            oracleCallFee: '0.0002',
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.0002')).toFixed(0),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
