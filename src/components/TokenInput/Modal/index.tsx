@@ -50,7 +50,9 @@ const Modal: FC<Props> = (props) => {
       />
 
       <ul>
-        {Whitelist.filter((t) => {
+        {Whitelist
+          .filter((t)=> t.symbol !== 'BNB')
+          .filter((t) => {
           if (t.symbol.toLowerCase().indexOf(search.toLowerCase()) > -1) {
             return true
           }

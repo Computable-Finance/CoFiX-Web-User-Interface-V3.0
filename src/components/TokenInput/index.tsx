@@ -210,7 +210,7 @@ const TokenInput: FC<Props> = ({ ...props }) => {
                 </span>
               }
             >
-              <Modal onClose={() => modal.current.close()} onSelect={handleSelectToken} tokens={props.tokens} />
+              <Modal onClose={() => modal.current.close()} onSelect={handleSelectToken} tokens={props.tokens}/>
             </Popup>
           )}
         </div>
