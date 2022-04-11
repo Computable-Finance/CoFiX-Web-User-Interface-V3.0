@@ -22,7 +22,6 @@ const useInactiveListener = (suppress = false) => {
         window.location.reload()
       } else if (chainId === '0x1' || chainId === '0x4'){
         window.location.href = 'https://cofix.tech'
-        window.location.reload()
       } else {
         window.location.reload()
       }
