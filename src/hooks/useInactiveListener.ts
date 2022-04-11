@@ -22,7 +22,6 @@ const useInactiveListener = (suppress = false) => {
         window.location.reload()
       } else if (chainId === '0x38' || chainId === '0x61'){
         window.location.href = 'https://bsc.cofix.tech'
-        window.location.reload()
       } else {
         window.location.reload()
       }

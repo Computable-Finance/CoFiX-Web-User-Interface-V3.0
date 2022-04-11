@@ -33,14 +33,14 @@ const Menu: FC<Props> = (props) => {
       link: 'https://bsc.cofix.tech',
       chainId: "0x38",
       icon: <BSC/>,
-      content: <Trans>BSC</Trans>,
+      content: <Trans>BNB</Trans>,
     },
     {
       id: 'bsc-testnet',
       link: 'https://bsc.cofix.tech',
       chainId: "0x61",
       icon: <BSC/>,
-      content: <Trans>BSC Testnet</Trans>,
+      content: <Trans>BNB Testnet</Trans>,
     },
   ]
   
