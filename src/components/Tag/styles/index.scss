@@ -8,7 +8,7 @@
   padding: 1px $space-sm;
 
   background: $text-gradient-color;
-  background-clip: text;
+  background-clip: initial;
   -webkit-background-clip: text;
   color: transparent;
 

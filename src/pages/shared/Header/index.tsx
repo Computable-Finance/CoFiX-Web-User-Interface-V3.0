@@ -5,11 +5,9 @@ import classNames from 'classnames'
 import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CoFiXLogoSmall, CoFiXLogoWithText, CoFiXVersion } from 'src/components/Icon'
-import Tag from 'src/components/Tag'
-import { Mainnet, SupportedChains } from 'src/constants/chains'
-import useWeb3 from 'src/hooks/useWeb3'
 import { MenuButton } from 'src/pages/shared/Menu'
 import WalletConnect from 'src/pages/shared/WalletConnect'
+import {NetworkSwitch} from "../NetworkSwicth";
 
 const Nav: FC = () => {
   const location = useLocation()
@@ -44,9 +42,7 @@ const Nav: FC = () => {
 
 const Header: FC = () => {
   const classPrefix = 'cofi-header'
-  const { chainId } = useWeb3()
-  const chain = SupportedChains.find((c) => c.chainId === chainId && chainId !== Mainnet.chainId)
-
+  
   return (
     <div className="container">
       <header className={`${classPrefix}`}>
@@ -55,11 +51,9 @@ const Header: FC = () => {
             <CoFiXLogoWithText />
             <CoFiXVersion />
           </Link>
-          {chain && <Tag primary>{chain.network[0].toUpperCase() + chain.network.slice(1)}</Tag>}
+          <NetworkSwitch />
         </div>
-
         <Nav />
-
         <div className={`${classPrefix}-extra`}>
           <WalletConnect />
           <MenuButton />
