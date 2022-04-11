@@ -19,11 +19,12 @@ const useInactiveListener = (suppress = false) => {
     ethereum.on('chainChanged', async () => {
       const chainId = await ethereum.request({ method: 'eth_chainId' })
       if (chainId === '0x1' || chainId === '0x4') {
-        refresh()
+        window.location.reload()
       } else if (chainId === '0x38' || chainId === '0x61'){
         window.location.href = 'https://bsc.cofix.tech'
+        window.location.reload()
       } else {
-        refresh()
+        window.location.reload()
       }
     })
     ethereum.on('accountsChanged', refresh)

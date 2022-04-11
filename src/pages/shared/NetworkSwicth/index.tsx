@@ -35,6 +35,13 @@ const Menu: FC<Props> = (props) => {
       icon: <BSC/>,
       content: <Trans>BSC</Trans>,
     },
+    {
+      id: 'bsc-testnet',
+      link: 'https://bsc.cofix.tech',
+      chainId: "0x61",
+      icon: <BSC/>,
+      content: <Trans>BSC Testnet</Trans>,
+    },
   ]
   
   const select = (id: string) => {
