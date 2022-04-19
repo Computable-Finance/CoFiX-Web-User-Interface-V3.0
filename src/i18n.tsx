@@ -34,7 +34,6 @@ export async function dynamicActivate(locale: string = defaultLocale) {
   }
 }
 
-
 const I18n: FC = ({ children }) => {
   useEffect(() => {
     dynamicActivate()

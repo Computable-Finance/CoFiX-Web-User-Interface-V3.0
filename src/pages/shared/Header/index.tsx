@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { CoFiXLogoSmall, CoFiXLogoWithText, CoFiXVersion } from 'src/components/Icon'
 import { MenuButton } from 'src/pages/shared/Menu'
 import WalletConnect from 'src/pages/shared/WalletConnect'
-import {NetworkSwitch} from "../NetworkSwicth";
+import { NetworkSwitch } from '../NetworkSwicth'
 
 const Nav: FC = () => {
   const location = useLocation()
@@ -41,7 +41,7 @@ const Nav: FC = () => {
 
 const Header: FC = () => {
   const classPrefix = 'cofi-header'
-  
+
   return (
     <div className="container">
       <header className={`${classPrefix}`}>

@@ -1,12 +1,12 @@
 import './styles'
 
-import {Trans} from '@lingui/macro'
-import {FC} from 'react'
+import { Trans } from '@lingui/macro'
+import { FC } from 'react'
 import Popup from 'reactjs-popup'
-import {Ethereum, BSC} from 'src/components/Icon'
-import Tag from "../../../components/Tag";
-import useWeb3 from "../../../hooks/useWeb3";
-import {SupportedChains} from "../../../constants/chains";
+import { Ethereum, BSC } from 'src/components/Icon'
+import Tag from '../../../components/Tag'
+import useWeb3 from '../../../hooks/useWeb3'
+import { SupportedChains } from '../../../constants/chains'
 
 type Props = {
   onSelect?: (id: string) => void
@@ -17,44 +17,44 @@ const Menu: FC<Props> = (props) => {
     {
       id: 'ethereum',
       link: 'https://cofix.tech/',
-      chainId: "0x1",
-      icon: <Ethereum/>,
+      chainId: '0x1',
+      icon: <Ethereum />,
       content: <Trans>Ethereum</Trans>,
     },
     {
       id: 'rinkeby',
       link: 'https://cofix.tech/',
-      chainId: "0x4",
-      icon: <Ethereum/>,
+      chainId: '0x4',
+      icon: <Ethereum />,
       content: <Trans>Rinkeby</Trans>,
     },
     {
       id: 'bsc',
       link: 'https://bsc.cofix.tech',
-      chainId: "0x38",
-      icon: <BSC/>,
+      chainId: '0x38',
+      icon: <BSC />,
       content: <Trans>BNB</Trans>,
     },
     {
       id: 'bsc-testnet',
       link: 'https://bsc.cofix.tech',
-      chainId: "0x61",
-      icon: <BSC/>,
+      chainId: '0x61',
+      icon: <BSC />,
       content: <Trans>BNB Testnet</Trans>,
     },
   ]
-  
+
   const select = (id: string) => {
     return async () => {
-      const {ethereum} = window
+      const { ethereum } = window
       if (!ethereum || !ethereum.on) {
         return
       }
       try {
         await ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{chainId: id}],
-        });
+          params: [{ chainId: id }],
+        })
       } catch (switchError) {
         console.log(switchError)
       }
@@ -63,9 +63,9 @@ const Menu: FC<Props> = (props) => {
       }
     }
   }
-  
+
   const classPrefix = 'cofi-menu'
-  
+
   return (
     <menu className={`${classPrefix}`}>
       <ul>
@@ -82,18 +82,20 @@ const Menu: FC<Props> = (props) => {
   )
 }
 
-export const NetworkSwitch: FC<Props & {
-  modal?: boolean
-}> = (props) => {
-  const {chainId} = useWeb3()
+export const NetworkSwitch: FC<
+  Props & {
+    modal?: boolean
+  }
+> = (props) => {
+  const { chainId } = useWeb3()
   const chain = SupportedChains.find((c) => c.chainId === chainId)
-  
+
   return (
     <Popup
       modal={props.modal}
-      position={"bottom left"}
+      position={'bottom left'}
       trigger={
-        <button className={"cofix-network-button"}>
+        <button className={'cofix-network-button'}>
           {chain && <Tag primary>{chain.network[0].toUpperCase() + chain.network.slice(1)}</Tag>}
         </button>
       }

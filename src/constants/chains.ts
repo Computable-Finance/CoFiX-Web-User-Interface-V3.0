@@ -71,4 +71,3 @@ export const BSCT = {
 }
 
 export const SupportedChains: Array<Chain> = [BSC, BSCT]
-

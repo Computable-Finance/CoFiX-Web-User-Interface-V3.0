@@ -99,7 +99,7 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           args.to,
           deadline(),
           {
-            value: args.sendETHValue
+            value: args.sendETHValue,
           }
         )
       }

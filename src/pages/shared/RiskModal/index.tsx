@@ -246,9 +246,7 @@ const RiskModal: FC = () => {
         <Button
           block
           primary
-          disabled={
-            !((action === 0 && isReadSwap) || (action === 1 && isReadPool))
-          }
+          disabled={!((action === 0 && isReadSwap) || (action === 1 && isReadPool))}
           onClick={() => approve(action)}
         >
           <Trans>Sure</Trans>

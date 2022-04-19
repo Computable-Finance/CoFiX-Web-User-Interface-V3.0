@@ -1,7 +1,7 @@
 import { TokenUSDT } from 'src/components/Icon'
 
 import { CoFiXPairProps } from '../api/CoFiXPair'
-import {BSC, BSCT} from './chains'
+import { BSC, BSCT } from './chains'
 
 export const NESTUSDT: CoFiXPairProps = {
   symbol: 'NEST-USDT',
@@ -16,4 +16,3 @@ export const NESTUSDT: CoFiXPairProps = {
 }
 
 export const CoFiXPairWhitelist = [NESTUSDT]
-

@@ -1,7 +1,7 @@
 import { TokenNEST, TokenUSDT } from 'src/components/Icon'
 
 import { TokenProps } from '../api/Token'
-import {BSC, BSCT} from './chains'
+import { BSC, BSCT } from './chains'
 
 export const USDT: TokenProps = {
   symbol: 'USDT',
@@ -23,4 +23,3 @@ export const NEST: TokenProps = {
 }
 
 export const ERC20TokenWhitelist = [USDT, NEST]
-

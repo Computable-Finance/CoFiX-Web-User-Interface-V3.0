@@ -20,7 +20,7 @@ const useInactiveListener = (suppress = false) => {
       const chainId = await ethereum.request({ method: 'eth_chainId' })
       if (chainId === '0x38' || chainId === '0x61') {
         window.location.reload()
-      } else if (chainId === '0x1' || chainId === '0x4'){
+      } else if (chainId === '0x1' || chainId === '0x4') {
         window.location.href = 'https://cofix.tech'
       } else {
         window.location.reload()

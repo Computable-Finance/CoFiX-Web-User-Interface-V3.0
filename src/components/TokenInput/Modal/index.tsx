@@ -50,34 +50,32 @@ const Modal: FC<Props> = (props) => {
       />
 
       <ul>
-        {Whitelist
-          .filter((t)=> t.symbol !== 'BNB')
+        {Whitelist.filter((t) => t.symbol !== 'BNB')
           .filter((t) => {
-          if (t.symbol.toLowerCase().indexOf(search.toLowerCase()) > -1) {
-            return true
-          }
+            if (t.symbol.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+              return true
+            }
 
-          if (!t.address) {
-            return false
-          }
+            if (!t.address) {
+              return false
+            }
 
-          return t.address.toLowerCase().indexOf(search.toLowerCase()) > -1;
+            return t.address.toLowerCase().indexOf(search.toLowerCase()) > -1
+          })
+          .map((t) => (
+            <li key={t.symbol}>
+              <Button className={`${classPrefix}-button`} onClick={handleSelect(t.symbol)}>
+                <div className={`${classPrefix}-icon`}>
+                  <t.Icon />
+                </div>
 
-
-        }).map((t) => (
-          <li key={t.symbol}>
-            <Button className={`${classPrefix}-button`} onClick={handleSelect(t.symbol)}>
-              <div className={`${classPrefix}-icon`}>
-                <t.Icon />
-              </div>
-
-              <div className={`${classPrefix}-token`}>
-                <div className={`${classPrefix}-symbol`}>{t.symbol}</div>
-                {t.address && t.symbol !== 'ETH' && <div className={`${classPrefix}-address`}>{t.address}</div>}
-              </div>
-            </Button>
-          </li>
-        ))}
+                <div className={`${classPrefix}-token`}>
+                  <div className={`${classPrefix}-symbol`}>{t.symbol}</div>
+                  {t.address && t.symbol !== 'ETH' && <div className={`${classPrefix}-address`}>{t.address}</div>}
+                </div>
+              </Button>
+            </li>
+          ))}
       </ul>
     </Card>
   )

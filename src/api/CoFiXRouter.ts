@@ -1,6 +1,6 @@
-import {CoFiXRouter as TypeCoFiXRouter, CoFiXRouter__factory} from 'src/abis/types'
+import { CoFiXRouter as TypeCoFiXRouter, CoFiXRouter__factory } from 'src/abis/types'
 import API from './index'
-import Contract, {ContractProps} from './Contract'
+import Contract, { ContractProps } from './Contract'
 
 export type CoFiXRouterProps = ContractProps
 
