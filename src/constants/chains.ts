@@ -26,8 +26,8 @@ export const BSC = {
   name: 'Smart Chain',
   chainId: 56,
   shortName: 'bsc',
-  chain: 'BSC',
-  network: 'BSC',
+  chain: 'BNB',
+  network: 'BNB',
   networkId: 56,
   nativeCurrency: {
     name: 'BNB',
@@ -50,8 +50,8 @@ export const BSCT = {
   name: 'Smart Chain - Testnet',
   chainId: 97,
   shortName: 'bsct',
-  chain: 'BSC',
-  network: 'BSC Testnet',
+  chain: 'BNB',
+  network: 'BNB Testnet',
   networkId: 97,
   nativeCurrency: {
     name: 'BNB',
