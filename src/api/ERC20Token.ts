@@ -1,4 +1,4 @@
-import { CoFiXERC20, ERC20LIB as ERC20, ERC20LIB__factory as ERC20__factory } from 'src/abis/types/cofix'
+import { CoFiXERC20, ERC20LIB as ERC20, ERC20LIB__factory as ERC20__factory } from 'src/abis/types'
 import API from './index'
 import Token, { TokenProps } from './Token'
 import { toBigNumber } from '../utils/util'

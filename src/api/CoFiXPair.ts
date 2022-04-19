@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { BigNumberish } from 'ethers'
-import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types/cofix'
+import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types'
 
 import API from './index'
 import { toBigNumber } from '../utils/util'
