@@ -25,10 +25,10 @@ const RemoveLiquidity: FC = () => {
   }>()
 
   const { api } = useWeb3()
-  const [symbol, setSymbol] = useState(['', ''])
+  const [symbols, setSymbols] = useState(['', ''])
   const [amount, setAmount] = useState('')
-  const { info: poolInfo } = usePoolInfo<PoolInfo>(symbol[0], symbol[1])
-  const xtoken = useXToken(symbol[0], symbol[1])
+  const { info: poolInfo } = usePoolInfo<PoolInfo>(symbols[0], symbols[1])
+  const xtoken = useXToken(symbols[0], symbols[1])
   const [insufficient, setInsufficient] = useState(false)
   const [percent, setPercent] = useState(0)
 
@@ -37,7 +37,7 @@ const RemoveLiquidity: FC = () => {
       return
     }
 
-    setSymbol([params.token0, params.token1])
+    setSymbols([params.token0, params.token1])
     const token0 = api.Tokens[params.token0]
     if (!token0) {
       history.push('/pool')
@@ -58,8 +58,8 @@ const RemoveLiquidity: FC = () => {
   }, [amount])
 
   const handleRemoveLiquidity = useRemoveLiquidity({
-    token0: symbol[0],
-    token1: symbol[1],
+    token0: symbols[0],
+    token1: symbols[1],
     liquidity: amount,
   })
 
@@ -78,7 +78,7 @@ const RemoveLiquidity: FC = () => {
 
       <TokenReceive
         title={t`Received Assets`}
-        tokens={[symbol[0], symbol[1]]}
+        tokens={[symbols[0], symbols[1]]}
         percent={percent}
         tooltip={
           <>
@@ -101,7 +101,7 @@ const RemoveLiquidity: FC = () => {
       <TransactionButtonGroup
         approve={{
           transactionType: TransactionType.RemoveLiquidity,
-          token: [symbol[0], symbol[1]],
+          token: [symbols[0], symbols[1]],
         }}
         onClick={handleRemoveLiquidity.handler}
         disabled={insufficient || !amount || toBigNumber(amount).lte(0)}
