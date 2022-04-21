@@ -1,6 +1,6 @@
 const useSlippageTolerance = () => {
   return {
-    ratio: 0.05,
+    ratio: 0.1,
   }
 }
 

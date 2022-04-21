@@ -63,7 +63,7 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
             setArgs(newArgs)
           }
         } else {
-          const liquidity = toBigNumber(content.token1.amount).div(poolInfo.nav)
+          const liquidity = toBigNumber(content.token1.amount)
 
           if (!liquidity.isNaN()) {
             content.liquidity = liquidity.toFixed(6)
