@@ -74,7 +74,7 @@ const AddLiquidity: FC = () => {
       <TransactionButtonGroup
         approve={{
           transactionType: TransactionType.AddLiquidity,
-          token: [symbol[0], symbol[1] || symbol[0]],
+          token: [symbol, symbol],
         }}
         onClick={handleAddLiquidity.handler}
         disabled={insufficient1}
