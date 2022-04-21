@@ -55,8 +55,8 @@ class ERC20Token extends Token {
     try {
       // try to get price from nest
       const value = await this.api.Contracts.NestPriceFacade.contract?.[
-        'lastPriceListAndTriggeredPriceInfo(uint256,uint256)'
-      ](1, 1)
+        'lastPriceListAndTriggeredPriceInfo(uint256,uint256,uint256)'
+      ](0, 1, 1)
       if (value) {
         const v = toBigNumber(value.prices[1])
         if (!v.isZero()) {
