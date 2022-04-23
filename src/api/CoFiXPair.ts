@@ -163,21 +163,21 @@ class CoFiXPair extends ERC20Token {
 
     try {
       const priceInfo = await this.api.Contracts.NestPriceFacade.contract[
-        'lastPriceListAndTriggeredPriceInfo(uint256,uint256,uint256)'
+        'lastPriceList(uint256,uint256,uint256)'
       ](0, 1, 2)
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const k = await this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract.calcRevisedK(
-        priceInfo.prices[3],
-        priceInfo.prices[2],
-        priceInfo.prices[1],
-        priceInfo.prices[0]
+        priceInfo[3],
+        priceInfo[2],
+        priceInfo[1],
+        priceInfo[0]
       )
 
       return {
         k: toBigNumber(k).shiftedBy(-18),
-        tokenAmount: this.amount(priceInfo.prices[1]),
+        tokenAmount: this.amount(priceInfo[1]),
       }
     } catch (e) {
       return {
