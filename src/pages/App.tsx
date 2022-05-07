@@ -8,7 +8,7 @@ import TransactionModal from 'src/pages/shared/TransactionModal'
 
 import RiskModal from './shared/RiskModal'
 
-const Swap = loadable(() => import('./Swap'))
+// const Swap = loadable(() => import('./Swap'))
 const Pool = loadable(() => import('./Pool'))
 const Repurchase = loadable(() => import('./Repurchase'))
 
@@ -23,9 +23,9 @@ function App() {
         <Header />
 
         <Switch>
-          <Route path="/swap">
-            <Swap />
-          </Route>
+          {/*<Route path="/swap">*/}
+          {/*  <Swap />*/}
+          {/*</Route>*/}
 
           <Route path="/pool">
             <Pool />
@@ -35,7 +35,8 @@ function App() {
             <Repurchase />
           </Route>
 
-          <Redirect to="/swap" />
+          <Redirect to="/pool" />
+          {/*<Redirect to="/swap" />*/}
         </Switch>
 
         <Footer />
