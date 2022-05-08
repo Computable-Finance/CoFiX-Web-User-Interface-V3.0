@@ -3,6 +3,7 @@ import { toBigNumber, deadline } from '../utils/util'
 import useTransaction, { TransactionRemoveLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
 import { ADDRESS_ZERO } from '../constants/constant'
+import {BSC} from "../constants/chains";
 
 const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
   const { api } = useWeb3()
@@ -68,8 +69,8 @@ const useRemoveLiquidity = (content: TransactionRemoveLiquidityContent) => {
           liquidity: liquidity.shiftedBy(18).toFixed(0),
           amountETHMin: '0',
           to: api.account || '',
-          oracleCallFee: '0.003',
-          sendETHValue: api.Tokens.ETH.parse(toBigNumber('0.003')).toFixed(0),
+          oracleCallFee: api.chainId === BSC.chainId ? "0" : '0.0002',
+          sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === BSC.chainId ? "0" : '0.0002')).toFixed(0),
           receive: content.receive,
         }
 
