@@ -1,4 +1,4 @@
-import { CoFiXDAO__factory, CoFiXDAO as TypeCoFiXDAO } from 'src/abis/types/cofix'
+import { CoFiXDAO__factory, CoFiXDAO as TypeCoFiXDAO } from 'src/abis/types'
 import API from './index'
 import Contract, { ContractProps } from './Contract'
 import { toBigNumber } from '../utils/util'

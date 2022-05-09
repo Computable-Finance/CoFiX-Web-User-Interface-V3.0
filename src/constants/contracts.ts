@@ -8,7 +8,7 @@ import { Mainnet, Rinkeby } from './chains'
 
 export const NestPriceFacade: NestPriceFacadeProps = {
   addresses: {
-    [Mainnet.chainId]: '0xB5D2890c061c321A5B6A4a4254bb1522425BAF0A',
+    [Mainnet.chainId]: '0xE544cF993C7d477C7ef8E91D28aCA250D135aa03',
     [Rinkeby.chainId]: '0x40C3EB032f27fDa7AdcF1B753c75B84e27f26838',
   },
 }

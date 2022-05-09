@@ -1,4 +1,4 @@
-import { CoFiXERC20, ERC20LIB as ERC20, ERC20LIB__factory as ERC20__factory } from 'src/abis/types/cofix'
+import { CoFiXERC20, ERC20LIB as ERC20, ERC20LIB__factory as ERC20__factory } from 'src/abis/types'
 import API from './index'
 import Token, { TokenProps } from './Token'
 import { toBigNumber } from '../utils/util'
@@ -60,12 +60,11 @@ class ERC20Token extends Token {
 
     try {
       // try to get price from nest
-      const value = await this.api.Contracts.NestPriceFacade.contract?.lastPriceListAndTriggeredPriceInfo(
-        this.address,
-        1
-      )
+      const value = await this.api.Contracts.NestPriceFacade.contract?.[
+        'lastPriceList(uint256,uint256,uint256)'
+        ](0, 1, 1)
       if (value) {
-        const v = toBigNumber(value.prices[1])
+        const v = toBigNumber(value[1])
         if (!v.isZero()) {
           return v
         }

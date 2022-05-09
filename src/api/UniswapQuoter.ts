@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import {BigNumberish} from 'ethers'
-import {UniswapQuoter as TypeUniswapQuoter, UniswapQuoter__factory} from 'src/abis/types/uniswap'
+import {UniswapQuoter as TypeUniswapQuoter, UniswapQuoter__factory} from 'src/abis/types'
 import API from './index'
 import Contract, {ContractProps} from './Contract'
 

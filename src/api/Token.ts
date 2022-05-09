@@ -110,22 +110,22 @@ abstract class Token extends Contract {
     }
 
     try {
-      const priceInfo = await this.api.Contracts.NestPriceFacade.contract.lastPriceListAndTriggeredPriceInfo(
-        this.address,
-        2
+      const priceInfo = await this.api.Contracts.NestPriceFacade.contract?.['lastPriceList(uint256,uint256,uint256)'](
+        0, 1, 1
       )
 
       const k = await this.api.Contracts.CoFiXController.contract.calcRevisedK(
-        priceInfo.triggeredSigmaSQ,
-        priceInfo.prices[3],
-        priceInfo.prices[2],
-        priceInfo.prices[1],
-        priceInfo.prices[0]
+        // priceInfo.triggeredSigmaSQ,
+        '',
+        priceInfo[3],
+        priceInfo[2],
+        priceInfo[1],
+        priceInfo[0]
       )
 
       return {
         k: toBigNumber(k).shiftedBy(-18),
-        tokenAmount: this.amount(priceInfo.prices[1]),
+        tokenAmount: this.amount(priceInfo[1]),
       }
     } catch (e) {
       return {

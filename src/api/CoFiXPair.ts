@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { BigNumberish } from 'ethers'
-import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types/cofix'
+import { CoFiXPair as TypeCoFiXPair, CoFiXPair__factory } from 'src/abis/types'
 import { TIME_TO_NEXT_BLOCK } from 'src/constants/parameter'
 
 import API from './index'

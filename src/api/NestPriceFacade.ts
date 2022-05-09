@@ -1,7 +1,7 @@
 import {
-  INestPriceFacade__factory as NestPriceFacade__factory,
-  INestPriceFacade as TypeNestPriceFacade,
-} from 'src/abis/types/cofix'
+  NestPriceFacade__factory as NestPriceFacade__factory,
+  NestPriceFacade as TypeNestPriceFacade,
+} from 'src/abis/types'
 import API from './index'
 import Contract, { ContractProps } from './Contract'
 

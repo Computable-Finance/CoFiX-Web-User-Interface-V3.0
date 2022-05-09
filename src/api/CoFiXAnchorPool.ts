@@ -1,4 +1,4 @@
-import { CoFiXAnchorPool__factory, CoFiXAnchorPool as TypeCoFiXAnchorPool } from 'src/abis/types/cofix'
+import { CoFiXAnchorPool__factory, CoFiXAnchorPool as TypeCoFiXAnchorPool } from 'src/abis/types'
 import { TokenXToken } from 'src/components/Icon'
 import API from '../api'
 import { ADDRESS_ZERO, BLOCK_DAILY, TIME_TO_NEXT_BLOCK } from '../constants/constant'
