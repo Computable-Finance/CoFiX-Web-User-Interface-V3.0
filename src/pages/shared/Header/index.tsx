@@ -13,7 +13,7 @@ const Nav: FC = () => {
   const location = useLocation()
 
   const routes = [
-    // { path: '/swap', content: <Trans>Swap</Trans> },
+    { path: '/swap', content: <Trans>Swap</Trans> },
     { path: '/pool', content: <Trans>Pool</Trans> },
     { path: '/repurchase', content: <Trans>Repurchase</Trans> },
   ].map((r) => (
