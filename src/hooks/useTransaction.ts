@@ -23,7 +23,7 @@ export enum TransactionStatus {
   Fail,
 }
 
-export type TansactionSwapContent = {
+export type TransactionSwapContent = {
   src: {
     amount: string
     symbol: string
@@ -95,7 +95,7 @@ export type Transaction = {
 } & (
   | {
       type: TransactionType.Swap
-      content: TansactionSwapContent
+      content: TransactionSwapContent
     }
   | {
       type: TransactionType.Repurchase
@@ -133,7 +133,7 @@ const _useTransaction = () => {
   const [current, setCurrent] = useState<Transaction>()
   const [showModal, setShowModal] = useState(false)
 
-  const upsertTranasction = (transaction: Transaction) => {
+  const upsertTransaction = (transaction: Transaction) => {
     const index = transactions.findIndex((t) => t.id === transaction.id)
     if (index > -1) {
       transactions[index] = transaction
@@ -156,7 +156,7 @@ const _useTransaction = () => {
     }
 
     setCurrent({ ...transaction })
-    upsertTranasction(transaction)
+    upsertTransaction(transaction)
   }
 
   const check = async (transaction: Transaction) => {
@@ -186,7 +186,7 @@ const _useTransaction = () => {
       transaction.status = TransactionStatus.Pending
       transaction.receiptStatus = TransactionReceiptStatus.Unknown
 
-      upsertTranasction(transaction)
+      upsertTransaction(transaction)
       updateCurrent(transaction)
       setShowModal(true)
 

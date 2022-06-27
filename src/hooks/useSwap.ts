@@ -5,10 +5,10 @@ import useSlippageTolerance from 'src/hooks/useSlippageTolerance'
 import { SwapInfo } from '../api'
 import { ADDRESS_ZERO } from '../constants/constant'
 import { deadline, toBigNumber } from '../utils/util'
-import useTransaction, { TansactionSwapContent, TransactionType } from './useTransaction'
+import useTransaction, { TransactionSwapContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
 
-const useSwap = (content: TansactionSwapContent) => {
+const useSwap = (content: TransactionSwapContent) => {
   const { api, inited } = useWeb3()
   const { push } = useTransaction()
   const { ratio: slippageTolerance } = useSlippageTolerance()
