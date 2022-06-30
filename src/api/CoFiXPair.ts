@@ -312,9 +312,7 @@ class CoFiXPair extends ERC20Token {
       // tokenAmount 是 1 ETH 对应的数量
       const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
 
-      console.log(this.pair[1].symbol, tokenAmount.toNumber())
       const amountIn = toBigNumber(amount)
-
 
       if (src === 'ETH' && dest === this.pair[1].symbol) {
         const fee = amountIn.multipliedBy(this.theta).div(10000)
@@ -332,7 +330,7 @@ class CoFiXPair extends ERC20Token {
           },
           oracleOut: amountIn.multipliedBy(tokenAmount),
           amountOut: amountOut,
-          oracleFee: toBigNumber(this.api.chainId === 1 ? 0 : 0.001),
+          oracleFee: toBigNumber(this.pair[1].oracleFee ?? 0),
         }
       } else if (src === this.pair[1].symbol && dest === 'ETH') {
         let amountOut = amountIn.div(tokenAmount)
@@ -352,7 +350,7 @@ class CoFiXPair extends ERC20Token {
           },
           oracleOut: amountIn.div(tokenAmount),
           amountOut: amountOut,
-          oracleFee: toBigNumber(this.api.chainId === 1 ? 0 : 0.001),
+          oracleFee: toBigNumber(this.pair[1].oracleFee ?? 0),
         }
       } else {
         throw new Error(`can not swap ${src} to ${dest}`)

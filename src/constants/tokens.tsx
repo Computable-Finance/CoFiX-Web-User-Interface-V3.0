@@ -29,10 +29,12 @@ export const PETH: TokenProps = {
     [Mainnet.chainId]: {
       channelId: 0,
       pairIndex: 1,
+      oracleFee: 0,
     },
     [Rinkeby.chainId]: {
       channelId: 0,
       pairIndex: 1,
+      oracleFee: 0.001
     }
   }
 }
@@ -49,10 +51,12 @@ export const NEST: TokenProps = {
     [Mainnet.chainId]: {
       channelId: 0,
       pairIndex: 2,
+      oracleFee: 0,
     },
     [Rinkeby.chainId]: {
       channelId: 0,
       pairIndex: 2,
+      oracleFee: 0.001
     }
   }
 }

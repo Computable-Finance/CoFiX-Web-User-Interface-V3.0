@@ -14,6 +14,7 @@ export type TokenProps = ContractProps & {
   priceInfo?: Record<number, {
     channelId: number,
     pairIndex: number,
+    oracleFee: number,
   }>
 }
 
@@ -41,6 +42,7 @@ abstract class Token extends Contract {
   cofiAmountPerBlock?: number
   channelId?: number
   pairIndex?: number
+  oracleFee?: number
 
   constructor(api: API, props: TokenProps) {
     super(api, props)
@@ -52,6 +54,7 @@ abstract class Token extends Contract {
     this.isXToken = !!props.isXToken
     this.channelId = props.priceInfo && api.chainId ? props.priceInfo[api.chainId].channelId : undefined
     this.pairIndex = props.priceInfo && api.chainId ? props.priceInfo[api.chainId].pairIndex : undefined
+    this.oracleFee = props.priceInfo && api.chainId ? props.priceInfo[api.chainId].oracleFee : undefined
   }
 
   amount(n: BigNumber | BigNumberish) {
@@ -87,7 +90,7 @@ abstract class Token extends Contract {
     return this.api.Tokens.USDT.amount(value)
   }
 
-  // tokenAmount 换成 1 ETH = ？ Token
+  // tokenAmount 换成 1 ETH = ? Token
   // 2000 U = x Token
   // 2000 U = y ETH
   // y ETH = x Token
