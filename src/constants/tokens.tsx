@@ -24,10 +24,12 @@ export const NEST: TokenProps = {
     [BSC.chainId]: {
       channelId: 0,
       pairIndex: 1,
+      oracleFee: 0,
     },
     [BSCT.chainId]: {
       channelId: 0,
       pairIndex: 1,
+      oracleFee: 0.0002
     }
   }
 }

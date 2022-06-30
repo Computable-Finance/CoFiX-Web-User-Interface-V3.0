@@ -26,12 +26,8 @@ class BNBToken extends Token {
     return new BigNumber(Infinity)
   }
 
-  async getValuePerETH() {
+  async getValuePer2000U() {
     return this.parse(0)
-  }
-
-  async getValuePerUSDT() {
-    return this.api.Tokens.USDT.getETHValue()
   }
 
   async allowance(_spender: string) {

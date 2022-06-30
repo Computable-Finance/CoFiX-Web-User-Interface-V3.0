@@ -6,7 +6,6 @@ import API from './index'
 import { toBigNumber } from '../utils/util'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import Token from './Token'
-import {BSC} from "../constants/chains";
 
 export type PoolInfo = {
   totalFunds: BigNumber
@@ -154,18 +153,20 @@ class CoFiXPair extends ERC20Token {
     if (
       !this.address ||
       !this.api.Contracts.NestPriceFacade.contract ||
-      !this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract
+      !this.api.CoFiXPairs[this.pair[0].symbol][this.pair[1].symbol].contract ||
+      this.pair[0].channelId === undefined ||
+      this.pair[0].pairIndex === undefined
     ) {
       return {
         k: toBigNumber(0),
-        tokenAmount: this.amount(await this.getValuePerETH()),
+        tokenAmount: this.amount(await this.getValuePer2000U()),
       }
     }
 
     try {
       const priceInfo = await this.api.Contracts.NestPriceFacade.contract[
         'lastPriceList(uint256,uint256,uint256)'
-      ](0, 1, 2)
+      ](this.pair[0].channelId, this.pair[0].pairIndex, 2)
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -175,7 +176,6 @@ class CoFiXPair extends ERC20Token {
         priceInfo[1],
         priceInfo[0]
       )
-
       return {
         k: toBigNumber(k).shiftedBy(-18),
         tokenAmount: this.amount(priceInfo[1]),
@@ -183,7 +183,7 @@ class CoFiXPair extends ERC20Token {
     } catch (e) {
       return {
         k: toBigNumber(0),
-        tokenAmount: this.amount(await this.getValuePerETH()),
+        tokenAmount: this.amount(await this.getValuePer2000U()),
       }
     }
   }
@@ -201,6 +201,9 @@ class CoFiXPair extends ERC20Token {
       throw new Error(`cofix pair ${this.symbol} not found`)
     }
 
+    // tokenAmount 是 x pair0 = 2000 USDT
+    // x / 2000 = 1 usdt
+    // x / 2000 * y = y usdt
     const { k, tokenAmount } = await this.queryOracle()
     const amountIn = toBigNumber(amount)
     if (src === 'USDT' && dest === this.pair[0].symbol) {
@@ -216,7 +219,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.multipliedBy(tokenAmount).div(2000),
         amountOut: amountOut,
-        oracleFee: toBigNumber(this.api.chainId === BSC.chainId ? 0 : 0.0002),
+        oracleFee: toBigNumber(this.pair[0].oracleFee ?? 0),
       }
     } else if (src === this.pair[0].symbol && dest === 'USDT') {
       let amountOut = amountIn.div(tokenAmount).multipliedBy(2000)
@@ -233,7 +236,7 @@ class CoFiXPair extends ERC20Token {
         },
         oracleOut: amountIn.div(tokenAmount).multipliedBy(2000),
         amountOut: amountOut,
-        oracleFee: toBigNumber(this.api.chainId === BSC.chainId ? 0 : 0.0002),
+        oracleFee: toBigNumber(this.pair[0].oracleFee ?? 0),
       }
     } else {
       throw new Error(`can not swap ${src} to ${dest}`)

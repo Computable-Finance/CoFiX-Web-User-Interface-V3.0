@@ -47,7 +47,7 @@ class ERC20Token extends Token {
     return toBigNumber(0)
   }
 
-  async getValuePerETH() {
+  async getValuePer2000U() {
     if (!this.address || this.channelId === undefined || this.pairIndex === undefined) {
       return new BigNumber(0)
     }
@@ -80,19 +80,6 @@ class ERC20Token extends Token {
       default:
         return this.parse(2700)
     }
-  }
-
-  async getValuePerUSDT() {
-    const [valuePerETH, usdtValuePerETH] = await Promise.all([
-      this.getValuePerETH(),
-      this.api.Tokens.USDT.getValuePerETH(),
-    ])
-
-    if (!valuePerETH || !usdtValuePerETH) {
-      return new BigNumber(0)
-    }
-
-    return valuePerETH.div(usdtValuePerETH).shiftedBy(this.api.Tokens.USDT.decimals)
   }
 
   async allowance(spender: string) {
