@@ -8,7 +8,7 @@ export type ERC20TokenProps = TokenProps
 
 class ERC20Token extends Token {
   contract?: ERC20 | CoFiXERC20
-  private _allowance: {
+  private readonly _allowance: {
     [symbol: string]: boolean
   }
 
@@ -53,16 +53,15 @@ class ERC20Token extends Token {
     return toBigNumber(0)
   }
 
-  async getValuePerETH() {
-    if (!this.address) {
+  async getValuePer2000U() {
+    if (!this.address || this.channelId === undefined || this.pairIndex === undefined) {
       return new BigNumber(0)
     }
-
     try {
       // try to get price from nest
       const value = await this.api.Contracts.NestPriceFacade.contract?.[
         'lastPriceList(uint256,uint256,uint256)'
-        ](0, 1, 1)
+        ](this.channelId, this.pairIndex, 1)
       if (value) {
         const v = toBigNumber(value[1])
         if (!v.isZero()) {
@@ -86,19 +85,6 @@ class ERC20Token extends Token {
       default:
         return this.parse(2700)
     }
-  }
-
-  async getValuePerUSDT() {
-    const [valuePerETH, usdtValuePerETH] = await Promise.all([
-      this.getValuePerETH(),
-      this.api.Tokens.USDT.getValuePerETH(),
-    ])
-
-    if (!valuePerETH || !usdtValuePerETH) {
-      return new BigNumber(0)
-    }
-
-    return valuePerETH.div(usdtValuePerETH).shiftedBy(this.api.Tokens.USDT.decimals)
   }
 
   async allowance(spender: string) {

@@ -57,8 +57,8 @@ class CoFiXDAO extends Contract {
       this.api.Tokens.COFI.balanceOf(this.address),
       this.api.Tokens.COFI.totalSupply(),
       this.api.Tokens.COFI.balanceOf(ADDRESS_ZERO),
-      this.api.Tokens.COFI.getETHAmount(),
-      this.api.Tokens.COFI.getUSDTAmount(),
+      this.api.Tokens.COFI.getUAmountPerToken(),
+      this.api.Tokens.COFI.getUAmountPerToken(),
       this.quotaOf(),
     ])
 

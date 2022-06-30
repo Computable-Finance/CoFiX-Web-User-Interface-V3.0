@@ -148,8 +148,8 @@ class CoFiXAnchorPool extends Contract {
 
     const [balance, usdtAmount, cofiUSDTAmount, xtokenTotalSupplys] = await Promise.all([
       token.balanceOf(this.address),
-      anchorToken.getUSDTAmount(),
-      this.api.Tokens.COFI.getUSDTAmount(),
+      anchorToken.getUAmountPerToken(),
+      this.api.Tokens.COFI.getUAmountPerToken(),
       Promise.all(
         Object.values(this.xtokens).map(async (xt) => {
           const totalSupply = await xt.totalSupply()

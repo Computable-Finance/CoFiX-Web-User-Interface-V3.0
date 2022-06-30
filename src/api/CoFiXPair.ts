@@ -8,7 +8,7 @@ import { BLOCK_DAILY } from '../constants/constant'
 import { toBigNumber } from '../utils/util'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import Token from './Token'
-import { USDT, WETH } from '../constants/tokens'
+import {USDT, WETH} from '../constants/tokens'
 
 export type PoolInfo = {
   totalFunds: BigNumber
@@ -119,9 +119,9 @@ class CoFiXPair extends ERC20Token {
     const [balances, ethAmounts, usdtAmounts, cofiUSDTAmount, pairBalance, pairTotalSupply, vaultBalance] =
       await Promise.all([
         Promise.all([this.contract.ethBalance(), tokens[1].balanceOf(this.address)]),
-        Promise.all([tokens[0].getValuePerETH(), tokens[1].getValuePerETH()]),
-        Promise.all([tokens[0].getUSDTAmount(), tokens[1].getUSDTAmount()]),
-        this.api.Tokens.COFI.getUSDTAmount(),
+        Promise.all([tokens[0].getValuePer2000U(), tokens[1].getValuePer2000U()]),
+        Promise.all([tokens[0].getUAmountPerToken(), tokens[1].getUAmountPerToken()]),
+        this.api.Tokens.COFI.getUAmountPerToken(),
 
         this.balanceOf(this.api.account || ''),
         this.totalSupply(),
@@ -309,14 +309,22 @@ class CoFiXPair extends ERC20Token {
         }
       }
     } else {
+      // tokenAmount 是 1 ETH 对应的数量
       const { k, tokenAmount } = await this.api.Tokens[this.pair[1].symbol].queryOracle()
+
+      console.log(this.pair[1].symbol, tokenAmount.toNumber())
       const amountIn = toBigNumber(amount)
+
+
       if (src === 'ETH' && dest === this.pair[1].symbol) {
         const fee = amountIn.multipliedBy(this.theta).div(10000)
         const c = toBigNumber(
           await this.contract.impactCostForSellOutETH(this.api.Tokens.ETH.parse(amountIn).toFixed(0))
         ).shiftedBy(-18)
+
+
         const amountOut = amountIn.minus(fee).multipliedBy(tokenAmount).div(toBigNumber(1).plus(k).plus(c))
+
         return {
           fee: {
             symbol: 'ETH',

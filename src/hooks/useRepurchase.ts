@@ -38,8 +38,8 @@ const useRepurchase = (content: TransactionRepurchaseContent) => {
         }
 
         const [ethAmount, usdtAmount] = await Promise.all([
-          api.Tokens.COFI.getETHAmount(),
-          api.Tokens.COFI.getUSDTAmount(),
+          api.Tokens.ETH.getUAmountPerToken(),
+          api.Tokens.COFI.getUAmountPerToken(),
         ])
 
         const amount = toBigNumber(content.amount)

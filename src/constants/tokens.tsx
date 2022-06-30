@@ -2,7 +2,6 @@ import {
   TokenCOFI,
   TokenNEST, TokenNHBTC,
   TokenPETH,
-  TokenUSDC,
   TokenUSDT,
   TokenWETH,
 } from 'src/components/Icon'
@@ -16,7 +15,7 @@ export const USDT: TokenProps = {
   addresses: {
     [Mainnet.chainId]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     [Rinkeby.chainId]: '0x2d750210c0b5343a0b79beff8F054C9add7d2411',
-  },
+  }
 }
 
 export const PETH: TokenProps = {
@@ -26,15 +25,16 @@ export const PETH: TokenProps = {
     [Mainnet.chainId]: '0x53f878Fb7Ec7B86e4F9a0CB1E9a6c89C0555FbbD',
     [Rinkeby.chainId]: '0x4D4B378eFbeb7eE15Aa498F3383C9949391557e0',
   },
-}
-
-export const USDC: TokenProps = {
-  symbol: 'USDC',
-  Icon: TokenUSDC,
-  addresses: {
-    [Mainnet.chainId]: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    [Rinkeby.chainId]: '0xB64825a6bA80d65886b5123f5170ddffc935D9DE',
-  },
+  priceInfo: {
+    [Mainnet.chainId]: {
+      channelId: 0,
+      pairIndex: 1,
+    },
+    [Rinkeby.chainId]: {
+      channelId: 0,
+      pairIndex: 1,
+    }
+  }
 }
 
 export const NEST: TokenProps = {
@@ -45,6 +45,16 @@ export const NEST: TokenProps = {
     [Rinkeby.chainId]: '0xE313F3f49B647fBEDDC5F2389Edb5c93CBf4EE25',
   },
   formatPrecision: 2,
+  priceInfo: {
+    [Mainnet.chainId]: {
+      channelId: 0,
+      pairIndex: 2,
+    },
+    [Rinkeby.chainId]: {
+      channelId: 0,
+      pairIndex: 2,
+    }
+  }
 }
 
 export const COFI: TokenProps = {

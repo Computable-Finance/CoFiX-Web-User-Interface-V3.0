@@ -16,7 +16,7 @@ const useTokenUSDTAmount = (token: string) => {
       return
     }
 
-    const value = await api.Tokens[token].getUSDTValue()
+    const value = await api.Tokens[token].getUValuePerToken()
     if (!amount || !value.eq(amount.value)) {
       setAmount({
         value,
