@@ -20,6 +20,16 @@ export const NEST: TokenProps = {
     [BSCT.chainId]: '0x821edD79cc386E56FeC9DA5793b87a3A52373cdE',
   },
   formatPrecision: 2,
+  priceInfo: {
+    [BSC.chainId]: {
+      channelId: 0,
+      pairIndex: 1,
+    },
+    [BSCT.chainId]: {
+      channelId: 0,
+      pairIndex: 1,
+    }
+  }
 }
 
 export const ERC20TokenWhitelist = [USDT, NEST]

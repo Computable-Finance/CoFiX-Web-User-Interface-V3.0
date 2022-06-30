@@ -5,7 +5,7 @@ import API from './index'
 import BigNumber from 'bignumber.js'
 import { ADDRESS_ZERO } from '../constants/constant'
 
-class ETHToken extends Token {
+class BNBToken extends Token {
   constructor(api: API) {
     super(api, {
       symbol: 'BNB',
@@ -27,7 +27,7 @@ class ETHToken extends Token {
   }
 
   async getValuePerETH() {
-    return this.parse(1)
+    return this.parse(0)
   }
 
   async getValuePerUSDT() {
@@ -43,4 +43,4 @@ class ETHToken extends Token {
   }
 }
 
-export default ETHToken
+export default BNBToken

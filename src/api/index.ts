@@ -3,7 +3,7 @@ import CoFiXPair, { CoFiXPairProps } from './CoFiXPair'
 import CoFiXRouter, { CoFiXRouterProps } from './CoFiXRouter'
 import ERC20Token, { ERC20TokenProps } from './ERC20Token'
 import NestPriceFacade, { NestPriceFacadeProps } from './NestPriceFacade'
-import ETHToken from './ETHToken'
+import BNBToken from './BNBToken'
 import Token from './Token'
 import { toBigNumber } from '../utils/util'
 import { BigNumberish } from 'ethers'
@@ -59,7 +59,7 @@ class API {
     this.account = props.account
 
     this.Tokens = {
-      ETH: new ETHToken(this),
+      ETH: new BNBToken(this),
       ...props.ERC20Tokens.reduce((tokens, token) => {
         tokens[token.symbol] = new ERC20Token(this, token)
 

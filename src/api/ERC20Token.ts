@@ -48,7 +48,7 @@ class ERC20Token extends Token {
   }
 
   async getValuePerETH() {
-    if (!this.address) {
+    if (!this.address || this.channelId === undefined || this.pairIndex === undefined) {
       return new BigNumber(0)
     }
 
@@ -56,7 +56,7 @@ class ERC20Token extends Token {
       // try to get price from nest
       const value = await this.api.Contracts.NestPriceFacade.contract?.[
         'lastPriceList(uint256,uint256,uint256)'
-      ](0, 1, 1)
+      ](this.channelId, this.pairIndex, 1)
       if (value) {
         const v = toBigNumber(value[1])
         if (!v.isZero()) {

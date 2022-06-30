@@ -11,6 +11,10 @@ export type TokenProps = ContractProps & {
   decimals?: number
   formatPrecision?: number
   isXToken?: boolean
+  priceInfo?: Record<number, {
+    channelId: number,
+    pairIndex: number,
+  }>
 }
 
 abstract class Token extends Contract {
@@ -20,6 +24,8 @@ abstract class Token extends Contract {
   formatPrecision: TokenProps['formatPrecision']
   isXToken: boolean
   cofiAmountPerBlock?: number
+  channelId?: number
+  pairIndex?: number
 
   protected constructor(api: API, props: TokenProps) {
     super(api, props)
@@ -29,6 +35,8 @@ abstract class Token extends Contract {
     this.decimals = props.decimals || 18
     this.formatPrecision = props.formatPrecision
     this.isXToken = !!props.isXToken
+    this.channelId = props.priceInfo && api.chainId ? props.priceInfo[api.chainId].channelId : undefined
+    this.pairIndex = props.priceInfo && api.chainId ? props.priceInfo[api.chainId].pairIndex : undefined
   }
 
   amount(n: BigNumber | BigNumberish) {
