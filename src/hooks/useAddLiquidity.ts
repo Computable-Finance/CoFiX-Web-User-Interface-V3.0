@@ -4,7 +4,6 @@ import useSlippageTolerance from 'src/hooks/useSlippageTolerance'
 import { deadline, toBigNumber } from '../utils/util'
 import useTransaction, { TransactionAddLiquidityContent, TransactionType } from './useTransaction'
 import useWeb3 from './useWeb3'
-import {BSC} from "../constants/chains";
 
 const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
   const { api } = useWeb3()
@@ -57,8 +56,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: api.chainId === BSC.chainId ? "0" : '0.0002',
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === BSC.chainId ? "0" : '0.0002')).toFixed(0),
+            oracleCallFee: api.Tokens.ETH.parse(toBigNumber(api.Tokens[content.token0.symbol].oracleFee ?? 0)).toFixed(),
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.Tokens[content.token0.symbol].oracleFee ?? 0)).toFixed(),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
@@ -81,8 +80,8 @@ const useAddLiquidity = (content: TransactionAddLiquidityContent) => {
               .shiftedBy(18)
               .toFixed(0),
             to: api.account || '',
-            oracleCallFee: api.chainId === BSC.chainId ? "0" : '0.0002',
-            sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.chainId === BSC.chainId ? "0" : '0.0002')).toFixed(0),
+            oracleCallFee: api.Tokens.ETH.parse(toBigNumber(api.Tokens[content.token0.symbol].oracleFee ?? 0)).toFixed(),
+            sendETHValue: api.Tokens.ETH.parse(toBigNumber(api.Tokens[content.token0.symbol].oracleFee ?? 0)).toFixed(),
           }
           if (JSON.stringify(newArgs) !== JSON.stringify(args)) {
             setArgs(newArgs)
