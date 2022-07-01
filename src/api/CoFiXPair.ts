@@ -134,13 +134,13 @@ class CoFiXPair extends ERC20Token {
       myPoolAmounts,
       xtokenBalance: {
         value: pairBalance,
-        amount: pairBalance.div(new BigNumber(10).pow(18)),
-        formatAmount: pairBalance.div(new BigNumber(10).pow(18)).toString(),
+        amount: pairBalance.shiftedBy(-18),
+        formatAmount: pairBalance.shiftedBy(-18).toString(),
       },
       xtokenTotalSupply: {
         value: pairTotalSupply,
-        amount: pairTotalSupply.div(new BigNumber(10).pow(18)),
-        formatAmount: pairTotalSupply.div(new BigNumber(10).pow(18)).toString(),
+        amount: pairTotalSupply.shiftedBy(-18),
+        formatAmount: pairTotalSupply.shiftedBy(-18).toString(),
       },
       k,
       tokenAmount,
